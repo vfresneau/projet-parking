@@ -18,7 +18,7 @@ for (var i=0; i< monParking.length; i++){ //Pour l'ensemble des elements du tabl
     cards.classList.add("titlecards"); // ajout de la class titlecards dans la cards //
 
     var cardBody = ultimateHTMLGenerator("div","",["card-body"],cards); //ajout de la class cardbody dans la cards//
-    var cardTitle = ultimateHTMLGenerator("h3",monParking[i].nom_parking,["card-title"],cardBody); //ajout des noms de parking dans titre h5 "cardTtitle" dans la cardBody//
+    var cardTitle = ultimateHTMLGenerator("h3",monParking[i].nom_parking,["card-title", "iframe"],cardBody); //ajout des noms de parking dans titre h5 "cardTtitle" dans la cardBody//
 
     var cardText = ultimateHTMLGenerator("p",monParking[i].adresse_parking,["card-text"],cardBody); //ajout de paragraphe dans cardbody//
   for (var j=0; j< monParking[i].place.length; j++){ //Pour l'ensemble des places du parking//
