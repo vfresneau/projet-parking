@@ -120,7 +120,7 @@ function modif_park(){
 }
 
 
-hello
+salut à tous 
 
 // _______________________________ Fonction de création de parking depuis le HTML ____________________________________________
 function CreerParking(){
