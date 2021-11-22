@@ -8,6 +8,18 @@ function test(){ // FONCTION TEST
     pouet.textContent = mesParkings.GogoParking[0]._NOM_PARKING;   //On récupère le nom du premier parking
 }
 
+function sender(variableretour){
+    let xhr = new XMLHttpRequest; // Création d'une nouvelle requête XMLHTTP pour aller récupérer la base de données
+    xhr.onreadystatechange = function(){ // on modifie l'attribut onreadystatechange de notre requête qui permet d'exécuter du code en fonction du changement d'état de la requête
+        if (xhr.readyState == XMLHttpRequest.DONE && xhr.status == 200){ // Si la requête se termine
+            mesParkings = JSON.parse(xhr.responseText); // on récupère le résultat de la requête dans la variable mesHeros, et on la convertit en objet JSON
+            test(); // On exécute la fonction principale
+        }
+    }
+    xhr.open("GET","http://141.94.223.96/Luc/GogoParking/php/DB_READ.php", true); // On indique la méthode (ce que doit faire la requête, dans ce cas récupérer une ressource) et l'adresse de la ressource (fichier php)
+    xhr.send(); // On envoie !
+}
+
 // Fonction de lecture de la base de données (va stocker la base de données dans la variable mesParkings au format JSON)
 function ReadDBParkings(){
     // Création de la variable qui stockera la base de données des héros
