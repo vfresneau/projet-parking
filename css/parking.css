@@ -1,0 +1,59 @@
+body{
+    background: url(https://c.wallhere.com/photos/67/0d/auto_street_cars_love_beautiful_car_racecar_speed-970256.jpg!d);
+}
+.a{
+    height: 130px;
+    border: solid 3px;
+    border-color: gold;
+    text-align: center;
+    font-size: 30px;
+    font-family: fantasy;
+    text-shadow:   -1px -1px 0 #000,  
+    1px -1px 0 #000,
+    -1px 1px 0 #000,
+     1px 1px 0 #000,
+     1px 1px 2px #141414,
+     1px 1px 3px #141414,
+     1px 1px 5px #141414,
+     1px 1px 7px #141414,
+     1px 1px 10px #141414,
+     1px 1px 12px #141414,
+     1px 1px 18px #141414;color:green;
+}
+.titre{
+    font-size: 30px;
+    text-shadow:   -1px -1px 0 red,  
+     1px -1px 0 red,
+     -1px 1px 0 red,
+      1px 1px 0 red,
+      1px 1px 2px red,
+      1px 1px 3px red,
+      1px 1px 5px red,
+      1px 1px 7px red,
+      1px 1px 10px red,
+      1px 1px 12px red,
+      1px 1px 18px red;color:white;
+}
+.monquartier{
+    font-size: 50px;
+    text-shadow:   -1px -1px 0 red,  
+     1px -1px 0 red,
+     -1px 1px 0 red,
+      1px 1px 0 red,
+      1px 1px 2px red,
+      1px 1px 3px red,
+      1px 1px 5px red,
+      1px 1px 7px red,
+      1px 1px 10px red,
+      1px 1px 12px red,
+      1px 1px 18px red; color:white;
+}
+.centrer{
+    height: 400px;
+    width: 700px;
+    display: block;
+    margin: 0 auto;
+}
+.rouge{
+    color: red;
+}

@@ -1,0 +1,38 @@
+body{
+    background-image: url("https://besthqwallpapers.com/img/original/47188/4k-novitec-torado-lamborghini-aventador-s-parking-2018-cars-supercars.jpg");
+    background-position:40% left ;
+}
+
+h1{
+    padding: 50px;
+    text-align: left;
+    color: lightslategrey;
+}
+
+h2{
+    padding: 10px;
+    text-align: right;
+    color: lightslategrey;
+    opacity: 0.4;
+}
+
+h3{
+
+    color: royalblue;
+    text-align: center;
+    font-size: 5em;
+}
+
+.col{
+    border: 2px solid peachpuff;
+}
+
+.titlecards{
+    margin-left: 10%;
+    padding: 2%;
+    width: 20rem ;
+    color: peru;
+}
+.btn-primary{
+    color : red;
+}
