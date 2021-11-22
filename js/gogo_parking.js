@@ -111,16 +111,10 @@ function generateDisplay(){
 
 function modif_park(){
 
-
-
-
-
-
+    console.log("test pour luc")
 
 }
 
-
-salut à tous 
 
 // _______________________________ Fonction de création de parking depuis le HTML ____________________________________________
 function CreerParking(){
