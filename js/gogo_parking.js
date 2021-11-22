@@ -111,7 +111,7 @@ function generateDisplay(){
 
 function modif_park(){
 
-    console.log("test pour luc ok ou pas !")
+    console.log("test pour vincent !")
 
 }
 
