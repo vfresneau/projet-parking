@@ -6,7 +6,7 @@ var ligne1 = ultimateHTMLGenerator("div","",["row"],park); //creer une ligne ave
 //var titre = ultimateHTMLGenerator("div","AD",["col-12"],ligne1 ); //ajout de la class cardbody dans la cards//
 
 var button2 = ultimateHTMLGenerator("a","ADMINISTRATEUR",["btn","btn-primary"],ligne1); //ajout d'un boutton dans la cardBody//
-button2.href = "gogo_parking.html";
+button2.href = "administrateur.html";
 
 
 for (var i=0; i< monParking.length; i++){ //Pour l'ensemble des elements du tableau "monParking" * //
@@ -36,7 +36,7 @@ for (var i=0; i< monParking.length; i++){ //Pour l'ensemble des elements du tabl
 
     var cardText3 = ultimateHTMLGenerator("p","Nombre de place disponible:"+ compteurPlace+"/"+ monParking[i].nombre_place,["card-text"],cardBody); //ajout de paragraphe3 "nombre de place" dans cardbody//
     var button = ultimateHTMLGenerator("a","+ d'info",["btn","btn-primary"],cardBody); //ajout d'un boutton dans la cardBody//
-      button.href = "administrateur.html"
+      button.href = "parking.html"
             
 
 }
