@@ -36,7 +36,7 @@ for (var i=0; i< monParking.length; i++){ //Pour l'ensemble des elements du tabl
 
     var cardText3 = ultimateHTMLGenerator("p","Nombre de place disponible:"+ compteurPlace+"/"+ monParking[i].nombre_place,["card-text"],cardBody); //ajout de paragraphe3 "nombre de place" dans cardbody//
     var button = ultimateHTMLGenerator("a","+ d'info",["btn","btn-primary"],cardBody); //ajout d'un boutton dans la cardBody//
-      button.href = "parking.html"
+      button.href = "administrateur.html"
             
 
 }
