@@ -120,6 +120,8 @@ function modif_park(){
 }
 
 
+hello
+
 // _______________________________ Fonction de création de parking depuis le HTML ____________________________________________
 function CreerParking(){
     // On récupère les valeurs des inputs depuis le html
