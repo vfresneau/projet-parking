@@ -80,15 +80,15 @@ function generateDisplay(){
         });
 
 
-        // // bouton modifier
-        // let modif = document.createElement("button");
-        // modif.type="button";
-        // modif.classList.add("btn");
-        // modif.classList.add("btn-danger");
-        // modif.textContent="Modifier";
-        // // on donne un id unique au bouton de suppression pour savoir quel id on dois supprimer de la liste
-        // modif.id = j;
-        // // On ajoute une fonction sur l'evenement click du bouton
+        // bouton modifier
+        let modif = document.createElement("button");
+        modif.type="button";
+        modif.classList.add("btn");
+        modif.classList.add("btn-danger");
+        modif.textContent="Modifier";
+        // on donne un id unique au bouton de suppression pour savoir quel id on dois supprimer de la liste
+        modif.id = j;
+        // On ajoute une fonction sur l'evenement click du bouton
         // modif.addEventListener('click', modif_park());
 
 
