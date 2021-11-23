@@ -1,7 +1,6 @@
-//Permet de savoir si le fichier json parking à bien été chargé
-console.log(monParking);
+var mesParkings; // Variable qui contiendra la BDD des Parkings
 
-generateDisplay();
+ReadDBParkings(); // on lit la BDD et on exécute la fonction principale generateDisplay
 
 // _______________________________ Fonction générant l'affichage des parking ____________________________________________
 function generateDisplay(){
@@ -12,7 +11,7 @@ function generateDisplay(){
     
     let ligneRow;
     // Pour chaque parking
-    for(var i =0; i < monParking.length; i++){
+    for(var i =0; i < mesParkings.GogoParking.length; i++){
         if(i%2 == 0){
             ligneRow = document.createElement("div");
             ligneRow.classList.add("row");
@@ -34,7 +33,7 @@ function generateDisplay(){
     
         // fabrication  du titre de la carte
         let montitre = document.createElement("h5");
-        montitre.textContent = monParking[i].quartier;
+        montitre.textContent = mesParkings.GogoParking[i]._NOM_QUARTIER;
         montitre.classList.add("card-title");
         cardBody.appendChild(montitre);
     
@@ -45,18 +44,18 @@ function generateDisplay(){
         let maListeAPuce = document.createElement("ul");
 
 
-        let puce_nom_parking = ultimateHTMLGenerator('li',monParking[i].nom_parking,['nom_parking'],i+"nom_parking",maListeAPuce);
-        let puce_adresse_parking =ultimateHTMLGenerator('li',monParking[i].adresse_parking,['adresse_parking'],i+"adresse_parking",maListeAPuce);
-        let puce_nombre_place =ultimateHTMLGenerator('li',monParking[i].nombre_place + " places",['nom_place'],i+"nombre_place",maListeAPuce);
-        let puce_tarif =ultimateHTMLGenerator('li',"Tarif : " + monParking[i].tarif,['tarif'],i+"tarif",maListeAPuce);
-        let puce_heure_ouverture =ultimateHTMLGenerator('li',"Heure d'ouverture : " + monParking[i].heure_ouverture,['heure_ouverture'],i+"heure_ouverture",maListeAPuce);
-        let puce_reservation =ultimateHTMLGenerator('li',"Réservation : " + monParking[i].reservation,['reservation'],i+"reservation",maListeAPuce);
-        // let puce_lien_maps =ultimateHTMLGenerator('li',monParking[i].lien_maps,['lien_maps'],"",maListeAPuce);
+        let puce_nom_parking = ultimateHTMLGenerator('li',mesParkings.GogoParking[i]._NOM_PARKING,['nom_parking'],i+"nom_parking",maListeAPuce);
+        let puce_adresse_parking =ultimateHTMLGenerator('li',mesParkings.GogoParking[i]._ADRESSE_PARKING,['adresse_parking'],i+"adresse_parking",maListeAPuce);
+        let puce_nombre_place =ultimateHTMLGenerator('li',mesParkings.GogoParking[i]._NOMBRE_PLACE + " places",['nom_place'],i+"nombre_place",maListeAPuce);
+        let puce_tarif =ultimateHTMLGenerator('li',"Tarif : " + mesParkings.GogoParking[i]._TARIF,['tarif'],i+"tarif",maListeAPuce);
+        let puce_heure_ouverture =ultimateHTMLGenerator('li',"Heure d'ouverture : " + mesParkings.GogoParking[i]._HEURE_OUVERTURE,['heure_ouverture'],i+"heure_ouverture",maListeAPuce);
+        let puce_reservation =ultimateHTMLGenerator('li',"Réservation : " + mesParkings.GogoParking[i]._RESERVATION,['reservation'],i+"reservation",maListeAPuce);
+        // let puce_lien_maps =ultimateHTMLGenerator('li',mesParkings.GogoParking[i]._LIEN_MAPS,['lien_maps'],"",maListeAPuce);
        
         // Pour chaque caractéristiques du parking en cours
-        for(var j=0; j<monParking[i].caracteristiques.length ;j++){
+        for(var j=0; j<mesParkings.GogoParking[i]._CARACTERISTIQUES.length ;j++){
             // On fabrique un element li
-            let puce_caracteristiques = ultimateHTMLGenerator('li',monParking[i].caracteristiques[j],"",i.toString()+j.toString()+"caracteristiques",maListeAPuce);
+            let puce_caracteristiques = ultimateHTMLGenerator('li',mesParkings.GogoParking[i]._CARACTERISTIQUES[j]._DESCRIPTION_CARAC,"",i.toString()+j.toString()+"caracteristiques",maListeAPuce);
         }
         
         // bouton supprimmer
@@ -70,7 +69,7 @@ function generateDisplay(){
         // On ajoute une fonction sur l'evenement click du bouton
         sup.addEventListener('click', function() {
             // permet de supprimer de la liste le parking qui à pour index l'id du bouton
-            monParking.splice(this.id, 1);
+            mesParkings.GogoParking.splice(this.id, 1);
             // on refait l'affichage
             generateDisplay();
         });
@@ -168,7 +167,7 @@ function CreerParking(){
 
     
     // On ajoute à la liste des parking du json un nouveau parking fraichement créé
-    monParking.push(nouveauParking);
+    mesParkings.GogoParking.push(nouveauParking);
     // On regénére l'affichage pour prendre en compte le nouveau parking
     generateDisplay();
 }
@@ -229,3 +228,15 @@ function ultimateHTMLGenerator(typeElement,contenu,tableauClassCss,id,destinatio
 } 
 //_________________________________________________________________________________________
 
+function ReadDBParkings(){
+    // Création de la variable qui stockera la base de données des héros
+    let xhr = new XMLHttpRequest; // Création d'une nouvelle requête XMLHTTP pour aller récupérer la base de données
+    xhr.onreadystatechange = function(){ // on modifie l'attribut onreadystatechange de notre requête qui permet d'exécuter du code en fonction du changement d'état de la requête
+        if (xhr.readyState == XMLHttpRequest.DONE && xhr.status == 200){ // Si la requête se termine
+            mesParkings = JSON.parse(xhr.responseText); // on récupère le résultat de la requête dans la variable mesHeros, et on la convertit en objet JSON
+            generateDisplay(); // On exécute la fonction principale
+        }
+    }
+    xhr.open("GET","http://141.94.223.96/Luc/GogoParking/php/DB_READ.php", true); // On indique la méthode (ce que doit faire la requête, dans ce cas récupérer une ressource) et l'adresse de la ressource (fichier php)
+    xhr.send(); // On envoie !
+}
