@@ -22,7 +22,7 @@ h2{
 
 .btn-outline-info:hover {
 
-    background-color: rgb(131, 154, 160) !important;
+    background-color: rgb(93, 137, 149) !important;
    
 }
 h3{
@@ -37,7 +37,7 @@ h3{
 }
 
 .btn.btn-outline-info{
-    color: rgba(121, 170, 227, 0.5);
+    color: rgba(17, 81, 155, 0.561);
     border-color:transparent;
 }
 
