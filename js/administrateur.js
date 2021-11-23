@@ -25,6 +25,7 @@ function generateDisplay(){
         // maColonne.classList.add("text-white");
         // maColonne.classList.add("bg-dark");
         // maColonne.classList.add("h-100");
+        maColonne.dataset.idDb = mesParkings.GogoParking[i]._ID;
         maColonne.id = i;
         
         // Fabrication du card body
@@ -35,6 +36,7 @@ function generateDisplay(){
         let montitre = document.createElement("h5");
         montitre.textContent = mesParkings.GogoParking[i]._NOM_QUARTIER;
         montitre.classList.add("card-title");
+        montitre.id = i+"nom_quartier";
         cardBody.appendChild(montitre);
     
         // ajout du card body à la card
@@ -65,9 +67,9 @@ function generateDisplay(){
         sup.classList.add("btn-danger");
         sup.textContent="Supprimer le parking";
         // on donne un id unique au bouton de suppression pour savoir quel id on dois supprimer de la liste
-        sup.id = mesParkings.GogoParking[i]._ID;
+        sup.dataset.idSuppression = mesParkings.GogoParking[i]._ID;
         // On ajoute une fonction sur l'evenement click du bouton
-        sup.onclick = function(){DeleteParking(sup.id);}
+        sup.onclick = function(){DeleteParking(sup.dataset.idSuppression);}
 
 
         // bouton modifier
@@ -109,24 +111,65 @@ function Modification(id){
     var carte = document.getElementById(id);
     if (carte.lastChild.lastChild.textContent == "Modifier"){
         // var Group = ultimateHTMLGenerator("div","","input-group",id+"group","");
+        var title = ultimateHTMLGenerator("input",carte.firstChild.firstChild.textContent,["form-control"],carte.firstChild.firstChild.id);
         for (z = 0; z < carte.lastChild.firstChild.children.length;z++){
             var element = ultimateHTMLGenerator("input",carte.lastChild.firstChild.children[0].textContent,["form-control"],carte.lastChild.firstChild.children[0].id);
             carte.lastChild.firstChild.children[0].remove();
             carte.lastChild.firstChild.appendChild(element);
         }
-        // carte.lastChild.firstChild.appendChild(Group);
+        carte.firstChild.firstChild.remove();
+        carte.firstChild.appendChild(title);
         carte.lastChild.lastChild.textContent = "Enregistrer";
     
     } else {
+        var title2 = ultimateHTMLGenerator("h5",carte.firstChild.firstChild.value,[],carte.firstChild.firstChild.id)
         for (z = 0; z < carte.lastChild.firstChild.children.length;z++){
             var element2 = ultimateHTMLGenerator("li",carte.lastChild.firstChild.children[0].value,[],carte.lastChild.firstChild.children[0].id)
             carte.lastChild.firstChild.children[0].remove();
             carte.lastChild.firstChild.appendChild(element2);
         }
-        // carte.lastChild.firstChild.appendChild(liste);
+        carte.firstChild.firstChild.remove();
+        carte.firstChild.appendChild(title2);
+        console.log(carte.dataset.idDb);
+        MajParking(carte.dataset.idDb,carte.id);
         carte.lastChild.lastChild.textContent = "Modifier";
     }
 
+}
+
+function MajParking(idDb,id){
+    var nom_quartier = document.getElementById(id+"nom_quartier").textContent;
+    var nom_parking = document.getElementById(id+"nom_parking").textContent;
+    var adresse_parking = document.getElementById(id+"adresse_parking").textContent;
+    var nombre_place = document.getElementById(id+"nombre_place").textContent;
+    nombre_place = parseInt(nombre_place.substr(0,nombre_place.length - " places".length));
+    var tarif = document.getElementById(id+"tarif").textContent;
+    tarif = tarif.substr("Tarif : ".length, tarif.length - "Tarif : ".length);
+    var heure_ouverture = document.getElementById(id+"heure_ouverture").textContent;
+    heure_ouverture = parseInt(heure_ouverture.substr("Heure d'ouverture : ".length, heure_ouverture.length - "Heure d'ouverture : ".length));
+    var reservation = document.getElementById(id+"reservation").textContent;
+    reservation = reservation.substr("Réservation : ".length, reservation.length - "Réservation : ".length);
+    // var url_map = document.getElementById(id+"url").value;
+    // var caracteristiques1 = document.getElementById("caracteristiques1").value;
+    // var caracteristiques2 = document.getElementById("caracteristiques2").value;
+    // var caracteristiques3 = document.getElementById("caracteristiques3").value;
+
+    // var caracteristiques = [caracteristiques1,caracteristiques2,caracteristiques3];
+
+    // On fabrique un model vide de parking
+    var nouveauParking = ParkingModel();
+    // On change les valeurs avant vide par le contenu des inputs
+    nouveauParking.nom_quartier = "\""+nom_quartier+"\"";
+    nouveauParking.nom_parking = "\""+nom_parking+"\"";
+    nouveauParking.adresse_parking = "\""+adresse_parking+"\"";
+    nouveauParking.nombre_place = nombre_place;
+    nouveauParking.tarif = "\""+tarif+"\"";
+    nouveauParking.heure_ouverture = "\""+heure_ouverture+"\"";
+    nouveauParking.reservation = "\""+reservation+"\"";
+    nouveauParking.lien_maps = "\""+"\"";
+    nouveauParking.id = idDb;
+    // on crée le nouveau parking dans la DB
+    UpdateParking(nouveauParking);
 }
 
 // _______________________________ Fonction de création de parking depuis le HTML ____________________________________________
@@ -157,7 +200,6 @@ function CreerParking(){
     nouveauParking.heure_ouverture = "\'"+heure_ouverture+"\'";
     nouveauParking.reservation = "\'"+reservation+"\'";
     nouveauParking.lien_maps = "\'"+url_map+"\'";
-    
     // on crée le nouveau parking dans la DB
     CreateParking(nouveauParking);
 }
@@ -165,6 +207,7 @@ function CreerParking(){
 // _______________________________ Fonction générant un parking vide ____________________________________________
 function ParkingModel(){
     return {
+        "id":"",
         "nom_quartier":"",
         "nom_parking":"",
         "adresse_parking":"",
@@ -254,4 +297,16 @@ function DeleteParking(parking){
         }
     }
     xhrdelete.send("delete="+encodeURIComponent(JSON.stringify(parking))); // On envoie notre requête, dans une variable PHP mesHeros à laquelle on rajoute le fichier JSON entier
+}
+
+function UpdateParking(update){
+    let xhrupdate = new XMLHttpRequest; // on crée une variable XMLHTTPRequest pour fabriquer notre requête
+    xhrupdate.open("POST","http://141.94.223.96/Luc/GogoParking/php/DB_UPDATE.php", true); // On utilise la méthode POST pour envoyer des données, sur l'URL du fichier PHP qui permet d'écrire le fichier json
+    xhrupdate.setRequestHeader("Content-type", "application/x-www-form-urlencoded"); // On définit les en-têtes pour que l'envoi soit correctement interprété par le serveur
+    xhrupdate.onreadystatechange = function(){ // on modifie l'attribut onreadystatechange de notre requête qui permet d'exécuter du code en fonction du changement d'état de la requête
+        if (xhrupdate.readyState == XMLHttpRequest.DONE && xhrupdate.status == 200){ // Si la requête se termine
+            ReadDBParkings(); // On exécute la fonction 
+        }
+    }
+    xhrupdate.send("update="+encodeURIComponent(JSON.stringify(update))); // On envoie notre requête, dans une variable PHP mesHeros à laquelle on rajoute le fichier JSON entier
 }
