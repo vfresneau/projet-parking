@@ -48,7 +48,7 @@ function Main(){
 
         var cardText3 = ultimateHTMLGenerator("p","Nombre de place disponible:"+ compteurPlace+"/"+ mesParkings.GogoParking[i]._NOMBRE_PLACE,["card-text"],cardBody); //ajout de paragraphe3 "nombre de place" dans cardbody//
         var button = ultimateHTMLGenerator("a","+ d'info",["btn","btn-primary"],cardBody); //ajout d'un boutton dans la cardBody//
-        button.href = "parking.html"
+        button.href = "parking.html?parking="+mesParkings.GogoParking[i]._ID;
     }
 }
         //Fonction qui génère mes lignes et colonnes//  
