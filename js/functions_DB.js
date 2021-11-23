@@ -9,12 +9,12 @@ function test(){ // FONCTION TEST
     pouet.textContent = mesParkings.GogoParking[0]._NOM_PARKING;   //On récupère le nom du premier parking
 }
 
-function sender(variableretour, operation, fonction, datatosend){
+function sender(a, operation, fonction, datatosend){
     let xhr = new XMLHttpRequest; // Création d'une nouvelle requête XMLHTTP pour aller récupérer la base de données
     xhr.onreadystatechange = function(){ // on modifie l'attribut onreadystatechange de notre requête qui permet d'exécuter du code en fonction du changement d'état de la requête
         if (xhr.readyState == XMLHttpRequest.DONE && xhr.status == 200){ // Si la requête se termine
             variableretour = JSON.parse(xhr.responseText); // on récupère le résultat de la requête dans la variable mesHeros, et on la convertit en objet JSON
-            fonction(); // On exécute la fonction principale
+            test(); // On exécute la fonction principale
         }
     }
     switch (operation){
