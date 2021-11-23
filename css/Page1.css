@@ -18,15 +18,15 @@ h2{
     color: lightslategrey;
     opacity: 0.4;
 }
-
+.btn.btn-secondary{
+color: rgb(31, 92, 184);
+background-color: rgba(144, 196, 255, 0.2);
+}
 
 .btn-outline-info:hover {
-
     background-color: rgb(93, 137, 149) !important;
-   
-}
+   }
 h3{
-
     color: royalblue;
     text-align: center;
     font-size: 5em;
@@ -37,7 +37,7 @@ h3{
 }
 
 .btn.btn-outline-info{
-    color: rgba(17, 81, 155, 0.561);
+        color: rgba(17, 81, 155, 0.561);
     border-color:transparent;
 }
 
