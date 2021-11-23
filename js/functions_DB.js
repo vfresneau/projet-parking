@@ -9,12 +9,12 @@ function test(){ // FONCTION TEST
     pouet.textContent = mesParkings.GogoParking[0]._NOM_PARKING;   //On récupère le nom du premier parking
 }
 
-function sender(a, operation, fonction, datatosend){
+function sender(variableretour, operation, fonction, datatosend){
     let xhr = new XMLHttpRequest; // Création d'une nouvelle requête XMLHTTP pour aller récupérer la base de données
     xhr.onreadystatechange = function(){ // on modifie l'attribut onreadystatechange de notre requête qui permet d'exécuter du code en fonction du changement d'état de la requête
         if (xhr.readyState == XMLHttpRequest.DONE && xhr.status == 200){ // Si la requête se termine
             variableretour = JSON.parse(xhr.responseText); // on récupère le résultat de la requête dans la variable mesHeros, et on la convertit en objet JSON
-            test(); // On exécute la fonction principale
+            fonction(); // On exécute la fonction principale
         }
     }
     switch (operation){
@@ -24,14 +24,17 @@ function sender(a, operation, fonction, datatosend){
             break;
         case "delete":
             xhr.open("POST","http://141.94.223.96/Luc/GogoParking/php/DB_DELETE.php", true);
+            xhr.setRequestHeader("Content-type", "application/x-www-form-urlencoded");
             xhr.send("delete="+encodeURIComponent(JSON.stringify(datatosend)));
             break;
         case "update":
             xhr.open("POST","http://141.94.223.96/Luc/GogoParking/php/DB_UPDATE.php", true);
+            xhr.setRequestHeader("Content-type", "application/x-www-form-urlencoded");
             xhr.send("update="+encodeURIComponent(JSON.stringify(datatosend)));
             break;
         case "create":
             xhr.open("POST","http://141.94.223.96/Luc/GogoParking/php/DB_CREATE.php", true);
+            xhr.setRequestHeader("Content-type", "application/x-www-form-urlencoded");
             xhr.send("create="+encodeURIComponent(JSON.stringify(datatosend)));
             break;
     }

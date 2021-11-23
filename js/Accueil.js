@@ -3,11 +3,15 @@ ReadDBParkings(); // On lit la BDD et on exécute la fonction principale Main
 
 function Main(){
     var park = document.getElementById("quartier"); // permet d'acceder à l'élément HTML avec l'id quartier //
-   
-    var mon_titre = ultimateHTMLGenerator("div","SMART PARK",["mon_titre"],park);
-    var mon_logo = ultimateHTMLGenerator('img',"",["mon_logo"],park);
-    mon_logo.scr = "image\mon_logo_test.jpg";
+    
+    var phrase = ultimateHTMLGenerator('h6',"Optez pour une gestion intelligente de votre parking !",["ma_phrase"],park)
+    
+    var mon_logo = ultimateHTMLGenerator('img',"",["mon_logo"],phrase);
+    mon_logo.src = "../image/logo_parking.png";
     mon_logo.alt = "logo";
+
+    var mon_titre = ultimateHTMLGenerator("div","SMART PARK",["mon_titre"],phrase);
+
 
 
     var ligne1 = ultimateHTMLGenerator("div","",["row"],park); //creer une ligne avec l'élément html "row" dans la var "park"//
