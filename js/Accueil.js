@@ -7,7 +7,7 @@ function Main(){
     var phrase = ultimateHTMLGenerator('h6',"Optez pour une gestion intelligente de votre parking !",["ma_phrase"],park)
     
     var mon_logo = ultimateHTMLGenerator('img',"",["mon_logo"],phrase);
-    mon_logo.src = "../image/mon_logo_test.jpg";
+    mon_logo.src = "../image/logo_parking.png";
     mon_logo.alt = "logo";
 
     var mon_titre = ultimateHTMLGenerator("div","SMART PARK",["mon_titre"],phrase);

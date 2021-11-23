@@ -52,20 +52,23 @@ iframe:hover{
     transform: scale(2,2) translate(30px);
 }
 .mon_logo{
-    height: 200px;
-
+    height: 250px;
     top:50px;
     left:50px;
     display: flex;
+    float:left
+    
 }
 .mon_titre{
     text-shadow: 4px 3px 0px #fff, 9px 8px 0px rgba(0,0,0,0.15);
     font-family: Impact, Haettenschweiler, 'Arial Narrow Bold', sans-serif;
-    font-size: 50px;
+    font-size: 70px;
     text-align: center;
-    background-color: white;
+
+    padding-top: 60px;
 }
 .ma_phrase{
-    background-color: white;
+
     text-align: center;
+    padding-bottom: 100px;
 }
