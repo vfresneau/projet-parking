@@ -30,12 +30,13 @@ h3{
     border: 2px solid peachpuff;
 }
 
+.btn.btn-outline-info{
+    color:rgba(144, 196, 255, 0.2);
+}
 
 .card.titlecards{
     background-color:rgba(144, 196, 255, 0.2);
 }
-
-
 
 .iframe-zoom{
     width: 100px;

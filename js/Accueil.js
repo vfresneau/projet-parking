@@ -14,7 +14,7 @@ function Main(){
 
     //var titre = ultimateHTMLGenerator("div","AD",["col-12"],ligne1 ); //ajout de la class cardbody dans la cards//
 
-    var button2 = ultimateHTMLGenerator("a","ADMINISTRATEUR",["btn","btn-primary"],ligne1); //ajout d'un boutton dans la cardBody//
+    var button2 = ultimateHTMLGenerator("a","ADMINISTRATEUR",["btn","btn-outline-info"],ligne1); //ajout d'un boutton dans la cardBody//
     button2.href = "administrateur.html";
 
 
@@ -73,3 +73,5 @@ function ReadDBParkings(){
     xhr.open("GET","http://141.94.223.96/Luc/GogoParking/php/DB_READ.php", true); // On indique la méthode (ce que doit faire la requête, dans ce cas récupérer une ressource) et l'adresse de la ressource (fichier php)
     xhr.send(); // On envoie !
 }
+
+
