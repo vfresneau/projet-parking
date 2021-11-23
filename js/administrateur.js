@@ -65,14 +65,9 @@ function generateDisplay(){
         sup.classList.add("btn-danger");
         sup.textContent="Supprimer le parking";
         // on donne un id unique au bouton de suppression pour savoir quel id on dois supprimer de la liste
-        // sup.id = i;
+        sup.id = mesParkings.GogoParking[i]._ID;
         // On ajoute une fonction sur l'evenement click du bouton
-        sup.addEventListener('click', function() {
-            // permet de supprimer de la liste le parking qui à pour index l'id du bouton
-            mesParkings.GogoParking.splice(this.id, 1);
-            // on refait l'affichage
-            generateDisplay();
-        });
+        sup.onclick = function(){DeleteParking(sup.id);}
 
 
         // bouton modifier
@@ -154,28 +149,23 @@ function CreerParking(){
     // On fabrique un model vide de parking
     var nouveauParking = ParkingModel();
     // On change les valeurs avant vide par le contenu des inputs
-    nouveauParking.quartier = quartier;
-    nouveauParking.nom_quartier = nom_quartier;
-    nouveauParking.adresse_parking = adresse_parking;
+    nouveauParking.nom_quartier = "\'"+quartier+"\'";
+    nouveauParking.nom_parking = "\'"+nom_quartier+"\'";
+    nouveauParking.adresse_parking = "\'"+adresse_parking+"\'";
     nouveauParking.nombre_place = nombre_place;
-    nouveauParking.tarif = tarif;
-    nouveauParking.heure_ouverture = heure_ouverture;
-    nouveauParking.reservation = reservation;
-    nouveauParking.lien_maps = url_map;
-    nouveauParking.caracteristiques = caracteristiques;
-
-
+    nouveauParking.tarif = "\'"+tarif+"\'";
+    nouveauParking.heure_ouverture = "\'"+heure_ouverture+"\'";
+    nouveauParking.reservation = "\'"+reservation+"\'";
+    nouveauParking.lien_maps = "\'"+url_map+"\'";
     
-    // On ajoute à la liste des parking du json un nouveau parking fraichement créé
-    mesParkings.GogoParking.push(nouveauParking);
-    // On regénére l'affichage pour prendre en compte le nouveau parking
-    generateDisplay();
+    // on crée le nouveau parking dans la DB
+    CreateParking(nouveauParking);
 }
 
 // _______________________________ Fonction générant un parking vide ____________________________________________
 function ParkingModel(){
     return {
-        "quartier":"",
+        "nom_quartier":"",
         "nom_parking":"",
         "adresse_parking":"",
         "nombre_place":0,
@@ -183,7 +173,7 @@ function ParkingModel(){
         "heure_ouverture":"",
         "reservation":"",
         "lien_maps":"",
-        "caracteristiques":[]
+        // "caracteristiques":[]
     
     };
 }
@@ -239,4 +229,29 @@ function ReadDBParkings(){
     }
     xhr.open("GET","http://141.94.223.96/Luc/GogoParking/php/DB_READ.php", true); // On indique la méthode (ce que doit faire la requête, dans ce cas récupérer une ressource) et l'adresse de la ressource (fichier php)
     xhr.send(); // On envoie !
+}
+
+function CreateParking(nouveauParking){
+    let xhrinsert = new XMLHttpRequest; // on crée une variable XMLHTTPRequest pour fabriquer notre requête
+    xhrinsert.open("POST","http://141.94.223.96/Luc/GogoParking/php/DB_CREATE.php", true); // On utilise la méthode POST pour envoyer des données, sur l'URL du fichier PHP qui permet d'écrire le fichier json
+    xhrinsert.setRequestHeader("Content-type", "application/x-www-form-urlencoded"); // On définit les en-têtes pour que l'envoi soit correctement interprété par le serveur
+    xhrinsert.onreadystatechange = function(){ // on modifie l'attribut onreadystatechange de notre requête qui permet d'exécuter du code en fonction du changement d'état de la requête
+        if (xhrinsert.readyState == XMLHttpRequest.DONE && xhrinsert.status == 200){ // Si la requête se termine
+            ReadDBParkings(); // On exécute la fonction
+        }
+    }
+    xhrinsert.send("create="+encodeURIComponent(JSON.stringify(nouveauParking))); // On envoie notre requête, dans une variable PHP mesHeros à laquelle on rajoute le fichier JSON entier
+}
+
+// Fonction de suppression d'un parking, lui passer seulement l'id du parking
+function DeleteParking(parking){
+    let xhrdelete = new XMLHttpRequest; // on crée une variable XMLHTTPRequest pour fabriquer notre requête
+    xhrdelete.open("POST","http://141.94.223.96/Luc/GogoParking/php/DB_DELETE.php", true); // On utilise la méthode POST pour envoyer des données, sur l'URL du fichier PHP qui permet d'écrire le fichier json
+    xhrdelete.setRequestHeader("Content-type", "application/x-www-form-urlencoded"); // On définit les en-têtes pour que l'envoi soit correctement interprété par le serveur
+    xhrdelete.onreadystatechange = function(){ // on modifie l'attribut onreadystatechange de notre requête qui permet d'exécuter du code en fonction du changement d'état de la requête
+        if (xhrdelete.readyState == XMLHttpRequest.DONE && xhrdelete.status == 200){ // Si la requête se termine
+             ReadDBParkings(); // On exécute la fonction principale
+        }
+    }
+    xhrdelete.send("delete="+encodeURIComponent(JSON.stringify(parking))); // On envoie notre requête, dans une variable PHP mesHeros à laquelle on rajoute le fichier JSON entier
 }

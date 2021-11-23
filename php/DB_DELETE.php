@@ -13,12 +13,12 @@ function delete_dbc() {
     // 127.0.0.1 est l'adresse ip local du serveur (le fichier php étant executer sur le serveur, l'adresse du serveur est donc l'adresse local)
     try {
         // connexion à la base de donnée
-        $dbh = new PDO('mysql:host=127.0.0.1;dbname=MES_HEROS_LUC', $user, $pass);
+        $dbh = new PDO('mysql:host=127.0.0.1;dbname=GogoParking', $user, $pass);
         // envoie d'une requete à la base de données
-        $request = "DELETE FROM quartiers WHERE quartiers.id = ".$donnees; // on construit la requête, pas obligé de préciser les colonnes mais on le fait parce qu'on est des bons !
-        echo $request; //pour debug
-        $stmt = $dbh->query($request); // on envoie la purée
-        // unlink("../img/".$donnees); // on supprime l'image du héros sur le serveur
+        $stmt = $dbh->prepare("DELETE FROM quartiers WHERE quartiers.id = :id");
+        $stmt->bindParam(':id', $donnees);
+        $stmt->execute();
+        $dbh = null;
 
     } catch (PDOException $e) {
         print "Erreur !: " . $e->getMessage() . "<br/>";
