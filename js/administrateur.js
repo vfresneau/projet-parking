@@ -125,7 +125,7 @@ function Modification(id){
     
     } else {
         for (z = 0; z < carte.lastChild.firstChild.children.length;z++){
-            var element2 = ultimateHTMLGenerator("li",carte.lastChild.firstChild.children[0].value,["pouet"],carte.lastChild.firstChild.children[0].id)
+            var element2 = ultimateHTMLGenerator("li",carte.lastChild.firstChild.children[0].value,[],carte.lastChild.firstChild.children[0].id)
             carte.lastChild.firstChild.children[0].remove();
             carte.lastChild.firstChild.appendChild(element2);
         }
