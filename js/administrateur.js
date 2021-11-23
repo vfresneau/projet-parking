@@ -2,12 +2,16 @@ var mesParkings; // Variable qui contiendra la BDD des Parkings
 
 ReadDBParkings(); // on lit la BDD et on exécute la fonction principale generateDisplay
 
+
+
+
 // _______________________________ Fonction générant l'affichage des parking ____________________________________________
 function generateDisplay(){
 
-    var monContainer = document.getElementById("mon_container");
-    // Permet de détruire le contenu avant de la reconstruire (pour l'afficahge de nouveau héro ou la suppression d'un héro)
+    let monContainer = document.getElementById("mon_container");
+    // Permet de détruire le contenu avant de la reconstruire (pour l'afficahge de nouveau parking ou la suppression d'un parking)
     monContainer.innerHTML = "";
+
     
     let ligneRow;
     // Pour chaque parking

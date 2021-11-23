@@ -18,7 +18,7 @@ function Main(){
 
     //var titre = ultimateHTMLGenerator("div","AD",["col-12"],ligne1 ); //ajout de la class cardbody dans la cards//
 
-    var button2 = ultimateHTMLGenerator("a","ADMINISTRATEUR",["btn","btn-outline-info","col-2", "mx-auto"],ligne0); //ajout d'un boutton dans la cardBody//
+    var button2 = ultimateHTMLGenerator("a","ADMINISTRATEUR",["btn","btn-outline-info","col-2", "mx-right"],ligne0); //ajout d'un boutton dans la cardBody//
     button2.href = "administrateur.html";
 
     var ligne1 = ultimateHTMLGenerator("div","",["row"],park); //creer une ligne avec l'élément html "row" dans la var "park"//
@@ -47,9 +47,12 @@ function Main(){
         }
 
         var cardText3 = ultimateHTMLGenerator("p","Nombre de place disponible:"+ compteurPlace+"/"+ mesParkings.GogoParking[i]._NOMBRE_PLACE,["card-text"],cardBody); //ajout de paragraphe3 "nombre de place" dans cardbody//
-        var button = ultimateHTMLGenerator("a","+ d'info",["btn","btn-primary"],cardBody); //ajout d'un boutton dans la cardBody//
+        var button = ultimateHTMLGenerator("a","+ d'info",["btn","btn-secondary"],cardBody); //ajout d'un boutton dans la cardBody//
         button.href = "parking.html?parking="+mesParkings.GogoParking[i]._ID;
     }
+
+    
+    var contact = ultimateHTMLGenerator('div',"Contact : Monsieur Gogo -  Adresse: 26 rue de la préfecture 37000 Tours - Téléphone : 06 85 79 51 69",["mon_contact"],park);
 }
         //Fonction qui génère mes lignes et colonnes//  
 function ultimateHTMLGenerator(typeElement,contenu,tableauClassCss,destinationElement){ 
