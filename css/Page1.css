@@ -73,3 +73,11 @@ iframe:hover{
     text-align: center;
     padding-bottom: 100px;
 }
+.mon_contact{
+    font-family: Impact, Haettenschweiler, 'Arial Narrow Bold', sans-serif;
+    font-size: 20px;
+    text-align: center;
+    color: black;
+    text-shadow: rgb(250, 250, 250) 1px 0 10px;
+    padding-top: 20px;
+}
