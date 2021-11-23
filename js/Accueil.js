@@ -50,6 +50,9 @@ function Main(){
         var button = ultimateHTMLGenerator("a","+ d'info",["btn","btn-secondary"],cardBody); //ajout d'un boutton dans la cardBody//
         button.href = "parking.html"
     }
+
+    
+    var contact = ultimateHTMLGenerator('div',"Contact : Monsieur Gogo -  Adresse: 26 rue de la préfecture 37000 Tours - Téléphone : 06 85 79 51 69",["mon_contact"],park);
 }
         //Fonction qui génère mes lignes et colonnes//  
 function ultimateHTMLGenerator(typeElement,contenu,tableauClassCss,destinationElement){ 
