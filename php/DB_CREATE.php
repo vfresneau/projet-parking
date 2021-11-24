@@ -15,10 +15,9 @@ function add_dbc() {
         // connexion à la base de donnée
         $dbh = new PDO('mysql:host=127.0.0.1;dbname=GogoParking', $user, $pass);
         // envoie d'une requete à la base de données
-        $donnees = implode(',',$donnees); // on concatène le tableau en chaîne, la requête par PDO ne permet pas d'accéder directement aux éléments du tableau...
-        $request = "INSERT INTO `quartiers`(`nom_quartier`, `nom_parking`, `adresse_parking`, `nombre_place`, `tarif`, `heure_ouverture`, `reservation`, `lien_maps`) VALUES ($donnees)"; // on construit la requête, pas obligé de préciser les colonnes mais on le fait parce qu'on est des bons !
-        echo $request; //pour debug
-        $stmt = $dbh->query($request); // on envoie la purée
+        $stmt = $dbh->prepare("INSERT INTO `quartiers`(`nom_quartier`, `nom_parking`, `adresse_parking`, `nombre_place`, `tarif`, `heure_ouverture`, `reservation`, `lien_maps`) VALUES (".$donnees["nom_quartier"].", ".$donnees["nom_parking"].", ".$donnees["adresse_parking"].", ".$donnees["nombre_place"].", ".$donnees["tarif"].", ".$donnees["heure_ouverture"].", ".$donnees["reservation"].", ".$donnees["lien_maps"].")");
+        $stmt->execute();
+        $dbh = null;
 
     } catch (PDOException $e) {
         print "Erreur !: " . $e->getMessage() . "<br/>";
