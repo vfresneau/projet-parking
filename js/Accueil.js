@@ -1,5 +1,3 @@
-
-
 var mesParkings; // variable qui contiendra la BDD des parkings
 ReadDBParkings(); // On lit la BDD et on exécute la fonction principale Main
 
@@ -9,9 +7,9 @@ function Main() {
 
     var mon_logo = ultimateHTMLGenerator('img', "", ["mon_logo"], titre);
 
-    var optez= ultimateHTMLGenerator("div","",["wrapper"],titre);
+    var optez = ultimateHTMLGenerator("div", "", ["wrapper"], titre);
 
-    var titreffet= ultimateHTMLGenerator("h1","Optez pour une gestion intelligente de votre parking !",["wrapper"],optez);
+    var titreffet = ultimateHTMLGenerator("h1", "Optez pour une gestion intelligente de votre parking !", ["wrapper"], optez);
 
     //var phrase = ultimateHTMLGenerator('h1', "Optez pour une gestion intelligente de votre parking !", ["wrapper"], titre)
 
@@ -30,13 +28,13 @@ function Main() {
     for (var i = 0; i < mesParkings.GogoParking.length; i++) { //Pour l'ensemble des elements du tableau "mesParkings.GogoParking" * //
         var compteurPlace = 0; // creation de variable pour utiliser un compteur // 
         compteurReservation = 0
-        var temp = ultimateHTMLGenerator("div", "", ["col-4", "wrap"], ligne1); //* je créer une colonne et affiche le contenu dans ligne1, pour autant qu'il y a d'élément nom_parking //
+        var temp = ultimateHTMLGenerator("div", "", ["col", "wrap"], ligne1); //* je créer une colonne et affiche le contenu dans ligne1, pour autant qu'il y a d'élément nom_parking //
 
         var cards = ultimateHTMLGenerator("div", "", ["card", "tile"], temp); //creation de cards dans les colonnes//
         cards.classList.add("titlecards"); // ajout de la class titlecards dans la cards //
 
         var imgcard = ultimateHTMLGenerator("img", "", ["card-img"], cards);
-        imgcard.src = "https://cdn-s-www.ledauphine.com/images/089991F3-A393-49C8-BAA5-C75BBB3B2AA4/NW_detail_M/carroll-shelby-etait-l-homme-de-la-situation-1622215109.jpg";
+        imgcard.src = mesParkings.GogoParking[i]._IMG;
 
         var divimg = ultimateHTMLGenerator("div", "", ["card-img-overlay"], cards);
 
@@ -65,28 +63,28 @@ function Main() {
         }
     }
 
-    var footer = ultimateHTMLGenerator('div',"",["footer"],park);
-    var contact = ultimateHTMLGenerator('p',"Contact : Monsieur Gogo -  Adresse: 26 rue de la préfecture 37000 Tours - Téléphone : 06 85 79 51 69",["text-center","text-footer"],footer);
-    var copy = ultimateHTMLGenerator('p',"Copyright @2021 | Designed by Les lutins de Mr Gogo",["text-center","text-footer"],footer);
-    var social_footer_ul = ultimateHTMLGenerator('ul',"",['social_footer_ul'],footer);
-    
-    var facebook_lien = ultimateHTMLGenerator ('a',"",[],social_footer_ul);
-    var facebook = ultimateHTMLGenerator('img',"",["icone"],facebook_lien)
-    facebook.src ="../image/facebook_ic.png";
-    facebook_lien.href ="https://fr-fr.facebook.com/";
+    var footer = ultimateHTMLGenerator('div', "", ["footer"], park);
+    var contact = ultimateHTMLGenerator('p', "Contact : Monsieur Gogo -  Adresse: 26 rue de la préfecture 37000 Tours - Téléphone : 06 85 79 51 69", ["text-center", "text-footer"], footer);
+    var copy = ultimateHTMLGenerator('p', "Copyright @2021 | Designed by Les lutins de Mr Gogo", ["text-center", "text-footer"], footer);
+    var social_footer_ul = ultimateHTMLGenerator('ul', "", ['social_footer_ul'], footer);
 
-    var twitter_lien = ultimateHTMLGenerator ('a',"",[],social_footer_ul);
-    var twitter = ultimateHTMLGenerator('img',"",["icone"],twitter_lien)
-    twitter.src ="../image/twitter-ic.png";
-    twitter_lien.href ="https://twitter.com/?lang=fr";
+    var facebook_lien = ultimateHTMLGenerator('a', "", [], social_footer_ul);
+    var facebook = ultimateHTMLGenerator('img', "", ["icone"], facebook_lien)
+    facebook.src = "../image/facebook_ic.png";
+    facebook_lien.href = "https://fr-fr.facebook.com/";
 
-    var instagram_lien = ultimateHTMLGenerator ('a',"",[],social_footer_ul);
-    var instagram = ultimateHTMLGenerator('img',"",["icone"],instagram_lien)
-    instagram.src ="../image/instagram_ic.png";
-    instagram_lien.href ="https://www.instagram.com/accounts/login/?source=auth_switcher";
+    var twitter_lien = ultimateHTMLGenerator('a', "", [], social_footer_ul);
+    var twitter = ultimateHTMLGenerator('img', "", ["icone"], twitter_lien)
+    twitter.src = "../image/twitter-ic.png";
+    twitter_lien.href = "https://twitter.com/?lang=fr";
 
-  
-   // var contact = ultimateHTMLGenerator('div', "Contact : Monsieur Gogo -  Adresse: 26 rue de la préfecture 37000 Tours - Téléphone : 06 85 79 51 69", ["mon_contact"], park);
+    var instagram_lien = ultimateHTMLGenerator('a', "", [], social_footer_ul);
+    var instagram = ultimateHTMLGenerator('img', "", ["icone"], instagram_lien)
+    instagram.src = "../image/instagram_ic.png";
+    instagram_lien.href = "https://www.instagram.com/accounts/login/?source=auth_switcher";
+
+
+    // var contact = ultimateHTMLGenerator('div', "Contact : Monsieur Gogo -  Adresse: 26 rue de la préfecture 37000 Tours - Téléphone : 06 85 79 51 69", ["mon_contact"], park);
 }
 //Fonction qui génère mes lignes et colonnes//  
 function ultimateHTMLGenerator(typeElement, contenu, tableauClassCss, destinationElement) {

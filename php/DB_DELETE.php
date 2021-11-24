@@ -18,6 +18,8 @@ function delete_dbc() {
         $stmt = $dbh->prepare("DELETE FROM quartiers WHERE quartiers.id = :id");
         $stmt->bindParam(':id', $donnees);
         $stmt->execute();
+        $id = $dbh->lastInsertId();
+
         $dbh = null;
 
     } catch (PDOException $e) {
