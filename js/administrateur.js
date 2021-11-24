@@ -123,12 +123,14 @@ function generateDisplay() {
         // on ajoute la colonne dans la ligne
         ligneRow.appendChild(maColonne);
     }
+
+    //Création de la liste des caractéristiques dans le formulaire de création de parking
     var checkboxesList = document.getElementById("checkboxes");
     for (h = 0; h < mesCarac.GogoParking.length; h++) {
-        var input = ultimateHTMLGenerator("input", "", ["form-check-input"], checkboxesList);
-        input.id = "check" + h;
-        var label = ultimateHTMLGenerator("label", "", ["form-check-label"], checkboxesList);
-        label.for = "check" + h;
+        var listeCheckboxes = ultimateHTMLGenerator("div", "", ["form-check"], "", checkboxesList);
+        var input = ultimateHTMLGenerator("input", "", ["form-check-input"], "check" + h, listeCheckboxes);
+        input.type = "checkbox";
+        var label = ultimateHTMLGenerator("label", mesCarac.GogoParking[h]._DESCRIPTION_CARAC, ["form-check-label"], "check" + h, listeCheckboxes);
     }
 }
 
