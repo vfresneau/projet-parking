@@ -217,7 +217,7 @@ function CreerParking() {
     nouveauParking.nom_parking = "\'" + nom_parking + "\'";
     nouveauParking.adresse_parking = "\'" + adresse_parking + "\'";
     nouveauParking.nombre_place = nombre_place;
-    nouveauParking.tarif = "\'" + tarif + "\'";
+    nouveauParking.tarif = "\"" + tarif + "\"";
     nouveauParking.heure_ouverture = "\'" + heure_ouverture + "\'";
     nouveauParking.reservation = "\'" + reservation + "\'";
     nouveauParking.lien_maps = "\'" + url_map + "\'";

@@ -14,7 +14,7 @@ function add_dbc() {
         // connexion à la base de donnée
         $dbh = new PDO('mysql:host=127.0.0.1;dbname=GogoParking', $user, $pass);
         // envoie d'une requete à la base de données
-        $stmt = $dbh->prepare("INSERT INTO `quartiers`(`nom_quartier`, `nom_parking`, `adresse_parking`, `nombre_place`, `tarif`, `heure_ouverture`, `reservation`, `lien_maps`) VALUES (".$donnees["nom_quartier"].", ".$donnees["nom_parking"].", ".$donnees["adresse_parking"].", ".$donnees["nombre_place"].", ".$donnees["tarif"].", ".$donnees["heure_ouverture"].", ".$donnees["reservation"].", ".$donnees["lien_maps"].")");
+        $stmt = $dbh->prepare("INSERT INTO `quartiers`(`nom_quartier`, `nom_parking`, `adresse_parking`, `nombre_place`, `tarif`, `heure_ouverture`, `reservation`, `lien_maps`, `img`) VALUES (".$donnees["nom_quartier"].", ".$donnees["nom_parking"].", ".$donnees["adresse_parking"].", ".$donnees["nombre_place"].", ".$donnees["tarif"].", ".$donnees["heure_ouverture"].", ".$donnees["reservation"].", ".$donnees["lien_maps"].", ".$donnees["img"].")");
         $stmt->execute();
         $id = $dbh->lastInsertId();
         echo($donnees["nom_quartier"]);
