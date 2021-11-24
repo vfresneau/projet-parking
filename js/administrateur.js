@@ -1,6 +1,7 @@
 var mesParkings; // Variable qui contiendra la BDD des Parkings
-
-ReadDBParkings(); // on lit la BDD et on exécute la fonction principale generateDisplay
+var mesCarac;
+ReadDBCarac();
+// on lit la BDD et on exécute la fonction principale generateDisplay
 
 
 
@@ -56,7 +57,7 @@ function generateDisplay() {
         let puce_tarif = ultimateHTMLGenerator('li', "Tarif : " + mesParkings.GogoParking[i]._TARIF, ['tarif'], i + "tarif", maListeAPuce);
         let puce_heure_ouverture = ultimateHTMLGenerator('li', "Heure d'ouverture : " + mesParkings.GogoParking[i]._HEURE_OUVERTURE, ['heure_ouverture'], i + "heure_ouverture", maListeAPuce);
         let puce_reservation = ultimateHTMLGenerator('li', "Réservation : " + mesParkings.GogoParking[i]._RESERVATION, ['reservation'], i + "reservation", maListeAPuce);
-        // let puce_lien_maps =ultimateHTMLGenerator('li',mesParkings.GogoParking[i]._LIEN_MAPS,['lien_maps'],"",maListeAPuce);
+        // let puce_lien_maps = ultimateHTMLGenerator('li', mesParkings.GogoParking[i]._LIEN_MAPS, ['lien_maps'], i + "lien_maps", maListeAPuce);
 
         // Pour chaque caractéristiques du parking en cours
         for (var j = 0; j < mesParkings.GogoParking[i]._CARACTERISTIQUES.length; j++) {
@@ -86,9 +87,6 @@ function generateDisplay() {
 
         // on donne un id unique au bouton de suppression pour savoir quel id on dois supprimer de la liste
         modif.id = i + "button";
-        // On ajoute une fonction sur l'evenement click du bouton
-        // modif.addEventListener('click', modif_park());
-
 
 
         // fabrication du texte
@@ -106,6 +104,13 @@ function generateDisplay() {
 
         // on ajoute la colonne dans la ligne
         ligneRow.appendChild(maColonne);
+    }
+    var checkboxesList = document.getElementById("checkboxes");
+    for (h = 0; h < mesCarac.GogoParking.length; h++) {
+        var input = ultimateHTMLGenerator("input", "", ["form-check-input"], checkboxesList);
+        input.id = "check" + h;
+        var label = ultimateHTMLGenerator("label", "", ["form-check-label"], checkboxesList);
+        label.for = "check" + h;
     }
 }
 
@@ -273,10 +278,24 @@ function ReadDBParkings() {
     xhr.onreadystatechange = function() { // on modifie l'attribut onreadystatechange de notre requête qui permet d'exécuter du code en fonction du changement d'état de la requête
         if (xhr.readyState == XMLHttpRequest.DONE && xhr.status == 200) { // Si la requête se termine
             mesParkings = JSON.parse(xhr.responseText); // on récupère le résultat de la requête dans la variable mesHeros, et on la convertit en objet JSON
+
             generateDisplay(); // On exécute la fonction principale
         }
     }
     xhr.open("GET", "http://141.94.223.96/Luc/GogoParking/php/DB_READ.php", true); // On indique la méthode (ce que doit faire la requête, dans ce cas récupérer une ressource) et l'adresse de la ressource (fichier php)
+    xhr.send(); // On envoie !
+}
+
+function ReadDBCarac() {
+    // Création de la variable qui stockera la base de données des héros
+    let xhr = new XMLHttpRequest; // Création d'une nouvelle requête XMLHTTP pour aller récupérer la base de données
+    xhr.onreadystatechange = function() { // on modifie l'attribut onreadystatechange de notre requête qui permet d'exécuter du code en fonction du changement d'état de la requête
+        if (xhr.readyState == XMLHttpRequest.DONE && xhr.status == 200) { // Si la requête se termine
+            mesCarac = JSON.parse(xhr.responseText); // on récupère le résultat de la requête dans la variable mesHeros, et on la convertit en objet JSON
+            ReadDBParkings();
+        }
+    }
+    xhr.open("GET", "http://141.94.223.96/Luc/GogoParking/php/DB_READ_CARAC.php", true); // On indique la méthode (ce que doit faire la requête, dans ce cas récupérer une ressource) et l'adresse de la ressource (fichier php)
     xhr.send(); // On envoie !
 }
 

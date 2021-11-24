@@ -15,7 +15,7 @@ function update_dbc() {
         // connexion à la base de donnée
         $dbh = new PDO('mysql:host=127.0.0.1;dbname=GogoParking', $user, $pass);
         // envoie d'une requete à la base de données
-        $stmt = $dbh->prepare("UPDATE `quartiers` SET `nom_quartier`=".$donnees["nom_quartier"].",`nom_parking`=".$donnees["nom_parking"].",`adresse_parking`=".$donnees["adresse_parking"].",`nombre_place`=".$donnees["nombre_place"].",`tarif`=".$donnees["tarif"].",`heure_ouverture`=".$donnees["heure_ouverture"].",`reservation`=".$donnees["reservation"].",`lien_maps`=".$donnees["lien_maps"].",`img`=".$donnees["img"]." WHERE `id` = ".$donnees["id"]);
+        $stmt = $dbh->prepare("UPDATE `quartiers` SET `nom_quartier`=".$donnees["nom_quartier"].",`nom_parking`=".$donnees["nom_parking"].",`adresse_parking`=".$donnees["adresse_parking"].",`nombre_place`=".$donnees["nombre_place"].",`tarif`=".$donnees["tarif"].",`heure_ouverture`=".$donnees["heure_ouverture"].",`reservation`=".$donnees["reservation"].",`lien_maps`=".$donnees["lien_maps"]." WHERE `id` = ".$donnees["id"]);
         $stmt->execute();
         $dbh = null;
 
