@@ -17,6 +17,7 @@ function add_dbc() {
         $stmt = $dbh->prepare("INSERT INTO `quartiers`(`nom_quartier`, `nom_parking`, `adresse_parking`, `nombre_place`, `tarif`, `heure_ouverture`, `reservation`, `lien_maps`) VALUES (".$donnees["nom_quartier"].", ".$donnees["nom_parking"].", ".$donnees["adresse_parking"].", ".$donnees["nombre_place"].", ".$donnees["tarif"].", ".$donnees["heure_ouverture"].", ".$donnees["reservation"].", ".$donnees["lien_maps"].")");
         $stmt->execute();
         $id = $dbh->lastInsertId();
+        echo($donnees["nom_quartier"]);
         $dbh = null;
     } catch (PDOException $e) {
         print "Erreur !: " . $e->getMessage() . "<br/>";

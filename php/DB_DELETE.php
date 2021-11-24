@@ -1,6 +1,5 @@
 <?php
 header("Access-Control-Allow-Origin: *");
-require('CLASS_PARKING.php');
 ini_set('display_errors', 1);
 error_reporting(E_ALL);
 //DELETE
@@ -15,10 +14,11 @@ function delete_dbc() {
         // connexion à la base de donnée
         $dbh = new PDO('mysql:host=127.0.0.1;dbname=GogoParking', $user, $pass);
         // envoie d'une requete à la base de données
-        $stmt = $dbh->prepare("DELETE FROM quartiers WHERE quartiers.id = :id");
+        $stmt = $dbh->prepare("DELETE FROM places WHERE `id_quartier` = :id");
         $stmt->bindParam(':id', $donnees);
         $stmt->execute();
         $dbh = null;
+        echo ("delete places...");
     } catch (PDOException $e) {
         print "Erreur !: " . $e->getMessage() . "<br/>";
         die();
@@ -27,15 +27,15 @@ function delete_dbc() {
         // connexion à la base de donnée
         $dbh = new PDO('mysql:host=127.0.0.1;dbname=GogoParking', $user, $pass);
         // envoie d'une requete à la base de données
-        $stmt = $dbh->prepare("DELETE FROM places WHERE `id_quartier` = :id");
+        $stmt = $dbh->prepare("DELETE FROM quartiers WHERE quartiers.id = :id");
         $stmt->bindParam(':id', $donnees);
         $stmt->execute();
         $dbh = null;
+        echo("delete parking...");
     } catch (PDOException $e) {
         print "Erreur !: " . $e->getMessage() . "<br/>";
         die();
     }
-
 }
 
 delete_dbc ();

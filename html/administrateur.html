@@ -52,11 +52,11 @@
         <div class="row">
             <div class="col-3">
                 <label for="quartier">Quartier :</label>
-                <input class="form-control" type="text" id="quartier" name="quartier">
+                <input class="form-control" type="text" id="nom_quartier" name="nom_quartier">
             </div>
             <div class="col-3">
                 <label for="nom_quartier">Nom du parking :</label>
-                <input class="form-control" type="text" id="nom_quartier" name="nom_quartier">
+                <input class="form-control" type="text" id="nom_parking" name="nom_parking">
             </div>
             <div class="col-3">
                 <label for="adresse_parking">Adresse du parking :</label>
@@ -89,12 +89,50 @@
                 <label for="img">Image de fond:</label>
                 <input class="form-control" id="img" name="img"></input>
             </div>
+            <div class="col-3" id="checkboxes1">
+                <div class="form-check">
+                    <input class="form-check-input" type="checkbox" id="check1" data-id-carac="1">
+                    <label class="form-check-label" for="check1">
+                        Restrictions de hauteur: 2.10m
+                    </label>
+                </div>
+                <div class="form-check">
+                    <input class="form-check-input" type="checkbox" id="check2" data-id-carac="2">
+                    <label class="form-check-label" for="check2">
+                        Espaces handicapés
+                    </label>
+                </div>
+                <div class="form-check">
+                    <input class="form-check-input" type="checkbox" id="check3" data-id-carac="3">
+                    <label class="form-check-label" for="check3">
+                        Restrictions de hauteur: 1.90m
+                    </label>
+                </div>
+            </div>
+            <div class="col-3" id="checkboxes2">
+                <div class="form-check">
+                    <input class="form-check-input" type="checkbox" id="check4" data-id-carac="4">
+                    <label class="form-check-label" for="check4">
+                        Aucune restriction de hauteur
+                    </label>
+                </div>
+                <div class="form-check">
+                    <input class="form-check-input" type="checkbox" id="check5" data-id-carac="5">
+                    <label class="form-check-label" for="check5">
+                        Restrictions de hauteur: 2.60m
+                    </label>
+                </div>
+                <div class="form-check">
+                    <input class="form-check-input" type="checkbox" id="check6" data-id-carac="6">
+                    <label class="form-check-label" for="check6">
+                        Charge de voiture électrique
+                    </label>
+                </div>
+            </div>
 
         </div>
 
         <div class="row">
-            <div class="col-3" id="checkboxes">
-            </div>
             <div class="col-3">
                 <button type="button" class="btn btn-success" onclick="CreerParking()">Créer un parking</button>
             </div>

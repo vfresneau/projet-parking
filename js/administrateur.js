@@ -1,14 +1,15 @@
 var mesParkings; // Variable qui contiendra la BDD des Parkings
 var mesCarac;
-ReadDBCarac();
+
+
 // on lit la BDD et on exécute la fonction principale generateDisplay
 
 var park = document.getElementById("quartier"); // permet d'acceder à l'élément HTML avec l'id quartier //
 var titre = document.getElementById("titre");
 
-var mon_logo = ultimateHTMLGenerator('img', "", ["mon_logo"],titre);
+var mon_logo = ultimateHTMLGenerator('img', "", ["mon_logo"], titre);
 
-var optez = ultimateHTMLGenerator("div", "", ["wrapper"],titre);
+var optez = ultimateHTMLGenerator("div", "", ["wrapper"], titre);
 
 var titreffet = ultimateHTMLGenerator("h1", "Optez pour une gestion intelligente de votre parking !", ["wrapper"], optez);
 
@@ -17,7 +18,7 @@ mon_logo.src = "../image/logo_parking.png";
 mon_logo.alt = "logo";
 
 
-
+ReadDBParkings();
 
 
 
@@ -120,15 +121,6 @@ function generateDisplay() {
         // on ajoute la colonne dans la ligne
         ligneRow.appendChild(maColonne);
     }
-
-    //Création de la liste des caractéristiques dans le formulaire de création de parking
-    var checkboxesList = document.getElementById("checkboxes");
-    for (h = 0; h < mesCarac.GogoParking.length; h++) {
-        var listeCheckboxes = ultimateHTMLGenerator("div", "", ["form-check"], "", checkboxesList);
-        var input = ultimateHTMLGenerator("input", "", ["form-check-input"], "check" + h, listeCheckboxes);
-        input.type = "checkbox";
-        var label = ultimateHTMLGenerator("label", mesCarac.GogoParking[h]._DESCRIPTION_CARAC, ["form-check-label"], "check" + h, listeCheckboxes);
-    }
 }
 
 // Fonction de modification d'une fiche parking
@@ -176,9 +168,6 @@ function MajParking(idDb, id) {
     var reservation = document.getElementById(id + "reservation").textContent;
     reservation = reservation.substr("Réservation : ".length, reservation.length - "Réservation : ".length);
     // var url_map = document.getElementById(id + "url").value;
-    // var caracteristiques1 = document.getElementById("caracteristiques1").value;
-    // var caracteristiques2 = document.getElementById("caracteristiques2").value;
-    // var caracteristiques3 = document.getElementById("caracteristiques3").value;
 
     // var caracteristiques = [caracteristiques1,caracteristiques2,caracteristiques3];
 
@@ -201,8 +190,8 @@ function MajParking(idDb, id) {
 // _______________________________ Fonction de création de parking depuis le HTML ____________________________________________
 function CreerParking() {
     // On récupère les valeurs des inputs depuis le html
-    var quartier = document.getElementById("quartier").value;
     var nom_quartier = document.getElementById("nom_quartier").value;
+    var nom_parking = document.getElementById("nom_parking").value;
     var adresse_parking = document.getElementById("adresse_parking").value;
     var nombre_place = document.getElementById("nombre_place").value;
     var tarif = document.getElementById("tarif").value;
@@ -210,17 +199,17 @@ function CreerParking() {
     var reservation = document.getElementById("reservation").value;
     var url_map = document.getElementById("url").value;
     var img = document.getElementById("img").value;
-    var caracteristiques1 = document.getElementById("caracteristiques1").value;
-    var caracteristiques2 = document.getElementById("caracteristiques2").value;
-    var caracteristiques3 = document.getElementById("caracteristiques3").value;
-
-    var caracteristiques = [caracteristiques1, caracteristiques2, caracteristiques3];
+    var caracteristiques = [];
+    // for (g = 1; g < document.getElementsByClassName("form-check-input").length; g++) {
+    //     var checkbox = document.getElementById("check" + g);
+    //     caracteristiques.push(checkbox.checked);
+    // }
 
     // On fabrique un model vide de parking
     var nouveauParking = ParkingModel();
     // On change les valeurs avant vide par le contenu des inputs
-    nouveauParking.nom_quartier = "\'" + quartier + "\'";
-    nouveauParking.nom_parking = "\'" + nom_quartier + "\'";
+    nouveauParking.nom_quartier = "\'" + nom_quartier + "\'";
+    nouveauParking.nom_parking = "\'" + nom_parking + "\'";
     nouveauParking.adresse_parking = "\'" + adresse_parking + "\'";
     nouveauParking.nombre_place = nombre_place;
     nouveauParking.tarif = "\'" + tarif + "\'";
@@ -228,6 +217,7 @@ function CreerParking() {
     nouveauParking.reservation = "\'" + reservation + "\'";
     nouveauParking.lien_maps = "\'" + url_map + "\'";
     nouveauParking.img = "\'" + img + "\'";
+    nouveauParking.caracteristiques = caracteristiques;
     // on crée le nouveau parking dans la DB
     CreateParking(nouveauParking);
 }
@@ -244,8 +234,8 @@ function ParkingModel() {
         "heure_ouverture": "",
         "reservation": "",
         "lien_maps": "",
-        "img": ""
-            // "caracteristiques":[]
+        "img": "",
+        "caracteristiques": []
     };
 }
 
@@ -295,24 +285,10 @@ function ReadDBParkings() {
     xhr.onreadystatechange = function() { // on modifie l'attribut onreadystatechange de notre requête qui permet d'exécuter du code en fonction du changement d'état de la requête
         if (xhr.readyState == XMLHttpRequest.DONE && xhr.status == 200) { // Si la requête se termine
             mesParkings = JSON.parse(xhr.responseText); // on récupère le résultat de la requête dans la variable mesHeros, et on la convertit en objet JSON
-
             generateDisplay(); // On exécute la fonction principale
         }
     }
     xhr.open("GET", "http://141.94.223.96/Luc/GogoParking/php/DB_READ.php", true); // On indique la méthode (ce que doit faire la requête, dans ce cas récupérer une ressource) et l'adresse de la ressource (fichier php)
-    xhr.send(); // On envoie !
-}
-
-function ReadDBCarac() {
-    // Création de la variable qui stockera la base de données des héros
-    let xhr = new XMLHttpRequest; // Création d'une nouvelle requête XMLHTTP pour aller récupérer la base de données
-    xhr.onreadystatechange = function() { // on modifie l'attribut onreadystatechange de notre requête qui permet d'exécuter du code en fonction du changement d'état de la requête
-        if (xhr.readyState == XMLHttpRequest.DONE && xhr.status == 200) { // Si la requête se termine
-            mesCarac = JSON.parse(xhr.responseText); // on récupère le résultat de la requête dans la variable mesHeros, et on la convertit en objet JSON
-            ReadDBParkings();
-        }
-    }
-    xhr.open("GET", "http://141.94.223.96/Luc/GogoParking/php/DB_READ_CARAC.php", true); // On indique la méthode (ce que doit faire la requête, dans ce cas récupérer une ressource) et l'adresse de la ressource (fichier php)
     xhr.send(); // On envoie !
 }
 
