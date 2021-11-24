@@ -79,3 +79,18 @@
     display: flex;
     float: left;
 }
+
+.card{
+    width: 100px;
+
+    display: flex;
+    position: relative;
+}
+
+.button_cus{
+    margin: 20px;
+}
+.btn-success{
+    margin:50px;
+    font-family: fantasy;
+}
