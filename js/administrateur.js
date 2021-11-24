@@ -4,22 +4,26 @@ var mesCarac;
 
 // on lit la BDD et on exécute la fonction principale generateDisplay
 
-var park = document.getElementById("quartier"); // permet d'acceder à l'élément HTML avec l'id quartier //
+
+var park = document.getElementById("quartier");
 var titre = document.getElementById("titre");
 
-var mon_logo = ultimateHTMLGenerator('img', "", ["mon_logo"], titre);
-
-var optez = ultimateHTMLGenerator("div", "", ["wrapper"], titre);
-
-var titreffet = ultimateHTMLGenerator("h1", "Optez pour une gestion intelligente de votre parking !", ["wrapper"], optez);
-
-
+var mon_logo = document.createElement('img');
+mon_logo.classList.add("mon_logo");
 mon_logo.src = "../image/logo_parking.png";
 mon_logo.alt = "logo";
+titre.appendChild(mon_logo);
 
+
+
+var ligne0 = ultimateHTMLGenerator("div", "", ["row"], "", park); //creer une ligne avec l'élément html "row" dans la var "park"//
+
+var button2 = ultimateHTMLGenerator("a", "Accueil", ["btn", "btn-outline-info", "col-2", "text-right", "glow-on-hover"], "", ligne0); //ajout d'un boutton dans la cardBody//
+button2.href = "Accueil.html";
 
 ReadDBParkings();
 
+let ligneRow;
 
 
 // _______________________________ Fonction générant l'affichage des parking ____________________________________________
@@ -30,7 +34,6 @@ function generateDisplay() {
     monContainer.innerHTML = "";
 
 
-    let ligneRow;
     // Pour chaque parking
     for (var i = 0; i < mesParkings.GogoParking.length; i++) {
         if (i % 2 == 0) {
@@ -45,7 +48,7 @@ function generateDisplay() {
         maColonne.classList.add("card");
         // maColonne.classList.add("text-white");
         // maColonne.classList.add("bg-dark");
-        // maColonne.classList.add("h-100");
+        //maColonne.classList.add("h-100");
         maColonne.dataset.idDb = mesParkings.GogoParking[i]._ID;
         maColonne.id = i;
 
@@ -85,6 +88,7 @@ function generateDisplay() {
         let sup = document.createElement("button");
         sup.type = "button";
         sup.classList.add("btn");
+        sup.classList.add("button_cus");
         sup.classList.add("btn-danger");
         sup.textContent = "Supprimer le parking";
         // on donne un id unique au bouton de suppression pour savoir quel id on dois supprimer de la liste
@@ -97,6 +101,7 @@ function generateDisplay() {
         let modif = document.createElement("button");
         modif.type = "button";
         modif.classList.add("btn");
+        modif.classList.add("button_cus");
         modif.classList.add("btn-danger");
         modif.textContent = "Modifier";
         modif.onclick = function() { Modification(maColonne.id); };
