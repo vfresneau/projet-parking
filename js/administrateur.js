@@ -213,13 +213,13 @@ function CreerParking() {
     // On fabrique un model vide de parking
     var nouveauParking = ParkingModel();
     // On change les valeurs avant vide par le contenu des inputs
-    nouveauParking.nom_quartier = "\'" + nom_quartier + "\'";
-    nouveauParking.nom_parking = "\'" + nom_parking + "\'";
-    nouveauParking.adresse_parking = "\'" + adresse_parking + "\'";
+    nouveauParking.nom_quartier = "\"" + nom_quartier + "\"";
+    nouveauParking.nom_parking = "\"" + nom_parking + "\"";
+    nouveauParking.adresse_parking = "\"" + adresse_parking + "\"";
     nouveauParking.nombre_place = nombre_place;
     nouveauParking.tarif = "\"" + tarif + "\"";
-    nouveauParking.heure_ouverture = "\'" + heure_ouverture + "\'";
-    nouveauParking.reservation = "\'" + reservation + "\'";
+    nouveauParking.heure_ouverture = "\"" + heure_ouverture + "\"";
+    nouveauParking.reservation = "\"" + reservation + "\"";
     nouveauParking.lien_maps = "\'" + url_map + "\'";
     nouveauParking.img = "\'" + img + "\'";
     nouveauParking.caracteristiques = caracteristiques;
