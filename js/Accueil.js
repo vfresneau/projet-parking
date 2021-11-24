@@ -1,3 +1,5 @@
+
+
 var mesParkings; // variable qui contiendra la BDD des parkings
 ReadDBParkings(); // On lit la BDD et on exécute la fonction principale Main
 
@@ -7,7 +9,11 @@ function Main() {
 
     var mon_logo = ultimateHTMLGenerator('img', "", ["mon_logo"], titre);
 
-    var phrase = ultimateHTMLGenerator('h6', "Optez pour une gestion intelligente de votre parking !", ["ma_phrase"], titre)
+    var optez= ultimateHTMLGenerator("div","",["wrapper"],titre);
+
+    var titreffet= ultimateHTMLGenerator("h1","Optez pour une gestion intelligente de votre parking !",["wrapper"],optez);
+
+    //var phrase = ultimateHTMLGenerator('h1', "Optez pour une gestion intelligente de votre parking !", ["wrapper"], titre)
 
     mon_logo.src = "../image/logo_parking.png";
     mon_logo.alt = "logo";
