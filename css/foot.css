@@ -222,3 +222,11 @@ body {
     text-align: center;
     padding-top: 50px;
 }
+
+.imgpark {
+    width: 25px;
+}
+
+.imgpark {
+    object-fit: cover;
+}

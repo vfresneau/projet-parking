@@ -24,22 +24,21 @@ function Main() {
     for (var i = 0; i < mesParkings.GogoParking.length; i++) { //Pour l'ensemble des elements du tableau "mesParkings.GogoParking" * //
         var compteurPlace = 0; // creation de variable pour utiliser un compteur // 
         compteurReservation = 0
-        var temp = ultimateHTMLGenerator("div", "", ["col-4", "wrap"], ligne1); //* je créer une colonne et affiche le contenu dans ligne1, pour autant qu'il y a d'élément nom_parking //
+        var temp = ultimateHTMLGenerator("div", "", ["col", "wrap"], ligne1); //* je créer une colonne et affiche le contenu dans ligne1, pour autant qu'il y a d'élément nom_parking //
 
         var cards = ultimateHTMLGenerator("div", "", ["card", "tile"], temp); //creation de cards dans les colonnes//
         cards.classList.add("titlecards"); // ajout de la class titlecards dans la cards //
 
-        var imgcard = ultimateHTMLGenerator("img", "", ["card-img"], cards);
-        imgcard.src = "https://cdn-s-www.ledauphine.com/images/089991F3-A393-49C8-BAA5-C75BBB3B2AA4/NW_detail_M/carroll-shelby-etait-l-homme-de-la-situation-1622215109.jpg";
+        var imgcard = ultimateHTMLGenerator("img", "", ["card-img", "imgpark"], cards);
+        imgcard.src = mesParkings.GogoParking[i]._IMG;
 
         var divimg = ultimateHTMLGenerator("div", "", ["card-img-overlay"], cards);
 
-        // var cardBody = ultimateHTMLGenerator("div", "", ["card-body"], divimg); //ajout de la class cardbody dans la cards//
         var cardTitle = ultimateHTMLGenerator("h1", mesParkings.GogoParking[i]._NOM_PARKING, ["card-title"], divimg); //ajout des noms de parking dans titre h5 "cardTtitle" dans la cardBody//
 
         var cardText = ultimateHTMLGenerator("h2", mesParkings.GogoParking[i]._ADRESSE_PARKING, ["card-text", "animate-text"], divimg); //ajout de paragraphe dans cardbody//
         for (var j = 0; j < mesParkings.GogoParking[i]._PLACES.length; j++) { //Pour l'ensemble des places du parking//
-            if (mesParkings.GogoParking[i]._PLACES[j]._DISPO === "Disponible") { // si place de parking disponible //
+            if (mesParkings.GogoParking[i]._PLACES[j]._DISPO === "0") { // si place de parking disponible //
                 compteurPlace++ //ajouter 1 à compteurPlace //
             }
         }
@@ -49,8 +48,6 @@ function Main() {
         }
 
         var cardText3 = ultimateHTMLGenerator("p", "Nombre de place disponible:" + compteurPlace + "/" + mesParkings.GogoParking[i]._NOMBRE_PLACE, ["card-text", "animate-text"], divimg); //ajout de paragraphe3 "nombre de place" dans cardbody//
-        // var button = ultimateHTMLGenerator("a", "+ d'info", ["btn", "btn-secondary"], divimg); //ajout d'un boutton dans la cardBody//
-        // button.href = "parking.html?parking=" + i;
         var link = ultimateHTMLGenerator("a", "", [], divimg);
         link.href = "parking.html?parking=" + i;
         var dots = ultimateHTMLGenerator("div", "", ["dots"], link);

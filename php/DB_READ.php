@@ -30,6 +30,7 @@ function get_parkings() {
             $leParking->set_HEURE_OUVERTURE($row['heure_ouverture']);
             $leParking->set_RESERVATION($row['reservation']);
             $leParking->set_LIEN_MAPS($row['lien_maps']);
+            $leParking->set_IMG($row['img']);
             $leParking->set_CARACTERISTIQUES(get_carac_by_id($leParking->get_ID($row['id'])));
             $leParking->set_PLACES(get_places_by_id($leParking->get_ID($row['id'])));
 

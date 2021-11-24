@@ -11,6 +11,7 @@ Class PARKING{
     private $_HEURE_OUVERTURE;
     private $_RESERVATION;
     private $_LIEN_MAPS;
+    private $_IMG;
 
 	// on va chercher les données d'un id
 	public function retrieve_parkings(){
@@ -36,6 +37,7 @@ Class PARKING{
 				$this->set_HEURE_OUVERTURE($row['heure_ouverture']);
 				$this->set_RESERVATION($row['reservation']);
 				$this->set_LIEN_MAPS($row['lien_maps']);
+				$this->set_IMG($row['img']);
 			}
 			$dbh = null;
 		} catch (PDOException $e) {
@@ -51,6 +53,15 @@ Class PARKING{
 	public function set_LIEN_MAPS($_LIEN_MAPS){
 		$this->_LIEN_MAPS = $_LIEN_MAPS;
 	}
+
+    public function get_IMG(){
+		return $this->_IMG;
+	}
+
+	public function set_IMG($_IMG){
+		$this->_IMG = $_IMG;
+	}
+
 
     public function get_ID(){
 		return $this->_ID;
