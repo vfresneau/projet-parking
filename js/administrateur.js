@@ -2,6 +2,24 @@ var mesParkings; // Variable qui contiendra la BDD des Parkings
 
 ReadDBParkings(); // on lit la BDD et on exécute la fonction principale generateDisplay
 
+var park = document.getElementById("quartier"); // permet d'acceder à l'élément HTML avec l'id quartier //
+var titre = document.getElementById("titre");
+
+var mon_logo = ultimateHTMLGenerator('img', "", ["mon_logo"], titre);
+
+var optez = ultimateHTMLGenerator("div", "", ["wrapper"], titre);
+
+var titreffet = ultimateHTMLGenerator("h1", "Optez pour une gestion intelligente de votre parking !", ["wrapper"], optez);
+
+
+mon_logo.src = "../image/logo_parking.png";
+mon_logo.alt = "logo";
+
+
+var ligne0 = ultimateHTMLGenerator("div", "", ["row"], park); //creer une ligne avec l'élément html "row" dans la var "park"//
+
+var button2 = ultimateHTMLGenerator("a", "Page Accueil", ["btn", "btn-outline-info", "col-2", "text-right"], ligne0); //ajout d'un boutton dans la cardBody//
+button2.href = "accueil.html";
 
 
 
@@ -107,6 +125,7 @@ function generateDisplay() {
         // on ajoute la colonne dans la ligne
         ligneRow.appendChild(maColonne);
     }
+
 }
 
 // Fonction de modification d'une fiche parking
@@ -316,3 +335,5 @@ function UpdateParking(update) {
     }
     xhrupdate.send("update=" + encodeURIComponent(JSON.stringify(update))); // On envoie notre requête, dans une variable PHP mesHeros à laquelle on rajoute le fichier JSON entier
 }
+
+

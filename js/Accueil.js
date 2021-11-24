@@ -84,7 +84,7 @@ function Main() {
     instagram_lien.href = "https://www.instagram.com/accounts/login/?source=auth_switcher";
 
 
-    // var contact = ultimateHTMLGenerator('div', "Contact : Monsieur Gogo -  Adresse: 26 rue de la préfecture 37000 Tours - Téléphone : 06 85 79 51 69", ["mon_contact"], park);
+    
 }
 //Fonction qui génère mes lignes et colonnes//  
 function ultimateHTMLGenerator(typeElement, contenu, tableauClassCss, destinationElement) {
