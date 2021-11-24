@@ -286,12 +286,16 @@ a {
 }
 
 .wrapper {
-    text-align: center;
+    
+    display: flex;
+    align-items:flex-start;
+    justify-content: center;
+    
 }
 
 .wrapper h1 {
     color: #fff;
-    font-size: 62px;
+    font-size: 30px;
     text-transform: uppercase;
     font-weight: 700;
     font-family: "Josefin Sans", sans-serif;
