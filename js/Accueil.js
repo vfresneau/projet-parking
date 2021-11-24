@@ -19,7 +19,7 @@ function Main() {
 
     var ligne0 = ultimateHTMLGenerator("div", "", ["row"], park); //creer une ligne avec l'élément html "row" dans la var "park"//
 
-    var button2 = ultimateHTMLGenerator("a", "ADMINISTRATEUR", ["btn", "btn-outline-info", "col-2", "text-right"], ligne0); //ajout d'un boutton dans la cardBody//
+    var button2 = ultimateHTMLGenerator("a", "ADMINISTRATEUR", ["btn", "btn-outline-info", "col-2", "text-right", "glow-on-hover"], ligne0); //ajout d'un boutton dans la cardBody//
     button2.href = "administrateur.html";
 
     var ligne1 = ultimateHTMLGenerator("div", "", ["row"], park); //creer une ligne avec l'élément html "row" dans la var "park"//
