@@ -81,7 +81,7 @@ function generateDisplay() {
         // Pour chaque caractéristiques du parking en cours
         for (var j = 0; j < mesParkings.GogoParking[i]._CARACTERISTIQUES.length; j++) {
             // On fabrique un element li
-            let puce_caracteristiques = ultimateHTMLGenerator('li', mesParkings.GogoParking[i]._CARACTERISTIQUES[j]._DESCRIPTION_CARAC, "", i.toString() + j.toString() + "caracteristiques", maListeAPuce);
+            let puce_caracteristiques = ultimateHTMLGenerator('li', mesParkings.GogoParking[i]._CARACTERISTIQUES[j]._DESCRIPTION_CARAC, [], i.toString() + j.toString() + "caracteristiques", maListeAPuce);
         }
 
         // bouton supprimmer
@@ -205,25 +205,26 @@ function CreerParking() {
     var url_map = document.getElementById("url").value;
     var img = document.getElementById("img").value;
     var caracteristiques = [];
-    // for (g = 1; g < document.getElementsByClassName("form-check-input").length; g++) {
-    //     var checkbox = document.getElementById("check" + g);
-    //     caracteristiques.push(checkbox.checked);
-    // }
+    for (g = 1; g <= document.getElementsByClassName("form-check-input").length; g++) {
+        var checkbox = document.getElementById("check" + g);
+        caracteristiques.push(checkbox.checked);
+    }
 
     // On fabrique un model vide de parking
     var nouveauParking = ParkingModel();
     // On change les valeurs avant vide par le contenu des inputs
-    nouveauParking.nom_quartier = "\"" + nom_quartier + "\"";
-    nouveauParking.nom_parking = "\"" + nom_parking + "\"";
-    nouveauParking.adresse_parking = "\"" + adresse_parking + "\"";
+    nouveauParking.nom_quartier = nom_quartier;
+    nouveauParking.nom_parking = nom_parking;
+    nouveauParking.adresse_parking = adresse_parking;
     nouveauParking.nombre_place = nombre_place;
-    nouveauParking.tarif = "\"" + tarif + "\"";
-    nouveauParking.heure_ouverture = "\"" + heure_ouverture + "\"";
-    nouveauParking.reservation = "\"" + reservation + "\"";
-    nouveauParking.lien_maps = "\'" + url_map + "\'";
-    nouveauParking.img = "\'" + img + "\'";
+    nouveauParking.tarif = tarif;
+    nouveauParking.heure_ouverture = heure_ouverture;
+    nouveauParking.reservation = reservation;
+    nouveauParking.lien_maps = url_map;
+    nouveauParking.img = img;
     nouveauParking.caracteristiques = caracteristiques;
     // on crée le nouveau parking dans la DB
+    console.log(nouveauParking);
     CreateParking(nouveauParking);
 }
 
