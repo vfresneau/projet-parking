@@ -4,6 +4,13 @@ var mesCarac;
 
 // on lit la BDD et on exécute la fonction principale generateDisplay
 
+var refCaracteristiques = ["Restrictions de hauteur: 2.10m",
+    "Espaces handicapés",
+    "Restrictions de hauteur: 1.90m",
+    "Aucune restriction de hauteur",
+    "Restrictions de hauteur: 2.60m",
+    "Charge de voiture électrique"
+];
 
 var park = document.getElementById("quartier");
 var titre = document.getElementById("titre");
@@ -52,6 +59,10 @@ function generateDisplay() {
         maColonne.dataset.idDb = mesParkings.GogoParking[i]._ID;
         maColonne.id = i;
 
+        // Ajout de l'image de fond
+        var imgcard = ultimateHTMLGenerator("img", "", ["card-img-top", "imglimit"], "", maColonne);
+        imgcard.src = mesParkings.GogoParking[i]._IMG;
+
         // Fabrication du card body
         let cardBody = document.createElement("div");
         cardBody.classList.add("card-body");
@@ -76,7 +87,8 @@ function generateDisplay() {
         let puce_tarif = ultimateHTMLGenerator('li', "Tarif : " + mesParkings.GogoParking[i]._TARIF, ['tarif'], i + "tarif", maListeAPuce);
         let puce_heure_ouverture = ultimateHTMLGenerator('li', "Heure d'ouverture : " + mesParkings.GogoParking[i]._HEURE_OUVERTURE, ['heure_ouverture'], i + "heure_ouverture", maListeAPuce);
         let puce_reservation = ultimateHTMLGenerator('li', "Réservation : " + mesParkings.GogoParking[i]._RESERVATION, ['reservation'], i + "reservation", maListeAPuce);
-        // let puce_lien_maps = ultimateHTMLGenerator('li', mesParkings.GogoParking[i]._LIEN_MAPS, ['lien_maps'], i + "lien_maps", maListeAPuce);
+        let puce_lien_maps = ultimateHTMLGenerator('li', mesParkings.GogoParking[i]._LIEN_MAPS, ['lien_maps'], i + "lien_maps", maListeAPuce);
+        let puce_img = ultimateHTMLGenerator('li', mesParkings.GogoParking[i]._IMG, ['imgcard'], i + "imgcard", maListeAPuce);
 
         // Pour chaque caractéristiques du parking en cours
         for (var j = 0; j < mesParkings.GogoParking[i]._CARACTERISTIQUES.length; j++) {
@@ -133,34 +145,67 @@ function generateDisplay() {
 function Modification(id) {
     var carte = document.getElementById(id);
     if (carte.lastChild.lastChild.textContent == "Modifier") {
-        // var Group = ultimateHTMLGenerator("div","","input-group",id+"group","");
-        var title = ultimateHTMLGenerator("input", carte.firstChild.firstChild.textContent, ["form-control"], carte.firstChild.firstChild.id);
-        for (z = 0; z < carte.lastChild.firstChild.children.length; z++) {
+        var title = ultimateHTMLGenerator("input", carte.children[1].firstChild.textContent, ["form-control"], carte.children[1].firstChild.id);
+        for (z = 0; z < 8; z++) {
             var element = ultimateHTMLGenerator("input", carte.lastChild.firstChild.children[0].textContent, ["form-control"], carte.lastChild.firstChild.children[0].id);
             carte.lastChild.firstChild.children[0].remove();
             carte.lastChild.firstChild.appendChild(element);
         }
-        carte.firstChild.firstChild.remove();
-        carte.firstChild.appendChild(title);
+        for (y = 1; y <= 6; y++) {
+            var element = ultimateHTMLGenerator("input", "", ["form-check-input"], carte.id + "check" + y);
+            element.type = "checkbox";
+            element.dataset.idCarac = carte.id + y;
+            var element2 = ultimateHTMLGenerator("label", refCaracteristiques[y - 1], ["form-check-label"], "");
+            element2.for = element.id;
+            carte.lastChild.firstChild.appendChild(element);
+            carte.lastChild.firstChild.appendChild(element2);
+        }
+        for (x = 1; x <= carte.lastChild.firstChild.children.length; x++) {
+            if (carte.lastChild.firstChild.children[0].id.includes("caracteristiques") && carte.lastChild.firstChild.children[0].textContent == carte.lastChild.firstChild.children[x].textContent) {
+                carte.lastChild.firstChild.children[x - 1].checked = true;
+                carte.lastChild.firstChild.children[0].remove();
+            }
+        }
+
+        carte.children[1].firstChild.remove();
+        carte.children[1].appendChild(title);
+        carte.lastChild.lastChild.classList.remove("btn-danger");
+        carte.lastChild.lastChild.classList.add("btn-success");
         carte.lastChild.lastChild.textContent = "Enregistrer";
 
     } else {
-        var title2 = ultimateHTMLGenerator("h5", carte.firstChild.firstChild.value, [], carte.firstChild.firstChild.id)
-        for (z = 0; z < carte.lastChild.firstChild.children.length; z++) {
-            var element2 = ultimateHTMLGenerator("li", carte.lastChild.firstChild.children[0].value, [], carte.lastChild.firstChild.children[0].id)
-            carte.lastChild.firstChild.children[0].remove();
-            carte.lastChild.firstChild.appendChild(element2);
+        var title2 = ultimateHTMLGenerator("h5", carte.children[1].firstChild.value, [], carte.children[1].firstChild.id)
+        var tableaucarac = [];
+        for (z = 0; z < carte.lastChild.firstChild.children.length;) {
+            if (carte.lastChild.firstChild.children[0].id.includes("check") && carte.lastChild.firstChild.children[0].checked) {
+                var element = ultimateHTMLGenerator("li", carte.lastChild.firstChild.children[1].textContent, [], z + "caracteristiques")
+                tableaucarac.push(carte.lastChild.firstChild.children[0].checked);
+                carte.lastChild.firstChild.children[0].remove();
+                carte.lastChild.firstChild.children[0].remove();
+                carte.lastChild.firstChild.appendChild(element);
+                z++;
+            } else if (carte.lastChild.firstChild.children[0].classList.contains("form-control")) {
+                var element = ultimateHTMLGenerator("li", carte.lastChild.firstChild.children[0].value, [], carte.lastChild.firstChild.children[0].id)
+                carte.lastChild.firstChild.children[0].remove();
+                carte.lastChild.firstChild.appendChild(element);
+                z++;
+            } else {
+                tableaucarac.push(carte.lastChild.firstChild.children[0].checked);
+                carte.lastChild.firstChild.children[0].remove();
+                carte.lastChild.firstChild.children[0].remove();
+            }
         }
-        carte.firstChild.firstChild.remove();
-        carte.firstChild.appendChild(title2);
-        console.log(carte.dataset.idDb);
-        MajParking(carte.dataset.idDb, carte.id);
+        carte.children[1].firstChild.remove();
+        carte.children[1].appendChild(title2);
+        MajParking(carte.dataset.idDb, carte.id, tableaucarac);
+        carte.lastChild.lastChild.classList.remove("btn-success");
+        carte.lastChild.lastChild.classList.add("btn-danger");
         carte.lastChild.lastChild.textContent = "Modifier";
     }
 
 }
 
-function MajParking(idDb, id) {
+function MajParking(idDb, id, tableaucarac) {
     var nom_quartier = document.getElementById(id + "nom_quartier").textContent;
     var nom_parking = document.getElementById(id + "nom_parking").textContent;
     var adresse_parking = document.getElementById(id + "adresse_parking").textContent;
@@ -169,27 +214,29 @@ function MajParking(idDb, id) {
     var tarif = document.getElementById(id + "tarif").textContent;
     tarif = tarif.substr("Tarif : ".length, tarif.length - "Tarif : ".length);
     var heure_ouverture = document.getElementById(id + "heure_ouverture").textContent;
-    heure_ouverture = parseInt(heure_ouverture.substr("Heure d'ouverture : ".length, heure_ouverture.length - "Heure d'ouverture : ".length));
+    heure_ouverture = heure_ouverture.substr("Heure d'ouverture : ".length, heure_ouverture.length - "Heure d'ouverture : ".length);
     var reservation = document.getElementById(id + "reservation").textContent;
     reservation = reservation.substr("Réservation : ".length, reservation.length - "Réservation : ".length);
-    // var url_map = document.getElementById(id + "url").value;
-
-    // var caracteristiques = [caracteristiques1,caracteristiques2,caracteristiques3];
+    var url_map = document.getElementById(id + "lien_maps").textContent;
+    var imgcard = document.getElementById(id + "imgcard").textContent;
 
     // On fabrique un model vide de parking
-    var nouveauParking = ParkingModel();
+    var ParkingMisAJour = ParkingModel();
     // On change les valeurs avant vide par le contenu des inputs
-    nouveauParking.nom_quartier = "\"" + nom_quartier + "\"";
-    nouveauParking.nom_parking = "\"" + nom_parking + "\"";
-    nouveauParking.adresse_parking = "\"" + adresse_parking + "\"";
-    nouveauParking.nombre_place = nombre_place;
-    nouveauParking.tarif = "\"" + tarif + "\"";
-    nouveauParking.heure_ouverture = "\"" + heure_ouverture + "\"";
-    nouveauParking.reservation = "\"" + reservation + "\"";
-    nouveauParking.lien_maps = "\"" + "\"";
-    nouveauParking.id = idDb;
+    ParkingMisAJour.nom_quartier = nom_quartier;
+    ParkingMisAJour.nom_parking = nom_parking;
+    ParkingMisAJour.adresse_parking = adresse_parking;
+    ParkingMisAJour.nombre_place = nombre_place;
+    ParkingMisAJour.tarif = tarif;
+    ParkingMisAJour.heure_ouverture = heure_ouverture;
+    ParkingMisAJour.reservation = reservation;
+    ParkingMisAJour.lien_maps = url_map;
+    ParkingMisAJour.img = imgcard;
+    ParkingMisAJour.caracteristiques = tableaucarac;
+    ParkingMisAJour.id = idDb;
     // on crée le nouveau parking dans la DB
-    UpdateParking(nouveauParking);
+    console.log(ParkingMisAJour);
+    UpdateParking(ParkingMisAJour);
 }
 
 // _______________________________ Fonction de création de parking depuis le HTML ____________________________________________

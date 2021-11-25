@@ -11,7 +11,7 @@ function add_dbc() {
     $user = "charley"; // Identifiant BDD
     $pass = "@JuNiRMdv5GZb"; // Mot de passe BDD
 
-    // En premier, on crée le parking (ou quartier) dans la base de données
+    //* En premier, on crée le parking (ou quartier) dans la base de données
     try {
         // connexion à la base de donnée
         $dbh = new PDO('mysql:host=127.0.0.1;dbname=GogoParking', $user, $pass); // on crée un objet PDO avec l'adresse, identifiant et mdp
@@ -35,7 +35,7 @@ function add_dbc() {
         die(); // et on arrête le script
     }
 
-    // Ensuite, on crée les places d'après le nombre de places indiquées par l'utilisateuer
+    //* Ensuite, on crée les places d'après le nombre de places indiquées par l'utilisateuer
 
     for ($index = 1; $index <= $donnees["nombre_place"]; $index++){ // On fait une boucle autant de fois qu'il y a de places
         try {
@@ -53,7 +53,7 @@ function add_dbc() {
         }
     }
 
-    // Puis enfin, on ajoute les caractéristiques liées au parking en liant l'id du parking aux ID des caractéristiques dans la base q_p
+    //* Puis enfin, on ajoute les caractéristiques liées au parking en liant l'id du parking aux ID des caractéristiques dans la base q_p
 
     for ($index = 0; $index < count($donnees["caracteristiques"]); $index++){ // On fait une boucle sur le tableau des caractéristiques du nouveau parking
         $decalageID = $index + 1; // on décale l'index pour identifier la caractéristique car l'id en BDD commence à 1, alors qu'il commence à 0 dans le JS...

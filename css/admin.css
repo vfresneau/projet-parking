@@ -1,4 +1,3 @@
-
 .back {
     margin: 1em auto;
     font-family: "Roboto";
@@ -69,6 +68,7 @@
 .back span:nth-child(10) {
     animation-delay: .9s;
 }
+
 .marge {
     margin-bottom: 25px;
     padding-top: 50px;
@@ -80,17 +80,20 @@
     float: left;
 }
 
-.card{
+.card {
     width: 100px;
-
     display: flex;
     position: relative;
 }
 
-.button_cus{
+.button_cus {
     margin: 20px;
 }
-.btn-success{
-    margin:50px;
- 
+
+.btn-success {
+    margin: 50px;
+}
+
+.imglimit {
+    max-width: 200px;
 }
