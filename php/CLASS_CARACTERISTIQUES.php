@@ -20,7 +20,7 @@ Class CARACTERISTIQUES{
 			// pour chaque ligne trouvé--> y en à qu'un ici
 			while ($row = $stmt->fetch()) {
 				// pour appeler une fonction : ->
-				// $this->set_ID_CARAC($row['id']);
+				$this->set_ID_CARAC($row['id']);
 				$this->set_DESCRIPTION_CARAC($row['description']);
 			}
 			$dbh = null;

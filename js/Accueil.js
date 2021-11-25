@@ -43,8 +43,8 @@ function Main() {
 
         var cardText = ultimateHTMLGenerator("h2", mesParkings.GogoParking[i]._ADRESSE_PARKING, ["card-text", "animate-text"], divimg); //ajout de paragraphe dans cardbody//
         for (var j = 0; j < mesParkings.GogoParking[i]._PLACES.length; j++) { //Pour l'ensemble des places du parking//
-            if (mesParkings.GogoParking[i]._PLACES[j]._DISPO === "Disponible") { // si place de parking disponible //
-                compteurPlace++ //ajouter 1 à compteurPlace //
+            if (mesParkings.GogoParking[i]._PLACES[j]._DISPO === "0") { // si place de parking disponible //
+                compteurPlace++; //ajouter 1 à compteurPlace //
             }
         }
 
@@ -84,7 +84,7 @@ function Main() {
     instagram_lien.href = "https://www.instagram.com/accounts/login/?source=auth_switcher";
 
 
-    // var contact = ultimateHTMLGenerator('div', "Contact : Monsieur Gogo -  Adresse: 26 rue de la préfecture 37000 Tours - Téléphone : 06 85 79 51 69", ["mon_contact"], park);
+
 }
 //Fonction qui génère mes lignes et colonnes//  
 function ultimateHTMLGenerator(typeElement, contenu, tableauClassCss, destinationElement) {
