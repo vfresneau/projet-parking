@@ -19,7 +19,7 @@ function Main() {
 
     var ligne0 = ultimateHTMLGenerator("div", "", ["row"], park); //creer une ligne avec l'élément html "row" dans la var "park"//
 
-    var button2 = ultimateHTMLGenerator("a", "ADMINISTRATEUR", ["btn", "btn-outline-info", "col-2", "text-right", "glow-on-hover"], ligne0); //ajout d'un boutton dans la cardBody//
+    var button2 = ultimateHTMLGenerator("a", "ADMINISTRATEUR", ["btn", "btn-outline-info", "col-2","mx-auto"], ligne0); //ajout d'un boutton dans la cardBody//
     button2.href = "administrateur.html";
 
     var ligne1 = ultimateHTMLGenerator("div", "", ["row"], park); //creer une ligne avec l'élément html "row" dans la var "park"//
@@ -30,7 +30,7 @@ function Main() {
         compteurReservation = 0
         var temp = ultimateHTMLGenerator("div", "", ["col", "wrap"], ligne1); //* je créer une colonne et affiche le contenu dans ligne1, pour autant qu'il y a d'élément nom_parking //
 
-        var cards = ultimateHTMLGenerator("div", "", ["card", "tile"], temp); //creation de cards dans les colonnes//
+        var cards = ultimateHTMLGenerator("div", "", ["card", "tile","mx-auto"], temp); //creation de cards dans les colonnes//
         cards.classList.add("titlecards"); // ajout de la class titlecards dans la cards //
 
         var imgcard = ultimateHTMLGenerator("img", "", ["card-img"], cards);
@@ -114,3 +114,4 @@ function ReadDBParkings() {
     xhr.open("GET", "http://141.94.223.96/Luc/GogoParking/php/DB_READ.php", true); // On indique la méthode (ce que doit faire la requête, dans ce cas récupérer une ressource) et l'adresse de la ressource (fichier php)
     xhr.send(); // On envoie !
 }
+
