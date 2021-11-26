@@ -1,0 +1,49 @@
+/* =Header
+-------------------------------------------------------------- */
+
+header {
+    width: 100%;
+    height: 580px;
+    overflow: hidden;
+    position: fixed;
+    background-color: whitesmoke;
+    top: 0;
+    left: 0;
+    z-index: 999;
+    transition: all 0.3s;
+    clip-path: polygon(100% 0, 100% 40%, 50% 50%, 0 40%, 0 0);
+}
+
+.logo {
+    display: inline-block;
+    height: 250px;
+    transition: all 0.3s;
+    position: fixed;
+    top: 0vh;
+    left: 0vh;
+}
+
+.smaller {
+    height: 150px;
+    clip-path: polygon(100% 0, 100% 100%, 100% 100%, 0 100%, 0 0);
+}
+
+.smallerlogo {
+    width: auto;
+    height: 80px;
+    transition: all 0.3s;
+}
+
+#quartier {
+    padding-top: 250px !important;
+}
+
+.backsmall {}
+
+.backsmall span {
+    font-size: 24px;
+    border: 2px solid white;
+    line-height: 50px;
+    transition: all 0.3s;
+    padding: 0 8px;
+}
