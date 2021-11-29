@@ -40,7 +40,7 @@ function parking() { //Pour chaque
     //creation du boutton accueuil //
     var btretour= document.createElement("a");
     btretour.classList.add("btn","btn-info");
-    btretour.textContent = "Accueuil";
+    btretour.textContent = "Accueil";
     btretour.href = "Accueil.html";
     tempo2.prepend(btretour); //place en début de container-fluid id idbouton //
 
