@@ -1,14 +1,15 @@
 var mesParkings; // variable qui contiendra la BDD des parkings
 var StartPagination = 0;
-var Intervalle = 3;
+var Intervalle = 6;
 ReadDBParkings(); // On lit la BDD et on exécute la fonction principale Main
 
 function GenererCartes(row,DebutCartes,NombreCartes){
+
     for (var i = DebutCartes; i < NombreCartes+DebutCartes; i++) { //Pour l'ensemble des elements du tableau "mesParkings.GogoParking" * //
         var compteurPlace = 0; // creation de variable pour utiliser un compteur // 
         compteurReservation = 0
 
-        var temp = ultimateHTMLGenerator("div", "", ["col", "wrap"], ligne1); //* je créer une colonne et affiche le contenu dans ligne1, pour autant qu'il y a d'élément nom_parking //
+        var temp = ultimateHTMLGenerator("div", "", ["col", "wrap"], row); //* je créer une colonne et affiche le contenu dans ligne1, pour autant qu'il y a d'élément nom_parking //
 
         var cards = ultimateHTMLGenerator("div", "", ["card", "tile","mx-auto"], temp); //creation de cards dans les colonnes//
         cards.classList.add("titlecards"); // ajout de la class titlecards dans la cards //
@@ -43,6 +44,32 @@ function GenererCartes(row,DebutCartes,NombreCartes){
         }
     }
 
+    var Previous = document.getElementById("previousbutton");
+    var Next = document.getElementById("nextbutton");
+    if (StartPagination !=0){
+        var ActiveNav = document.getElementById("nav"+((StartPagination/Intervalle)+1));
+    } else {
+        var ActiveNav = document.getElementById("nav1");
+    }
+    let Navs = document.getElementsByTagName("li");
+    for (let u = 0;u< Navs.length;u++){
+        if (Navs[u].classList.contains("active")){
+            Navs[u].classList.remove("active");
+        }
+    }
+    ActiveNav.classList.add("active");
+
+    if (StartPagination == 0){
+        Previous.classList.add("disabled");
+    } 
+    if (StartPagination != 0){
+        Previous.classList.remove("disabled");
+    }
+    if (StartPagination+Intervalle > mesParkings.GogoParking.length){
+        Next.classList.add("disabled");
+    } else {
+        Next.classList.remove("disabled");
+    }
 }
 
 function Main() {
@@ -70,34 +97,36 @@ function Main() {
     var ligne1 = ultimateHTMLGenerator("div", "", ["row"], park); //creer une ligne avec l'élément html "row" dans la var "park"//
     ligne1.id = "ligne1";
 
-GenererCartes(ligne1,StartPagination,Intervalle);
 
     //* Block de navigation
     var navblock = ultimateHTMLGenerator("nav","",[],park);
     var ul = ultimateHTMLGenerator("ul","",["pagination","justify-content-center","navblock"],navblock);
-    for(p = 1; p <= (mesParkings.GogoParking.length /3);p++){
+    for(let p = 1; p <= ((mesParkings.GogoParking.length /Intervalle)+1);p++){
         if (p == 1){
-            var PreviousLi = ultimateHTMLGenerator("li","",["page-item"],ul);
-            if (StartPagination == 0){
-                PreviousLi.classList.add("disabled");
-            }
+            var PreviousLi = ultimateHTMLGenerator("li","",["page-item"],ul)
+            PreviousLi.id = "previousbutton";
             var PreviousA = ultimateHTMLGenerator("a","",["page-link"],PreviousLi);
             PreviousA.href = "#";
-            PreviousA.onclick = function(){EffaceCartes((StartPagination-Intervalle,Intervalle));};
+            PreviousA.onclick = function(){EffaceCartes((StartPagination-Intervalle),Intervalle,"previous");};
             PreviousA.tabindex = "-1";
             var PreviousSymbol = ultimateHTMLGenerator("span","«",[],PreviousA);
         }
         var Item = ultimateHTMLGenerator("li","",["page-item"],ul);
+        Item.id = "nav"+p;
         var ItemA = ultimateHTMLGenerator("a",p,["page-link"],Item);
         ItemA.href = "#";
-        ItemA.onclick = function(){EffaceCartes(StartPagination,Intervalle);};
+        ItemA.onclick = function(){EffaceCartes(((Intervalle*p)-Intervalle),Intervalle,"none");};
     }
 
     var NextLi = ultimateHTMLGenerator("li","",["page-item"],ul);
+    NextLi.id = "nextbutton";
     var NextA = ultimateHTMLGenerator("a","",["page-link"],NextLi);
     NextA.href = "#";
-    NextA.onclick = function(){EffaceCartes((StartPagination+Intervalle),Intervalle);};
+    NextA.onclick = function(){EffaceCartes((StartPagination+Intervalle),Intervalle,"next");};
     var NextSymbol = ultimateHTMLGenerator("span","»",[],NextA);
+
+    GenererCartes(ligne1,StartPagination,Intervalle);
+
 
     var footer = ultimateHTMLGenerator('div', "", ["footer"], park);
     var contact = ultimateHTMLGenerator('p', "Contact : Monsieur Gogo -  Adresse: 26 rue de la préfecture 37000 Tours - Téléphone : 06 85 79 51 69", ["text-center", "text-footer"], footer);
@@ -118,8 +147,6 @@ GenererCartes(ligne1,StartPagination,Intervalle);
     var instagram = ultimateHTMLGenerator('img', "", ["icone"], instagram_lien)
     instagram.src = "../image/instagram_ic.png";
     instagram_lien.href = "https://www.instagram.com/accounts/login/?source=auth_switcher";
-
-
 
 }
 //Fonction qui génère mes lignes et colonnes//  
@@ -151,11 +178,28 @@ function ReadDBParkings() {
     xhr.send(); // On envoie !
 }
 
-function EffaceCartes(start,interval){
+function EffaceCartes(start,interval, sens){
     var ligne1 = document.getElementById("ligne1");
     ligne1.remove();
     var ligne1 = document.createElement("div");
     ligne1.classList.add("row");
+    ligne1.id = "ligne1";
     document.getElementById("ligne0").after(ligne1);
-    GenererCartes(ligne1,start,interval);
+    switch (sens){
+        case "previous":
+            StartPagination = StartPagination - Intervalle;
+            break;
+        case "next":
+            StartPagination = StartPagination + Intervalle;
+            break;
+        default:
+            StartPagination = start;
+            break;
+    }
+    if (StartPagination+Intervalle > mesParkings.GogoParking.length){
+        GenererCartes(ligne1,start,mesParkings.GogoParking.length - StartPagination);
+
+    } else {
+        GenererCartes(ligne1,start,interval);
+    }
 }
