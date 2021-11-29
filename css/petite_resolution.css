@@ -29,11 +29,23 @@ body {
 }
 
 .back span{
-    font-size: xx-small;
+   line-height: 50px;
+   border: 2px solid white;;
+   font-size: 0.6em;
+   padding: 0 8px;
+   transition: all 0.3s;
+
 }
 
 .back {
     margin:auto;
     font-family: "Roboto";
     font-weight: 900;
+}
+
+.mon_logo {
+    height: 150px;
+    width: 150;
+    display: flex;
+    float: left;
 }
