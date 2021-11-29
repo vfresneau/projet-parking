@@ -12,9 +12,11 @@ var refCaracteristiques = ["Restrictions de hauteur: 2.10m",
     "Charge de voiture électrique"
 ];
 
+
 var park = document.getElementById("quartier");
 var titre = document.getElementById("titre");
 
+//ajout du logo //
 var mon_logo = document.createElement('img');
 mon_logo.classList.add("mon_logo");
 mon_logo.src = "../image/logo_parking.png";
@@ -54,9 +56,6 @@ function generateDisplay() {
         maColonne.classList.add("col-6");
         maColonne.classList.add("card");
         maColonne.classList.add("custom-card");
-        // maColonne.classList.add("text-white");
-        // maColonne.classList.add("bg-dark");
-        //maColonne.classList.add("h-100");
         maColonne.dataset.idDb = mesParkings.GogoParking[i]._ID;
         maColonne.id = i;
 
@@ -145,7 +144,7 @@ function generateDisplay() {
     }
 }
 
-// Fonction de modification d'une fiche parking
+//___________________________________ Fonction de modification d'une fiche parking_________________________________________________
 
 function Modification(id) {
     var carte = document.getElementById(id);
