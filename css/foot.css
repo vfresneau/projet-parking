@@ -267,7 +267,7 @@ ma_phrase {
 body {
     height: 100vh;
     margin: 0;
-    background-color: chartreuse;
+    background-color: #c2ae90 !important;
     font-family: "ubuntu", Arial, sans-serif;
     overflow-x: hidden;
     display: grid;
@@ -311,4 +311,8 @@ a {
     to {
         background-position: 200% center;
     }
+}
+
+.navblock {
+    padding-top:30px;
 }

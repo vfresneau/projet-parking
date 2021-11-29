@@ -25,7 +25,7 @@ titre.appendChild(mon_logo);
 
 var ligne0 = ultimateHTMLGenerator("div", "", ["row"], "", park); //creer une ligne avec l'élément html "row" dans la var "park"//
 
-var button2 = ultimateHTMLGenerator("a", "Accueil", ["btn", "btn-outline-info", "col-2", "text-right", "glow-on-hover"], "", ligne0); //ajout d'un boutton dans la cardBody//
+var button2 = ultimateHTMLGenerator("a", "Accueil", ["btn", "btn-outline-info", "col-2","mx-auto"], "", ligne0); //ajout d'un boutton dans la cardBody//
 button2.href = "Accueil.html";
 
 ReadDBParkings();
@@ -53,24 +53,27 @@ function generateDisplay() {
         let maColonne = document.createElement("div");
         maColonne.classList.add("col-6");
         maColonne.classList.add("card");
+        maColonne.classList.add("custom-card");
         // maColonne.classList.add("text-white");
         // maColonne.classList.add("bg-dark");
         //maColonne.classList.add("h-100");
         maColonne.dataset.idDb = mesParkings.GogoParking[i]._ID;
         maColonne.id = i;
 
-        // Ajout de l'image de fond
-        var imgcard = ultimateHTMLGenerator("img", "", ["card-img-top", "imglimit"], "", maColonne);
-        imgcard.src = mesParkings.GogoParking[i]._IMG;
-
         // Fabrication du card body
         let cardBody = document.createElement("div");
         cardBody.classList.add("card-body");
+
+        // Ajout de l'image de fond
+        var imgcard = ultimateHTMLGenerator("img", "", ["img-responsive","card-img-top", "imglimit","img-custom"], "",cardBody);
+        imgcard.src = mesParkings.GogoParking[i]._IMG;
+
 
         // fabrication  du titre de la carte
         let montitre = document.createElement("h5");
         montitre.textContent = mesParkings.GogoParking[i]._NOM_QUARTIER;
         montitre.classList.add("card-title");
+        montitre.classList.add("custom-card-title")
         montitre.id = i + "nom_quartier";
         cardBody.appendChild(montitre);
 
@@ -79,16 +82,17 @@ function generateDisplay() {
 
         // Fabrication de la liste à puce
         let maListeAPuce = document.createElement("ul");
+        maListeAPuce.classList.add("liste-custom");
 
 
-        let puce_nom_parking = ultimateHTMLGenerator('li', mesParkings.GogoParking[i]._NOM_PARKING, ['nom_parking'], i + "nom_parking", maListeAPuce);
-        let puce_adresse_parking = ultimateHTMLGenerator('li', mesParkings.GogoParking[i]._ADRESSE_PARKING, ['adresse_parking'], i + "adresse_parking", maListeAPuce);
-        let puce_nombre_place = ultimateHTMLGenerator('li', mesParkings.GogoParking[i]._NOMBRE_PLACE + " places", ['nom_place'], i + "nombre_place", maListeAPuce);
+        let puce_nom_parking = ultimateHTMLGenerator('li',"Nom du parking : "+ mesParkings.GogoParking[i]._NOM_PARKING, ['nom_parking'], i + "nom_parking", maListeAPuce);
+        let puce_adresse_parking = ultimateHTMLGenerator('li',"Adresse : "+ mesParkings.GogoParking[i]._ADRESSE_PARKING, ['adresse_parking'], i + "adresse_parking", maListeAPuce);
+        let puce_nombre_place = ultimateHTMLGenerator('li',"Nombre de place : "+ mesParkings.GogoParking[i]._NOMBRE_PLACE + " places", ['nom_place'], i + "nombre_place", maListeAPuce);
         let puce_tarif = ultimateHTMLGenerator('li', "Tarif : " + mesParkings.GogoParking[i]._TARIF, ['tarif'], i + "tarif", maListeAPuce);
         let puce_heure_ouverture = ultimateHTMLGenerator('li', "Heure d'ouverture : " + mesParkings.GogoParking[i]._HEURE_OUVERTURE, ['heure_ouverture'], i + "heure_ouverture", maListeAPuce);
         let puce_reservation = ultimateHTMLGenerator('li', "Réservation : " + mesParkings.GogoParking[i]._RESERVATION, ['reservation'], i + "reservation", maListeAPuce);
-        let puce_lien_maps = ultimateHTMLGenerator('li', mesParkings.GogoParking[i]._LIEN_MAPS, ['lien_maps'], i + "lien_maps", maListeAPuce);
-        let puce_img = ultimateHTMLGenerator('li', mesParkings.GogoParking[i]._IMG, ['imgcard'], i + "imgcard", maListeAPuce);
+        let puce_lien_maps = ultimateHTMLGenerator('li',"Lien Maps : "+ mesParkings.GogoParking[i]._LIEN_MAPS, ['lien_maps'], i + "lien_maps", maListeAPuce);
+        let puce_img = ultimateHTMLGenerator('li',"Source Image : "+ mesParkings.GogoParking[i]._IMG, ['imgcard'], i + "imgcard", maListeAPuce);
 
         // Pour chaque caractéristiques du parking en cours
         for (var j = 0; j < mesParkings.GogoParking[i]._CARACTERISTIQUES.length; j++) {
@@ -125,6 +129,7 @@ function generateDisplay() {
         // fabrication du texte
         let cardText = document.createElement("p");
         cardText.classList.add("card-text");
+        cardText.classList.add("custom-card-text");
         // on ajoute la liste à puce dans le texte de la carte
         cardText.appendChild(maListeAPuce);
         //on ajoute le bouton supprimer au texte de la carte
@@ -145,7 +150,7 @@ function generateDisplay() {
 function Modification(id) {
     var carte = document.getElementById(id);
     if (carte.lastChild.lastChild.textContent == "Modifier") {
-        var title = ultimateHTMLGenerator("input", carte.children[1].firstChild.textContent, ["form-control"], carte.children[1].firstChild.id);
+        var title = ultimateHTMLGenerator("input", carte.firstChild.lastChild.textContent, ["form-control"], carte.firstChild.lastChild.id);
         for (z = 0; z < 8; z++) {
             var element = ultimateHTMLGenerator("input", carte.lastChild.firstChild.children[0].textContent, ["form-control"], carte.lastChild.firstChild.children[0].id);
             carte.lastChild.firstChild.children[0].remove();
@@ -167,14 +172,14 @@ function Modification(id) {
             }
         }
 
-        carte.children[1].firstChild.remove();
-        carte.children[1].appendChild(title);
+        carte.firstChild.lastChild.remove();
+        carte.firstChild.appendChild(title);
         carte.lastChild.lastChild.classList.remove("btn-danger");
         carte.lastChild.lastChild.classList.add("btn-success");
         carte.lastChild.lastChild.textContent = "Enregistrer";
 
     } else {
-        var title2 = ultimateHTMLGenerator("h5", carte.children[1].firstChild.value, [], carte.children[1].firstChild.id)
+        var title2 = ultimateHTMLGenerator("h5", carte.firstChild.lastChild.value, [], carte.firstChild.lastChild.id)
         var tableaucarac = [];
         for (z = 0; z < carte.lastChild.firstChild.children.length;) {
             if (carte.lastChild.firstChild.children[0].id.includes("check") && carte.lastChild.firstChild.children[0].checked) {
@@ -195,8 +200,8 @@ function Modification(id) {
                 carte.lastChild.firstChild.children[0].remove();
             }
         }
-        carte.children[1].firstChild.remove();
-        carte.children[1].appendChild(title2);
+        carte.firstChild.lastChild.remove();
+        carte.firstChild.appendChild(title2);
         MajParking(carte.dataset.idDb, carte.id, tableaucarac);
         carte.lastChild.lastChild.classList.remove("btn-success");
         carte.lastChild.lastChild.classList.add("btn-danger");
