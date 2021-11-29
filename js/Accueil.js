@@ -1,34 +1,13 @@
 var mesParkings; // variable qui contiendra la BDD des parkings
+var StartPagination = 0;
+var Intervalle = 3;
 ReadDBParkings(); // On lit la BDD et on exécute la fonction principale Main
 
-function Main() {
-    var park = document.getElementById("quartier"); // permet d'acceder à l'élément HTML avec l'id quartier //
-    var titre = document.getElementById("titre");
-
-    var mon_logo = ultimateHTMLGenerator('img', "", ["mon_logo"], titre);
-
-    var optez = ultimateHTMLGenerator("div", "", ["wrapper"], titre);
-
-    var titreffet = ultimateHTMLGenerator("h1", "Optez pour une gestion intelligente de votre parking !", ["wrapper"], optez);
-
-    //var phrase = ultimateHTMLGenerator('h1', "Optez pour une gestion intelligente de votre parking !", ["wrapper"], titre)
-
-    mon_logo.src = "../image/logo_parking.png";
-    mon_logo.alt = "logo";
-
-
-    var ligne0 = ultimateHTMLGenerator("div", "", ["row"], park); //creer une ligne avec l'élément html "row" dans la var "park"//
-
-    var button2 = ultimateHTMLGenerator("a", "ADMINISTRATEUR", ["btn", "btn-outline-info", "col-2","mx-auto"], ligne0); //ajout d'un boutton dans la cardBody//
-    button2.href = "administrateur.html";
-
-    var ligne1 = ultimateHTMLGenerator("div", "", ["row"], park); //creer une ligne avec l'élément html "row" dans la var "park"//
-
-
-    for (var i = 0; i < mesParkings.GogoParking.length; i++) { //Pour l'ensemble des elements du tableau "mesParkings.GogoParking" * //
+function GenererCartes(row,DebutCartes,NombreCartes){
+    for (var i = DebutCartes; i < NombreCartes+DebutCartes; i++) { //Pour l'ensemble des elements du tableau "mesParkings.GogoParking" * //
         var compteurPlace = 0; // creation de variable pour utiliser un compteur // 
         compteurReservation = 0
-        var temp = ultimateHTMLGenerator("div", "", ["col", "wrap"], ligne1); //* je créer une colonne et affiche le contenu dans ligne1, pour autant qu'il y a d'élément nom_parking //
+        var temp = ultimateHTMLGenerator("div", "", ["col", "wrap"], row); //* je créer une colonne et affiche le contenu dans ligne1, pour autant qu'il y a d'élément nom_parking //
 
         var cards = ultimateHTMLGenerator("div", "", ["card", "tile","mx-auto"], temp); //creation de cards dans les colonnes//
         cards.classList.add("titlecards"); // ajout de la class titlecards dans la cards //
@@ -62,6 +41,62 @@ function Main() {
             var span = ultimateHTMLGenerator("span", "", [], dots);
         }
     }
+
+}
+
+function Main() {
+    var park = document.getElementById("quartier"); // permet d'acceder à l'élément HTML avec l'id quartier //
+    var titre = document.getElementById("titre");
+
+    var mon_logo = ultimateHTMLGenerator('img', "", ["mon_logo"], titre);
+
+    var optez = ultimateHTMLGenerator("div", "", ["wrapper"], titre);
+
+    var titreffet = ultimateHTMLGenerator("h1", "Optez pour une gestion intelligente de votre parking !", ["wrapper"], optez);
+
+    //var phrase = ultimateHTMLGenerator('h1', "Optez pour une gestion intelligente de votre parking !", ["wrapper"], titre)
+
+    mon_logo.src = "../image/logo_parking.png";
+    mon_logo.alt = "logo";
+
+
+    var ligne0 = ultimateHTMLGenerator("div", "", ["row"], park); //creer une ligne avec l'élément html "row" dans la var "park"//
+    ligne0.id = "ligne0";
+
+    var button2 = ultimateHTMLGenerator("a", "ADMINISTRATEUR", ["btn", "btn-outline-info", "col-2","mx-auto"], ligne0); //ajout d'un boutton dans la cardBody//
+    button2.href = "administrateur.html";
+
+    var ligne1 = ultimateHTMLGenerator("div", "", ["row"], park); //creer une ligne avec l'élément html "row" dans la var "park"//
+    ligne1.id = "ligne1";
+
+GenererCartes(ligne1,StartPagination,Intervalle);
+
+    //* Block de navigation
+    var navblock = ultimateHTMLGenerator("nav","",[],park);
+    var ul = ultimateHTMLGenerator("ul","",["pagination","justify-content-center","navblock"],navblock);
+    for(p = 1; p <= (mesParkings.GogoParking.length /3);p++){
+        if (p == 1){
+            var PreviousLi = ultimateHTMLGenerator("li","",["page-item"],ul);
+            if (StartPagination == 0){
+                PreviousLi.classList.add("disabled");
+            }
+            var PreviousA = ultimateHTMLGenerator("a","",["page-link"],PreviousLi);
+            PreviousA.href = "#";
+            PreviousA.onclick = function(){EffaceCartes((StartPagination-Intervalle,Intervalle));};
+            PreviousA.tabindex = "-1";
+            var PreviousSymbol = ultimateHTMLGenerator("span","«",[],PreviousA);
+        }
+        var Item = ultimateHTMLGenerator("li","",["page-item"],ul);
+        var ItemA = ultimateHTMLGenerator("a",p,["page-link"],Item);
+        ItemA.href = "#";
+        ItemA.onclick = function(){EffaceCartes(StartPagination,Intervalle);};
+    }
+
+    var NextLi = ultimateHTMLGenerator("li","",["page-item"],ul);
+    var NextA = ultimateHTMLGenerator("a","",["page-link"],NextLi);
+    NextA.href = "#";
+    NextA.onclick = function(){EffaceCartes(((StartPagination+Intervalle),Intervalle));};
+    var NextSymbol = ultimateHTMLGenerator("span","»",[],NextA);
 
     var footer = ultimateHTMLGenerator('div', "", ["footer"], park);
     var contact = ultimateHTMLGenerator('p', "Contact : Monsieur Gogo -  Adresse: 26 rue de la préfecture 37000 Tours - Téléphone : 06 85 79 51 69", ["text-center", "text-footer"], footer);
@@ -115,3 +150,11 @@ function ReadDBParkings() {
     xhr.send(); // On envoie !
 }
 
+function EffaceCartes(start,interval){
+    var ligne1 = document.getElementById("ligne1");
+    ligne1.remove();
+    var ligne1 = document.createElement("div");
+    ligne1.classList.add("row");
+    document.getElementById("ligne0").after(ligne1);
+    GenererCartes(ligne1,start,interval);
+}
