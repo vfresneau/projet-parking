@@ -99,15 +99,17 @@
     max-width: 200px;
 }
 .custom-card{
-    background-color: rgb(151, 151, 145) !important;
+    background-color: rgb(204, 204, 201) !important;
     max-width: 600px !important;
     margin-left: 100px;
     margin-top: 30px !important;
+
     
 }
 .img-custom{
  
   float:right;
+  border-radius: 25px;
   
 }
 .custom-card-title{
@@ -125,4 +127,14 @@
     list-style-type: none;
 }
 
-
+li::before{
+    display: inline-block;
+    position: relative;
+    width: 1em;
+    height: 1em;
+    top: 0.2rem;
+    margin-right: 0.4rem;
+    content: "";
+    background-image: url('https://cdn-icons.flaticon.com/png/512/6210/premium/6210643.png?token=exp=1638193130~hmac=347cf4199ebad471694a0369fbaa9a5a');
+    background-size: contain;
+  }
