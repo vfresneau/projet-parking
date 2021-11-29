@@ -1,9 +1,16 @@
+/*couleur de fond de la page*/
+body{
+    background-color: #c2ae90 !important;
+}
+
+
+/*annimation du grand titre "SMART PARK" */
 .back {
     margin: 1em auto;
     font-family: "Roboto";
     font-weight: 700;
+    
 }
-
 .back span {
     font-size: 2em;
     color: white;
@@ -16,7 +23,6 @@
     line-height: 100px;
     animation: jumb 2s infinite;
 }
-
 @keyframes jumb {
     0% {
         transform: translateY(0px)
@@ -28,7 +34,6 @@
         transform: translateY(0px)
     }
 }
-
 .back span:nth-child(1) {
     animation-delay: 0s;
 }
@@ -68,61 +73,98 @@
 .back span:nth-child(10) {
     animation-delay: .9s;
 }
+/*____________________________________________________ */
 
+
+/* marge au dessus du grand titre*/
 .marge {
     margin-bottom: 25px;
     padding-top: 50px;
-}
+} 
 
+
+/*mise en forme et position du logo*/
 .mon_logo {
     height: 250px;
     display: flex;
     float: left;
 }
 
+/*mise en forme de la card taille et position*/
 .card {
     width: 100px;
     display: flex;
     position: relative;
-    
+}
+.custom-card{
+    background-color: rgb(204, 204, 201) !important;
+    max-width: 600px !important;
+    margin-left: 100px;
+    margin-top: 30px !important; 
 }
 
+/*marge entre les boutons*/
 .button_cus {
     margin: 20px;
 }
-
 .btn-success {
     margin: 50px;
 }
 
-.imglimit {
-    max-width: 200px;
-}
-.custom-card{
-    background-color: rgb(151, 151, 145) !important;
-    max-width: 600px !important;
-    margin-left: 100px;
-    margin-top: 30px !important;
-    
-}
+
+/*position et taille des images dans les vignettes*/
 .img-custom{
- 
   float:right;
-  
+  border-radius: 25px;
+  max-width: 200px;
 }
+
+/*mise en forme du titre des vignettes */
 .custom-card-title{
     font-family: monospace;
     text-align: justify;
     margin-top: 50px;
 
 }
+
+/*mise en forme du texte des vignettes */
 .custom-card-text{
     font-family: cursive;
     font-size: 12px;
     position:static;
 }
+
+/*mise en forme des puces de la liste */
 .liste-custom{
     list-style-type: none;
+}
+li::before{
+    display: inline-block;
+    position: relative;
+    width: 1em;
+    height: 1em;
+    top: 0.2rem;
+    margin-right: 0.4rem;
+    content: "";
+    background-image: url('https://cdn-icons.flaticon.com/png/512/6210/premium/6210643.png?token=exp=1638193130~hmac=347cf4199ebad471694a0369fbaa9a5a');
+    background-size: contain;
+}
+
+
+/*mise en forme des boutons modifier et supprimer*/
+.button_cus {
+text-decoration: none;
+padding: 13px;
+font-family: verdana;
+font-size: 1.1em;
+color: #FFFFFF;
+background-color: #c0504d;
+border-radius: 24px;
+-webkit-border-radius: 24px;
+-moz-border-radius: 24px;
+box-shadow: 6px 6px 12px #444444;
+-webkit-box-shadow: 6px 6px 12px #444444;
+-moz-box-shadow: 6px 6px 12px #444444;
 }
 
 

@@ -65,7 +65,7 @@ function generateDisplay() {
         cardBody.classList.add("card-body");
 
         // Ajout de l'image de fond
-        var imgcard = ultimateHTMLGenerator("img", "", ["img-responsive","card-img-top", "imglimit","img-custom"], "",cardBody);
+        var imgcard = ultimateHTMLGenerator("img", "", ["img-responsive","card-img-top","img-custom"], "",cardBody);
         imgcard.src = mesParkings.GogoParking[i]._IMG;
 
 
