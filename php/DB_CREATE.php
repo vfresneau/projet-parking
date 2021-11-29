@@ -16,8 +16,12 @@ function add_dbc() {
         // connexion à la base de donnée
         $dbh = new PDO('mysql:host=127.0.0.1;dbname=GogoParking', $user, $pass); // on crée un objet PDO avec l'adresse, identifiant et mdp
         // on prépare notre requête SQL
-        $stmt = $dbh->prepare("INSERT INTO `quartiers`(`nom_quartier`, `nom_parking`, `adresse_parking`, `nombre_place`, `tarif`, `heure_ouverture`, `reservation`, `lien_maps`, `img`) VALUES (:nom_quartier, :nom_parking, :adresse_parking, :nombre_place, :tarif, :heure_ouverture, :reservation, :lien_maps, :img)");
         //avec bindParam, on remplace les valeurs indiquées comme ceci :valeur par les vraies valeurs du nouveau parking, en évitant l'injection SQL
+        if ($donnees["img"] != ""){
+            $stmt = $dbh->prepare("INSERT INTO `quartiers`(`nom_quartier`, `nom_parking`, `adresse_parking`, `nombre_place`, `tarif`, `heure_ouverture`, `reservation`, `lien_maps`, `img`) VALUES (:nom_quartier, :nom_parking, :adresse_parking, :nombre_place, :tarif, :heure_ouverture, :reservation, :lien_maps, :img)");
+        } else {
+            $stmt = $dbh->prepare("INSERT INTO `quartiers`(`nom_quartier`, `nom_parking`, `adresse_parking`, `nombre_place`, `tarif`, `heure_ouverture`, `reservation`, `lien_maps`) VALUES (:nom_quartier, :nom_parking, :adresse_parking, :nombre_place, :tarif, :heure_ouverture, :reservation, :lien_maps)");
+        }
         $stmt->bindParam(":nom_quartier", $donnees["nom_quartier"]);
         $stmt->bindParam(":nom_parking", $donnees["nom_parking"]);
         $stmt->bindParam(":adresse_parking", $donnees["adresse_parking"]);
@@ -26,7 +30,9 @@ function add_dbc() {
         $stmt->bindParam(":heure_ouverture", $donnees["heure_ouverture"]);
         $stmt->bindParam(":reservation", $donnees["reservation"]);
         $stmt->bindParam(":lien_maps", $donnees["lien_maps"]);
-        $stmt->bindParam(":img", $donnees["img"]);
+        if ($donnees["img"] != ""){
+            $stmt->bindParam(":img", $donnees["img"]);
+        }
         $stmt->execute(); // On envoie notre requête SQL au serveur
         $id = $dbh->lastInsertId(); // On en profite pour récupérer l'ID de l'enregistrement créé, utilisé pour la suite du script
         $dbh = null; // on vide la requête pour être sûr de ne pas avoir de conflit par la suite
