@@ -107,11 +107,8 @@
 }
 .img-custom{
  
-    position: absolute;
-    margin-top: 10px;
-    margin-left: 350px;
-   
-
+  float:right;
+  
 }
 .custom-card-title{
     font-family: monospace;

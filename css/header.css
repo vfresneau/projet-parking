@@ -6,7 +6,7 @@ header {
     height: 580px;
     overflow: hidden;
     position: fixed;
-    background-color: whitesmoke;
+    background-color: wheat;
     top: 0;
     left: 0;
     z-index: 999;
@@ -30,8 +30,10 @@ header {
 
 .smallerlogo {
     width: auto;
-    height: 80px;
+    height: 100px;
     transition: all 0.3s;
+    position:static;
+    position : fixed; left : 300px; top : 20px;
 }
 
 #quartier {
@@ -42,8 +44,26 @@ header {
 
 .backsmall span {
     font-size: 24px;
-    border: 2px solid white;
+    border: px solid white;
     line-height: 50px;
     transition: all 0.3s;
     padding: 0 8px;
+}
+.smallerh1 {
+    color: #fff;
+    font-size: 20px!important;
+    text-transform: uppercase;
+    font-weight: 700;
+    font-family: "Josefin Sans", sans-serif;
+    background: linear-gradient(to right, #095fab 10%, #25abe8 50%, #57d75b 60%);
+    background-size: auto auto;
+    background-clip: border-box;
+    background-size: 200% auto;
+    color: #fff;
+    background-clip: text;
+    text-fill-color: transparent;
+    -webkit-background-clip: text;
+    -webkit-text-fill-color: transparent;
+    animation: textclip 1.5s linear infinite;
+    display: inline-list-item;
 }

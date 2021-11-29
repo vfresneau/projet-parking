@@ -6,6 +6,8 @@ function init() {
         if (distanceY > shrinkOn) {
             document.getElementsByTagName("header")[0].classList.add("smaller");
             document.getElementsByClassName("mon_logo")[0].classList.add("smallerlogo");
+            document.getElementsByClassName("wrapper")[1].classList.add("smallerh1");
+            
             var spans = document.getElementsByTagName("span");
             for (x = 0; x < spans.length; x++) {
                 spans[x].classList.add("backsmall");
@@ -17,6 +19,9 @@ function init() {
             if (document.getElementsByClassName("mon_logo")[0].classList.contains("smallerlogo")) {
                 document.getElementsByClassName("mon_logo")[0].classList.remove("smallerlogo");
             }
+            if (document.getElementsByClassName("wrapper")[1].classList.contains("smallerh1")) {
+                document.getElementsByClassName("wrapper")[1].classList.remove("smallerh1");
+            }
             var spans = document.getElementsByTagName("span");
             for (x = 0; x < spans.length; x++) {
                 if (spans[x].classList.contains("backsmall")) {
@@ -24,6 +29,7 @@ function init() {
                 };
             }
         }
+       
     });
 }
 window.onload = init();
