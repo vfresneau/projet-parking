@@ -217,7 +217,7 @@
     float: left;
 }
 
-ma_phrase {
+.ma_phrase {
     text-align: center;
     padding-top: 50px;
 }
@@ -267,7 +267,7 @@ ma_phrase {
 body {
     height: 100vh;
     margin: 0;
-    background-color: #c2ae90 !important;
+    background-color: #c2ae90;
     font-family: "ubuntu", Arial, sans-serif;
     overflow-x: hidden;
     display: grid;
@@ -284,8 +284,7 @@ a {
     display: flex;
     align-items:flex-start;
     justify-content:center;
-
-    
+    padding-top:0.5vh;
 }
 
 .wrapper h1 {
