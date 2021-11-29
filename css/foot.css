@@ -267,7 +267,7 @@ ma_phrase {
 body {
     height: 100vh;
     margin: 0;
-    background-color: #c2ae90 !important;
+    background-color: #c2ae90;
     font-family: "ubuntu", Arial, sans-serif;
     overflow-x: hidden;
     display: grid;
