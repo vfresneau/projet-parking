@@ -217,7 +217,14 @@
     float: left;
 }
 
+<<<<<<< HEAD
+.ma_phrase {
+    text-align: center;
+    padding-top: 50px;
+}
+=======
 
+>>>>>>> 79bdc27aad81486a8a92c856dfbaab27be59e827
 
 .imgpark {
     width: 25px;
@@ -264,7 +271,7 @@
 body {
     height: 100vh;
     margin: 0;
-    background-color: #c2ae90 !important;
+    background-color: #c2ae90;
     font-family: "ubuntu", Arial, sans-serif;
     overflow-x: hidden;
     display: grid;
@@ -281,8 +288,7 @@ a {
     display: flex;
     align-items:flex-start;
     justify-content:center;
-
-    
+    padding-top:0.5vh;
 }
 
 .wrapper h1 {
