@@ -84,6 +84,7 @@
     width: 100px;
     display: flex;
     position: relative;
+    
 }
 
 .button_cus {
@@ -97,3 +98,34 @@
 .imglimit {
     max-width: 200px;
 }
+.custom-card{
+    background-color: rgb(151, 151, 145) !important;
+    max-width: 600px !important;
+    margin-left: 100px;
+    margin-top: 30px !important;
+    
+}
+.img-custom{
+ 
+    position: absolute;
+    margin-top: 10px;
+    margin-left: 350px;
+   
+
+}
+.custom-card-title{
+    font-family: monospace;
+    text-align: justify;
+    margin-top: 50px;
+
+}
+.custom-card-text{
+    font-family: cursive;
+    font-size: 12px;
+    position:static;
+}
+.liste-custom{
+    list-style-type: none;
+}
+
+
