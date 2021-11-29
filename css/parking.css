@@ -1,5 +1,6 @@
 body{
     background: url(https://voyage-onirique.com/wp-content/uploads/2020/12/backiee-184887-landscape.jpg);
+    background-attachment: fixed;
 }
 .a{
     height: 130px;
