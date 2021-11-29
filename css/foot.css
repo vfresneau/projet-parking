@@ -319,3 +319,11 @@ a {
 .navblock {
     padding-top:30px;
 }
+
+.page-link{
+    color:red!important;
+    background-color: azure!important;
+    border: solid!important;
+    border-color:black!important;
+    font-family:cursive!important;
+}
