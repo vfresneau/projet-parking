@@ -95,7 +95,7 @@ GenererCartes(ligne1,StartPagination,Intervalle);
     var NextLi = ultimateHTMLGenerator("li","",["page-item"],ul);
     var NextA = ultimateHTMLGenerator("a","",["page-link"],NextLi);
     NextA.href = "#";
-    NextA.onclick = function(){EffaceCartes(((StartPagination+Intervalle),Intervalle));};
+    NextA.onclick = function(){EffaceCartes((StartPagination+Intervalle),Intervalle);};
     var NextSymbol = ultimateHTMLGenerator("span","»",[],NextA);
 
     var footer = ultimateHTMLGenerator('div', "", ["footer"], park);
