@@ -16,7 +16,7 @@
 </head>
 
 <body>
-
+    <!-- titre animé à côté du logo en haut de page-->
     <div class="container-fluid" id="quartier">
         <div class="row">
             <h1 class="text-center marge" id="titre">
@@ -38,6 +38,7 @@
 
     <div class="container-fluid" id="mon_container"> </div>
 
+    <!--container dans lequel on fabrique un formulaire pour créer un nouveau parking ainsi que des boutons le permettant-->
     <div class="container-fluid" id="formulaire">
         <div class="row">
             <div class="col-3">
@@ -49,19 +50,22 @@
     <div class="container-fluid bg-secondary" style="display:none" id="mes_formulaires">
         <form action="" class="form-example" id="mon_form"></form>
             <div class="row">
-
+                <!--input Quartier-->
                 <div class="col-3">
                     <label for="quartier">Quartier :</label>
                     <input class="form-control" type="text" placeholder="Quartier des Halles..." id="nom_quartier" name="nom_quartier">
                 </div>
+                <!--input Nom du parking-->
                 <div class="col-3">
                     <label for="nom_quartier">Nom du parking :</label>
                     <input class="form-control" type="text" placeholder="Parking place Chateauneuf..."id="nom_parking" name="nom_parking">
                 </div>
+                <!--input Adresse-->
                 <div class="col-3">
                     <label for="adresse_parking">Adresse du parking :</label>
                     <input class="form-control" type="text" placeholder="46 rue de Chateauneuf 37000 Tours..." id="adresse_parking" name="adresse_parking">
                 </div>
+                <!--input Nombre de place-->
                 <div class="col-3">
                     <label for="nombre_place">Nombre de place :</label>
                     <input class="form-control" type="number" placeholder="15 places..."id="nombre_place" name="nombre_place">
@@ -70,32 +74,33 @@
             </div>
 
             <div class="row">
-
+                <!--input Tarif-->
                 <div class="col-3">
                     <label for="tarif">Tarif :</label>
                     <input class="form-control" type="text" placeholder="1€ par heure..." id="tarif" name="tarif">
                 </div>
-
+                <!--input Horaire d'ouverture-->
                 <div class="col-3">
                     <label for="heure_ouverture">Heure d'ouverture :</label>
                     <input class="form-control" type="text" placeholder="24h/24h" id="heure_ouverture" name="heure_ouverture">
                 </div>
-
+                <!--input Reservation-->
                 <div class="col-3">
                     <label for="reservation">Reservation :</label>
                     <input class="form-control" type="text" placeholder="oui" id="reservation" name="reservation">
                 </div>
-
+                <!--input URL Map-->
                 <div class="col-3">
                     <label for="url">Url Map:</label>
                     <input class="form-control" id="url" placeholder="Collez l'url"  name="url"></input>
                 </div>
-
+                <!--input IMG-->
                 <div class="col-3">
                     <label for="img">Image de fond:</label>
                     <input class="form-control" id="img" placeholder="Collez l'url" name="img"></input>
                 </div>
 
+                <!--Checkboxes pour les caractéristiques parking-->
                 <div class="col-3" id="checkboxes1">
                     <div class="form-check">
                         <input class="form-check-input" type="checkbox" id="check1" data-id-carac="1">
@@ -143,13 +148,13 @@
                     </div>
 
                 </div>
-                
+
             </div>
 
             <div class="row">
                 <div class="col" id="checkboxes">
                 </div>
-
+                <!-- bouton création de parking liéé à la fonction onclick-->
                 <div class="custom_button">
                     <button type="button" class="btn btn-success" onclick="CreerParking()">Créer un parking</button>
                 </div>
