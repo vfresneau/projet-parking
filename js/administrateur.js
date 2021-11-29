@@ -60,7 +60,6 @@ function generateDisplay() {
         maColonne.dataset.idDb = mesParkings.GogoParking[i]._ID;
         maColonne.id = i;
 
-  
         // Fabrication du card body
         let cardBody = document.createElement("div");
         cardBody.classList.add("card-body");
@@ -68,7 +67,7 @@ function generateDisplay() {
         // Ajout de l'image de fond
         var imgcard = ultimateHTMLGenerator("img", "", ["card-img-top", "imglimit","img-custom"], "", cardBody);
         imgcard.src = mesParkings.GogoParking[i]._IMG;
-      
+
 
         // fabrication  du titre de la carte
         let montitre = document.createElement("h5");
@@ -151,7 +150,7 @@ function generateDisplay() {
 function Modification(id) {
     var carte = document.getElementById(id);
     if (carte.lastChild.lastChild.textContent == "Modifier") {
-        var title = ultimateHTMLGenerator("input", carte.children[1].firstChild.textContent, ["form-control"], carte.children[1].firstChild.id);
+        var title = ultimateHTMLGenerator("input", carte.firstChild.lastChild.textContent, ["form-control"], carte.firstChild.lastChild.id);
         for (z = 0; z < 8; z++) {
             var element = ultimateHTMLGenerator("input", carte.lastChild.firstChild.children[0].textContent, ["form-control"], carte.lastChild.firstChild.children[0].id);
             carte.lastChild.firstChild.children[0].remove();
@@ -173,14 +172,14 @@ function Modification(id) {
             }
         }
 
-        carte.children[1].firstChild.remove();
-        carte.children[1].appendChild(title);
+        carte.firstChild.lastChild.remove();
+        carte.firstChild.appendChild(title);
         carte.lastChild.lastChild.classList.remove("btn-danger");
         carte.lastChild.lastChild.classList.add("btn-success");
         carte.lastChild.lastChild.textContent = "Enregistrer";
 
     } else {
-        var title2 = ultimateHTMLGenerator("h5", carte.children[1].firstChild.value, [], carte.children[1].firstChild.id)
+        var title2 = ultimateHTMLGenerator("h5", carte.firstChild.lastChild.value, [], carte.firstChild.lastChild.id)
         var tableaucarac = [];
         for (z = 0; z < carte.lastChild.firstChild.children.length;) {
             if (carte.lastChild.firstChild.children[0].id.includes("check") && carte.lastChild.firstChild.children[0].checked) {
@@ -201,8 +200,8 @@ function Modification(id) {
                 carte.lastChild.firstChild.children[0].remove();
             }
         }
-        carte.children[1].firstChild.remove();
-        carte.children[1].appendChild(title2);
+        carte.firstChild.lastChild.remove();
+        carte.firstChild.appendChild(title2);
         MajParking(carte.dataset.idDb, carte.id, tableaucarac);
         carte.lastChild.lastChild.classList.remove("btn-success");
         carte.lastChild.lastChild.classList.add("btn-danger");
