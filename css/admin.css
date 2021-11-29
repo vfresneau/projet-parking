@@ -103,11 +103,13 @@
     max-width: 600px !important;
     margin-left: 100px;
     margin-top: 30px !important;
+
     
 }
 .img-custom{
  
   float:right;
+  border-radius: 25px;
   
 }
 .custom-card-title{
@@ -124,5 +126,4 @@
 .liste-custom{
     list-style-type: none;
 }
-
 
