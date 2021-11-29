@@ -107,8 +107,10 @@
 }
 .img-custom{
  
-position: relative;
-justify-items: center;
+  float:right;
+  
+
+
 }
 .custom-card-title{
     font-family: monospace;
