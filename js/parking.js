@@ -14,6 +14,9 @@ var google = document.createElement("iframe");
 var col12 = document.getElementById("google");
 var numeroparking = processUser(); // récupère le parking envoyé depuis l'URL
 var mesParkings; // variable qui contiendra la BDD
+var tempo2 = document.getElementById("idbouton") // récupère l'id de l'element html container -fluid //
+
+
 
 ReadDBParkings(); // Lit la BDD pour charger les infos parkings
 
@@ -24,7 +27,7 @@ function processUser() {
     return parseInt(l);
 }
 
-function parking() {
+function parking() { //Pour chaque 
     quartier.classList.add("monquartier");
     adresse.classList.add("titre");
     nombre.classList.add("titre");
@@ -34,11 +37,20 @@ function parking() {
     caracteristique.classList.add("titre");
     nom.classList.add("titre");
 
+    //creation du boutton accueuil //
+    var btretour= document.createElement("a");
+    btretour.classList.add("btn","btn-info");
+    btretour.textContent = "Accueuil";
+    btretour.href = "Accueil.html";
+    tempo2.prepend(btretour); //place en début de container-fluid id idbouton //
+
+
     for (var z = 1; z <= 1; z++) {
         var ligne1 = document.createElement("div");
         ligne1.classList.add("row");
         ligne1.classList.add("a");
         a.appendChild(ligne1);
+        
 
         for (var i = 0; i < mesParkings.GogoParking[numeroparking]._PLACES.length; i++) {
             var colonne1 = document.createElement("div");

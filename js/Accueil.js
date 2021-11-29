@@ -28,6 +28,7 @@ function Main() {
     for (var i = 0; i < mesParkings.GogoParking.length; i++) { //Pour l'ensemble des elements du tableau "mesParkings.GogoParking" * //
         var compteurPlace = 0; // creation de variable pour utiliser un compteur // 
         compteurReservation = 0
+
         var temp = ultimateHTMLGenerator("div", "", ["col", "wrap"], ligne1); //* je créer une colonne et affiche le contenu dans ligne1, pour autant qu'il y a d'élément nom_parking //
 
         var cards = ultimateHTMLGenerator("div", "", ["card", "tile","mx-auto"], temp); //creation de cards dans les colonnes//
