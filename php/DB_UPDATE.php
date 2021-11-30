@@ -4,7 +4,7 @@ require('CLASS_PARKING.php'); // Classe Parking, peut-être pas nécessaire dans
 ini_set('display_errors', 1); // affiche toutes les erreurs
 error_reporting(E_ALL); // affiche toutes les erreurs
 
-$donnees = json_decode($_POST["update"],true); //On récupère et d&décode les données du parking dans un tableau
+$donnees = json_decode($_POST["update"],true); //On récupère et décode les données du parking dans un tableau
 
 function update_dbc() {
     global $donnees; // permet de récupérer la variable globale $donnees
