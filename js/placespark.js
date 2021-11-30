@@ -6,8 +6,10 @@ var idparking = 1;
 var boutton = document.createElement("a");
 var numeroparking = processUser(); // récupère le parking envoyé depuis l'URL
 
-ReadDBParkings();
+ReadDBParkings();// Lit la BDD pour charger les infos parkings
+
 function pri() { 
+    nom.classList.add("titre");
     
     for (var z = 1; z <= 1; z++) {
         var ligne1 = document.createElement("div");
@@ -32,26 +34,8 @@ function pri() {
         }
     }
 }
-//for (var i = 0; i < 2; i++) {
-    //var ligne2 = document.createElement("div"); // nouvelle var ligne10 on cree un element div depuis Javascript
-    // ligne2.classList.add("row"); // on ajoute la classe row du css a l'element html 
-    // ligne2.classList.add("a"); // on ajoute la classe a du css a l'element html 
-    // ligne2.classList.add("styleligne")
-    // a.appendChild(ligne2); // ligne10 apparait dans le container
 
-    // for (var o = 0; o < 6; o++) {
-    //     var colonne6 = document.createElement("div"); // nouvelle var colonne10 on cree un element div depuis javascript 
-    //     colonne6.classList.add("col-2"); // on ajoute la classe col du css a l'element colonne10
-    //     colonne6.classList.add("a"); // on ajoute la classe a du css a l'element colonne10
-    //     ligne2.appendChild(colonne6); // colonne10 apparait dans ligne10(container)
-    //     compteur = compteur + 1; // le compteur est egal a 0 on cree un compteur qui additionne +1
-    //     colonne6.textContent = compteur; // dans chaque colonne apparaitra le nombre de la casse 
-    //     colonne6.id = compteur; // pour chaque casse ils auronts un id different pour chaque
-    //     colonne6.classList.add("stylecol");
 nom.textContent = mesParkings.GogoParking[1]._NOM_PARKING;
-
-
-
 
 function ReadDBParkings() {
     // Création de la variable qui stockera la base de données des héros
