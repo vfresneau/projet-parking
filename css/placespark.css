@@ -35,9 +35,13 @@ text-shadow:   -1px -1px 0 black,
     z-index: 0;
     border-radius: 10px;
     display: block;
-   margin : auto;
+    margin : auto;
+    text-align: center;
+    padding-top:10px;
+    text-decoration: none;
     
 }
+
 
 .glow-on-hover:before {
     content: '';
@@ -57,7 +61,7 @@ text-shadow:   -1px -1px 0 black,
 }
 
 .glow-on-hover:active {
-    color: #000
+    color: #000;
 }
 
 .glow-on-hover:active:after {
