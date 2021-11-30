@@ -9,10 +9,10 @@ var numeroparking = processUser(); // récupère le parking envoyé depuis l'URL
 ReadDBParkings();// Lit la BDD pour charger les infos parkings
 
 function processUser() {
-     var parameters = location.search.substring(1).split("&");
-     var temp = parameters[0].split("=");
-     l = unescape(temp[1]);
-     return parseInt(l);
+var parameters = location.search.substring(1).split("&");
+var temp = parameters[0].split("=");
+l = unescape(temp[1]);
+return parseInt(l);
 }
 
 function pri() { 
@@ -41,6 +41,7 @@ function pri() {
 
      var tempoff2 = ultimateHTMLGenerator("input", "", ["switch-input"],"toggle-one"+i,tempoff ) //creation d'un input et une class switch-input et un id pour chaque input dans la colonne //
      tempoff2.type = "checkbox"; // ajout le type checkbox dans l'input var tempoff2// 
+     tempoff2.onclick = function (){maPlace(tempoff2.id,parseInt(mesParkings.GogoParking[numeroparking]._ID),mesParkings.GogoParking[numeroparking]._PLACES[i])} ;
      var tempoff3 = ultimateHTMLGenerator("span", "", ["switch-label"],"",tempoff ) // creation d'un element html span et une class switch-label  dans la colonne //
      tempoff3.setAttribute("data-on","Libre") ; //dans la span, je met la valeur libre a l'attribut data-one //
      tempoff3.setAttribute("data-off","Occupé") ; // dans la span, je met la valeur occupé  a l'attribut data-off //
@@ -48,7 +49,17 @@ function pri() {
 
 
 
-            if (mesParkings.GogoParking[1]._PLACES[i]._DISPO == "1") { //Si chaque place de parking occupé, le switch se met sur "occupé" //
+            if (mesParkings.GogoParking[numeroparking]._PLACES[i]._DISPO == "1") { //Si chaque place de parking occupé, le switch se met sur "occupé" //
+                
+                colonne1.textContent="occupé depuis :"+mesParkings.GogoParking[numeroparking]._PLACES[i]._HEURE_DERNIERE_UT;
+                var tempoff = ultimateHTMLGenerator("label", "", ["switch"],"",colonne1 ) //creation d'un element html label et d'une class "switch" dans la div //
+
+                var tempoff2 = ultimateHTMLGenerator("input", "", ["switch-input"],"toggle-one"+i,tempoff ) //creation d'un input et une class switch-input et un id pour chaque input dans la colonne //
+                tempoff2.type = "checkbox"; // ajout le type checkbox dans l'input var tempoff2// 
+                var tempoff3 = ultimateHTMLGenerator("span", "", ["switch-label"],"",tempoff ) // creation d'un element html span et une class switch-label  dans la colonne //
+                tempoff3.setAttribute("data-on","Libre") ; //dans la span, je met la valeur libre a l'attribut data-one //
+                tempoff3.setAttribute("data-off","Occupé") ; // dans la span, je met la valeur occupé  a l'attribut data-off //
+                var tempoff4 = ultimateHTMLGenerator("span", "", ["switch-handle"],"",tempoff ) //creation d'un element html span et une class switch-handle dans la colonne //
                 tempoff2.checked = true ;
             }
         }
@@ -78,7 +89,7 @@ function processUser() {
 }
 
 
-function ultimateHTMLGenerator(typeElement, contenu, tableauClassCss, id, destinationElement){
+function ultimateHTMLGenerator(typeElement, contenu, tableauClassCss,id, destinationElement){
     // on crer un element html donné en paramètre (1er paramètre)
     var ultimateElement = document.createElement(typeElement);
     // on attribut du contenu (paramètre 2) à l'element html précedement fabriqué
@@ -94,3 +105,26 @@ function ultimateHTMLGenerator(typeElement, contenu, tableauClassCss, id, destin
          }
     
     
+         // Fonction de MAJ de parking dans la BDD
+function UpdateParking(update) {
+    let xhrupdate = new XMLHttpRequest; // on crée une variable XMLHTTPRequest pour fabriquer notre requête
+    xhrupdate.open("POST", "http://141.94.223.96/Luc/GogoParking/php/DB_UPDATE_PLACES.php", true); // On utilise la méthode POST pour envoyer des données, sur l'URL du fichier PHP qui permet d'écrire le fichier json
+    xhrupdate.setRequestHeader("Content-type", "application/x-www-form-urlencoded"); // On définit les en-têtes pour que l'envoi soit correctement interprété par le serveur
+    xhrupdate.onreadystatechange = function() { // on modifie l'attribut onreadystatechange de notre requête qui permet d'exécuter du code en fonction du changement d'état de la requête
+        if (xhrupdate.readyState == XMLHttpRequest.DONE && xhrupdate.status == 200) { // Si la requête se termine
+            ReadDBParkings(); // On exécute la fonction 
+        }
+    }
+    xhrupdate.send("update_places=" + encodeURIComponent(JSON.stringify(update))); // On envoie notre requête, dans une variable PHP mesHeros à laquelle on rajoute le fichier JSON entier
+}
+
+function maPlace(idBouton,idParking,idPlace
+    ) {
+        var bouton = document.getElementById(idBouton);
+    if (idBouton.checked ==true){ //si ma case est coché //
+        UpdateParking(idParking,idPlace,1)
+        }
+        else {
+            UpdateParking(idParking,idPlace,0)
+        }
+}
