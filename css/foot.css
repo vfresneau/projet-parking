@@ -20,6 +20,7 @@
     padding: 0 15px;
     line-height: 100px;
     animation: jumb 2s infinite;
+    vertical-align: top;
 }
 
 @keyframes jumb {
@@ -207,11 +208,11 @@
 }
 
 .marge {
-    margin-bottom: 25px;
-    padding-top: 50px;
+    padding-top: 5vh;
 }
 
 .mon_logo {
+
     height: 250px;
     display: flex;
     float: left;
@@ -322,4 +323,14 @@ a {
     border: solid!important;
     border-color:black!important;
     font-family:cursive!important;
+}
+
+.boutonadmin{
+    transition:all 0.3s;
+    height:fit-content;
+    margin-top:50px;
+}
+
+.smalladmin{
+    margin-top:20px;
 }

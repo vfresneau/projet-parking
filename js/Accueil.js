@@ -75,8 +75,11 @@ function GenererCartes(row,DebutCartes,NombreCartes){
 function Main() {
     var park = document.getElementById("quartier"); // permet d'acceder à l'élément HTML avec l'id quartier //
     var titre = document.getElementById("titre");
+    var containerheader = document.getElementById("containerheader");
 
-    var mon_logo = ultimateHTMLGenerator('img', "", ["mon_logo"], titre);
+    var mon_logo = document.createElement("img");
+    mon_logo.classList.add("mon_logo");
+    containerheader.prepend(mon_logo); // Permet de créer le logo en premier dans le container (avant les autres éléments)
 
     var optez = ultimateHTMLGenerator("div", "", ["wrapper"], titre);
 
@@ -87,11 +90,8 @@ function Main() {
     mon_logo.src = "../image/logo_parking.png";
     mon_logo.alt = "logo";
 
-
-    var ligne0 = ultimateHTMLGenerator("div", "", ["row"], park); //creer une ligne avec l'élément html "row" dans la var "park"//
-    ligne0.id = "ligne0";
-
-    var button2 = ultimateHTMLGenerator("a", "ADMINISTRATEUR", ["btn", "btn-outline-info", "col-2","mx-auto"], ligne0); //ajout d'un boutton dans la cardBody//
+    var button2 = ultimateHTMLGenerator("a", "ADMINISTRATEUR", ["btn", "btn-outline-info","boutonadmin"], containerheader); //ajout d'un boutton dans la cardBody//
+    button2.id = "adminbutton";
     button2.href = "administrateur.html";
 
     var ligne1 = ultimateHTMLGenerator("div", "", ["row"], park); //creer une ligne avec l'élément html "row" dans la var "park"//
