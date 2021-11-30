@@ -219,17 +219,22 @@ function Modification(id) {
 function MajParking(idDb, id, tableaucarac) {
     var nom_quartier = document.getElementById(id + "nom_quartier").textContent;
     var nom_parking = document.getElementById(id + "nom_parking").textContent;
+    nom_parking = nom_parking.substring("Nom du parking : ".length, nom_parking.length);
     var adresse_parking = document.getElementById(id + "adresse_parking").textContent;
+    adresse_parking = adresse_parking.substring("Adresse : ".length, adresse_parking.length);
     var nombre_place = document.getElementById(id + "nombre_place").textContent;
-    nombre_place = parseInt(nombre_place.substr(0, nombre_place.length - " places".length));
+    nombre_place = parseInt(nombre_place.substr("Nombre de place : ".length, nombre_place.length - " places".length));
     var tarif = document.getElementById(id + "tarif").textContent;
     tarif = tarif.substr("Tarif : ".length, tarif.length - "Tarif : ".length);
     var heure_ouverture = document.getElementById(id + "heure_ouverture").textContent;
     heure_ouverture = heure_ouverture.substr("Heure d'ouverture : ".length, heure_ouverture.length - "Heure d'ouverture : ".length);
     var reservation = document.getElementById(id + "reservation").textContent;
-    reservation = reservation.substr("Réservation : ".length, reservation.length - "Réservation : ".length);
+    reservation = reservation.substr("Réservation : ".length, reservation.length);
     var url_map = document.getElementById(id + "lien_maps").textContent;
+    url_map = url_map.substring("Lien Maps : ".length, url_map.length);
     var imgcard = document.getElementById(id + "imgcard").textContent;
+    imgcard = imgcard.substring("Source Image : ".length, imgcard.length);
+
 
     // On fabrique un model vide de parking
     var ParkingMisAJour = ParkingModel();
