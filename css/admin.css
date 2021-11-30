@@ -167,32 +167,33 @@ box-shadow: 6px 6px 12px #444444;
 -moz-box-shadow: 6px 6px 12px #444444;
 }
 
+
+/* mise en forme du lien "nombre de place" dans les vignettes*/
 .lien_nbr_place_cus{
     outline: none;
     text-decoration: none;
     padding: 2px 1px 0;
-  }
-  
-  .lien_nbr_place_cus:link {
-    color:rgb(34, 102, 153);
-  }
-  
-  .lien_nbr_place_cus:visited {
-    color: rgb(34, 102, 153);
-  }
-  
-  .lien_nbr_place_cus:focus, a:hover {
-    border-bottom: 1px solid;
-  }
-  
-  .lien_nbr_place_cus:active {
-    color: red;
-  }
-  
-  .lien_nbr_place_cus {
-    background: url("../image/puce_lien_ic.png") no-repeat 100% 0;
-    background-size: 16px 16px;
-    padding-right: 22px;
-  }
+}
+.lien_nbr_place_cus:link {
+color:rgb(34, 102, 153);
+}
+
+.lien_nbr_place_cus:visited {
+color: rgb(34, 102, 153);
+}
+
+.lien_nbr_place_cus:focus, a:hover {
+border-bottom: 1px solid;
+}
+
+.lien_nbr_place_cus:active {
+color: red;
+}
+
+.lien_nbr_place_cus {
+background: url("../image/puce_lien_ic.png") no-repeat 100% 0;
+background-size: 16px 16px;
+padding-right: 22px;
+}
 
 
