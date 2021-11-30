@@ -23,8 +23,6 @@ mon_logo.src = "../image/logo_parking.png";
 mon_logo.alt = "logo";
 titre.appendChild(mon_logo);
 
-
-
 var ligne0 = ultimateHTMLGenerator("div", "", ["row"], "", park); //creer une ligne avec l'élément html "row" dans la var "park"//
 
 var button2 = ultimateHTMLGenerator("a", "Accueil", ["btn", "btn-outline-info", "col-2","mx-auto"], "", ligne0); //ajout d'un boutton dans la cardBody//

@@ -25,9 +25,22 @@ function pri() {
             colonne1.id = compteur;
             colonne1.classList.add("stylecol");
 
-            if (mesParkings.GogoParking[1]._PLACES[i]._DISPO == "1") {
-                colonne1.classList.add("rouge");
-                colonne1.textContent = "Occupée depuis : " + mesParkings.GogoParking[1]._PLACES[i]._HEURE_DERNIERE_UT;
+
+   //bouton on/off pour la dispo des parking //
+
+     var tempoff = ultimateHTMLGenerator("label", "", ["switch"],"",colonne1 ) //creation d'un element html label et d'une class "switch" dans la div //
+
+     var tempoff2 = ultimateHTMLGenerator("input", "", ["switch-input"],"toggle-one"+i,tempoff ) //creation d'un input et une class switch-input et un id pour chaque input dans la colonne //
+     tempoff2.type = "checkbox"; // ajout le type checkbox dans l'input var tempoff2// 
+     var tempoff3 = ultimateHTMLGenerator("span", "", ["switch-label"],"",tempoff ) // creation d'un element html span et une class switch-label  dans la colonne //
+     tempoff3.setAttribute("data-on","Libre") ; //dans la span, je met la valeur libre a l'attribut data-one //
+     tempoff3.setAttribute("data-off","Occupé") ; // dans la span, je met la valeur occupé  a l'attribut data-off //
+     var tempoff4 = ultimateHTMLGenerator("span", "", ["switch-handle"],"",tempoff ) //creation d'un element html span et une class switch-handle dans la colonne //
+
+
+
+            if (mesParkings.GogoParking[1]._PLACES[i]._DISPO == "1") { //Si chaque place de parking occupé, le switch se met sur "occupé" //
+                tempoff2.checked = true ;
             }
         }
     }
@@ -72,3 +85,21 @@ function processUser() {
     l = unescape(temp[1]);
     return parseInt(l);
 }
+
+
+function ultimateHTMLGenerator(typeElement, contenu, tableauClassCss, id, destinationElement){
+    // on crer un element html donné en paramètre (1er paramètre)
+    var ultimateElement = document.createElement(typeElement);
+    // on attribut du contenu (paramètre 2) à l'element html précedement fabriqué
+    ultimateElement.textContent = contenu;
+    // on souhaite ajouter plusieurs class CSS à l'element html précedement créé
+    for (var i = 0; i < tableauClassCss.length; i++) {
+        // on ajoute la class css contenu dans le tableau de class css passé en paramètre 3
+        ultimateElement.classList.add(tableauClassCss[i]);
+    }
+    // on fait apparaitre l'element dans celui passé en 4ème paramètre
+    destinationElement.appendChild(ultimateElement);
+    return ultimateElement;
+         }
+    
+    
