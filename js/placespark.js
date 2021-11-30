@@ -2,11 +2,18 @@ var a = document.getElementById("container"); // je recupere l'id de mon contain
 var compteur = 0 // nouvelle variable compteur
 var nom = document.getElementById("titre1");
 var mesParkings;
-var idparking = 1;
+
 var boutton = document.createElement("a");
 var numeroparking = processUser(); // récupère le parking envoyé depuis l'URL
 
 ReadDBParkings();// Lit la BDD pour charger les infos parkings
+
+function processUser() {
+     var parameters = location.search.substring(1).split("&");
+     var temp = parameters[0].split("=");
+     l = unescape(temp[1]);
+     return parseInt(l);
+}
 
 function pri() { 
     nom.classList.add("titre");
@@ -18,7 +25,7 @@ function pri() {
         ligne1.classList.add("styleligne");
         a.appendChild(ligne1);
         
-        for (var i = 0; i < mesParkings.GogoParking[1]._PLACES.length; i++) {
+        for (var i = 0; i < mesParkings.GogoParking[numeroparking]._PLACES.length; i++) {
             var colonne1 = document.createElement("div");
             colonne1.classList.add("col");
             colonne1.classList.add("a");
@@ -27,15 +34,15 @@ function pri() {
             colonne1.id = compteur;
             colonne1.classList.add("stylecol");
 
-            if (mesParkings.GogoParking[1]._PLACES[i]._DISPO == "1") {
+            if (mesParkings.GogoParking[numeroparking]._PLACES[i]._DISPO == "1") {
                 colonne1.classList.add("rouge");
-                colonne1.textContent = "Occupée depuis : " + mesParkings.GogoParking[1]._PLACES[i]._HEURE_DERNIERE_UT;
+                colonne1.textContent = "Occupée depuis : " + mesParkings.GogoParking[numeroparking]._PLACES[i]._HEURE_DERNIERE_UT;
             }
         }
     }
 }
 
-nom.textContent = mesParkings.GogoParking[1]._NOM_PARKING;
+nom.textContent = mesParkings.GogoParking[numeroparking]._NOM_PARKING;
 
 function ReadDBParkings() {
     // Création de la variable qui stockera la base de données des héros
