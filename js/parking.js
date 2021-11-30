@@ -44,14 +44,14 @@ function parking() { //Pour chaque
     btretour.href = "Accueil.html";
     tempo2.prepend(btretour); //place en début de container-fluid id idbouton //
 
-
+// creation des lignes pour tableau 
     for (var z = 1; z <= 1; z++) {
         var ligne1 = document.createElement("div");
         ligne1.classList.add("row");
         ligne1.classList.add("a");
         a.appendChild(ligne1);
         
-
+// creation des colonnes pour tableau 
         for (var i = 0; i < mesParkings.GogoParking[numeroparking]._PLACES.length; i++) {
             var colonne1 = document.createElement("div");
             colonne1.classList.add("col");
@@ -60,13 +60,13 @@ function parking() { //Pour chaque
             colonne1.textContent = "Disponible";
             colonne1.id = compteur;
 
-            if (mesParkings.GogoParking[numeroparking]._PLACES[i]._DISPO == "1") {
+            if (mesParkings.GogoParking[numeroparking]._PLACES[i]._DISPO == "1") { // si c'est disponible l'afficher   
                 colonne1.classList.add("rouge");
                 colonne1.textContent = "Occupée depuis : " + mesParkings.GogoParking[numeroparking]._PLACES[i]._HEURE_DERNIERE_UT;
             }
         }
     }
-
+    // ajouter contenue json 
     quartier.textContent = mesParkings.GogoParking[numeroparking]._NOM_QUARTIER;
     nom.textContent = mesParkings.GogoParking[numeroparking]._NOM_PARKING;
     adresse.textContent = "Adresse : " + mesParkings.GogoParking[numeroparking]._ADRESSE_PARKING;
@@ -84,6 +84,7 @@ function parking() { //Pour chaque
     }
     // caracteristique.textContent = "Restriction : "+mesParkings.GogoParking[numeroparking]._CARACTERISTIQUES;
 
+    // creation de la map google map
     google.src = mesParkings.GogoParking[numeroparking]._LIEN_MAPS;
     google.classList.add("centrer");
     col12.appendChild(google);
