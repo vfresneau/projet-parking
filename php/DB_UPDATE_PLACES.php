@@ -11,7 +11,7 @@ function update_place_dbc() {
     $user = "charley"; // Identifiant BDD
     $pass = "@JuNiRMdv5GZb"; // Mot de passe BDD
     
-    //* On met à jour les infos principales du parking
+    //* On met à jour les infos de place individuelle d'un parking
     
     try {
         // connexion à la base de donnée
@@ -30,9 +30,6 @@ function update_place_dbc() {
         print "Erreur !: " . $e->getMessage() . "<br/>"; // on affiche le détail de l'erreur
         die(); // et on arrête le script
     }
-
-    //* Ensuite, on supprime les caractéristiques associées au parking
-    
 }
 
 update_place_dbc();
