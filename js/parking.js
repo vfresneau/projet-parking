@@ -84,6 +84,7 @@ function parking() { //Pour chaque
     }
     // caracteristique.textContent = "Restriction : "+mesParkings.GogoParking[numeroparking]._CARACTERISTIQUES;
 
+    // creation de la map google map
     google.src = mesParkings.GogoParking[numeroparking]._LIEN_MAPS;
     google.classList.add("centrer");
     col12.appendChild(google);
