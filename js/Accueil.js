@@ -127,22 +127,26 @@ function Main() {
 
     GenererCartes(ligne1,StartPagination,Intervalle);
 
-
+    // fabrication du pied de page "contact"//
     var footer = ultimateHTMLGenerator('div', "", ["footer"], park);
     var contact = ultimateHTMLGenerator('p', "Contact : Monsieur Gogo -  Adresse: 26 rue de la préfecture 37000 Tours - Téléphone : 06 85 79 51 69", ["text-center", "text-footer"], footer);
     var copy = ultimateHTMLGenerator('p', "Copyright @2021 | Designed by Les lutins de Mr Gogo", ["text-center", "text-footer"], footer);
+    // fabrication d'une liste pour les icones des réseaux sociaux//
     var social_footer_ul = ultimateHTMLGenerator('ul', "", ['social_footer_ul'], footer);
 
+    // icone et lien FACEBOOK//
     var facebook_lien = ultimateHTMLGenerator('a', "", [], social_footer_ul);
     var facebook = ultimateHTMLGenerator('img', "", ["icone"], facebook_lien)
     facebook.src = "../image/facebook_ic.png";
     facebook_lien.href = "https://fr-fr.facebook.com/";
 
+    // icone et lien TWITTER//
     var twitter_lien = ultimateHTMLGenerator('a', "", [], social_footer_ul);
     var twitter = ultimateHTMLGenerator('img', "", ["icone"], twitter_lien)
     twitter.src = "../image/twitter-ic.png";
     twitter_lien.href = "https://twitter.com/?lang=fr";
 
+    // icone et lien INSTAGRAM//
     var instagram_lien = ultimateHTMLGenerator('a', "", [], social_footer_ul);
     var instagram = ultimateHTMLGenerator('img', "", ["icone"], instagram_lien)
     instagram.src = "../image/instagram_ic.png";
