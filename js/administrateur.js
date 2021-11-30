@@ -95,8 +95,7 @@ function generateDisplay() {
         lien_nombre_place.href ="placespark.html?placespark="+ i ;
         puce_nombre_place.appendChild(lien_nombre_place);
        
-        
-
+  
         // Pour chaque caractéristiques du parking en cours
         for (var j = 0; j < mesParkings.GogoParking[i]._CARACTERISTIQUES.length; j++) {
             // On fabrique un element li
