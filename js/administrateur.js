@@ -86,12 +86,19 @@ function generateDisplay() {
 
         let puce_nom_parking = ultimateHTMLGenerator('li',"Nom du parking : "+ mesParkings.GogoParking[i]._NOM_PARKING, ['nom_parking'], i + "nom_parking", maListeAPuce);
         let puce_adresse_parking = ultimateHTMLGenerator('li',"Adresse : "+ mesParkings.GogoParking[i]._ADRESSE_PARKING, ['adresse_parking'], i + "adresse_parking", maListeAPuce);
-        let puce_nombre_place = ultimateHTMLGenerator('li',"Nombre de place : "+ mesParkings.GogoParking[i]._NOMBRE_PLACE + " places", ['nom_place'], i + "nombre_place", maListeAPuce);
+        let puce_nombre_place = ultimateHTMLGenerator('li',"", ['nom_place'], i + "nombre_place", maListeAPuce);
         let puce_tarif = ultimateHTMLGenerator('li', "Tarif : " + mesParkings.GogoParking[i]._TARIF, ['tarif'], i + "tarif", maListeAPuce);
         let puce_heure_ouverture = ultimateHTMLGenerator('li', "Heure d'ouverture : " + mesParkings.GogoParking[i]._HEURE_OUVERTURE, ['heure_ouverture'], i + "heure_ouverture", maListeAPuce);
         let puce_reservation = ultimateHTMLGenerator('li', "Réservation : " + mesParkings.GogoParking[i]._RESERVATION, ['reservation'], i + "reservation", maListeAPuce);
         let puce_lien_maps = ultimateHTMLGenerator('li',"Lien Maps : "+ mesParkings.GogoParking[i]._LIEN_MAPS, ['lien_maps'], i + "lien_maps", maListeAPuce);
         let puce_img = ultimateHTMLGenerator('li',"Source Image : "+ mesParkings.GogoParking[i]._IMG, ['imgcard'], i + "imgcard", maListeAPuce);
+
+        let lien_nombre_place = document.createElement("a");
+        lien_nombre_place.classList.add("lien_nbr_place_cus")
+        lien_nombre_place.textContent = "Nombre de place : "+ mesParkings.GogoParking[i]._NOMBRE_PLACE + " places";
+        lien_nombre_place.href ="LIEN DE LA PAGE A METTRE ICI";
+        puce_nombre_place.appendChild(lien_nombre_place);
+        
 
         // Pour chaque caractéristiques du parking en cours
         for (var j = 0; j < mesParkings.GogoParking[i]._CARACTERISTIQUES.length; j++) {
@@ -261,6 +268,7 @@ function CreerParking() {
         caracteristiques.push(checkbox.checked);
     }
 
+
     // On fabrique un model vide de parking
     var nouveauParking = ParkingModel();
     // On change les valeurs avant vide par le contenu des inputs
@@ -274,6 +282,11 @@ function CreerParking() {
     nouveauParking.lien_maps = url_map;
     nouveauParking.img = img;
     nouveauParking.caracteristiques = caracteristiques;
+
+
+    
+
+
     // on crée le nouveau parking dans la DB
     console.log(nouveauParking);
     CreateParking(nouveauParking);
@@ -294,6 +307,7 @@ function ParkingModel() {
         "img": "",
         "caracteristiques": []
     };
+    
 }
 
 //__________________Fonction permettant de faire apparaitre le formulaire en cliquant sur le bouton _______________________
