@@ -1,9 +1,6 @@
 var mesParkings; // Variable qui contiendra la BDD des Parkings
-var mesCarac;
 
-
-// on lit la BDD et on exécute la fonction principale generateDisplay
-
+// Tableau des caractéristiques (fixe)
 var refCaracteristiques = ["Restrictions de hauteur: 2.10m",
     "Espaces handicapés",
     "Restrictions de hauteur: 1.90m",
@@ -12,7 +9,7 @@ var refCaracteristiques = ["Restrictions de hauteur: 2.10m",
     "Charge de voiture électrique"
 ];
 
-
+// On récupère les containers de la page dont on a besoin
 var park = document.getElementById("quartier");
 var titre = document.getElementById("titre");
 
@@ -23,14 +20,12 @@ mon_logo.src = "../image/logo_parking.png";
 mon_logo.alt = "logo";
 titre.appendChild(mon_logo);
 
-
-
+// Création de la ligne et du bouton permettant de revenir à l'accueil
 var ligne0 = ultimateHTMLGenerator("div", "", ["row"], "", park); //creer une ligne avec l'élément html "row" dans la var "park"//
-
 var button2 = ultimateHTMLGenerator("a", "Accueil", ["btn", "btn-outline-info", "col-2","mx-auto"], "", ligne0); //ajout d'un boutton dans la cardBody//
 button2.href = "Accueil.html";
 
-ReadDBParkings();
+ReadDBParkings(); // On exécute la fonction permettant de récupérer les parkings depuis la BDD
 
 let ligneRow;
 
@@ -39,7 +34,7 @@ let ligneRow;
 function generateDisplay() {
 
     let monContainer = document.getElementById("mon_container");
-    // Permet de détruire le contenu avant de la reconstruire (pour l'afficahge de nouveau parking ou la suppression d'un parking)
+    // Permet de détruire le contenu avant de la reconstruire (pour l'affichage de nouveau parking ou la suppression d'un parking)
     monContainer.innerHTML = "";
 
 
@@ -83,7 +78,7 @@ function generateDisplay() {
         let maListeAPuce = document.createElement("ul");
         maListeAPuce.classList.add("liste-custom");
 
-
+        // Création du contenu de chaque carte
         let puce_nom_parking = ultimateHTMLGenerator('li',"Nom du parking : "+ mesParkings.GogoParking[i]._NOM_PARKING, ['nom_parking'], i + "nom_parking", maListeAPuce);
         let puce_adresse_parking = ultimateHTMLGenerator('li',"Adresse : "+ mesParkings.GogoParking[i]._ADRESSE_PARKING, ['adresse_parking'], i + "adresse_parking", maListeAPuce);
         let puce_nombre_place = ultimateHTMLGenerator('li',"", ['nom_place'], i + "nombre_place", maListeAPuce);
@@ -92,7 +87,8 @@ function generateDisplay() {
         let puce_reservation = ultimateHTMLGenerator('li', "Réservation : " + mesParkings.GogoParking[i]._RESERVATION, ['reservation'], i + "reservation", maListeAPuce);
         let puce_lien_maps = ultimateHTMLGenerator('li',"Lien Maps : "+ mesParkings.GogoParking[i]._LIEN_MAPS, ['lien_maps'], i + "lien_maps", maListeAPuce);
         let puce_img = ultimateHTMLGenerator('li',"Source Image : "+ mesParkings.GogoParking[i]._IMG, ['imgcard'], i + "imgcard", maListeAPuce);
-
+        
+        // Création du lien vers la page permettant de modifier le nombre de places
         let lien_nombre_place = document.createElement("a");
         lien_nombre_place.classList.add("lien_nbr_place_cus")
         lien_nombre_place.textContent = "Nombre de place : "+ mesParkings.GogoParking[i]._NOMBRE_PLACE + " places";
@@ -153,16 +149,20 @@ function generateDisplay() {
 
 //___________________________________ Fonction de modification d'une fiche parking_________________________________________________
 
+
+/*Fonction qui permet de récupérer le texte de chaque élément d'une carte, créer des champs de formulaires, y mettre les valeurs texte
+précédemment récupérées, puis détruire les anciens éléments ; remplace donc le contenu original de la carte par des champs de formulaire,
+et vice-versa ! */
 function Modification(id) {
     var carte = document.getElementById(id);
-    if (carte.lastChild.lastChild.textContent == "Modifier") {
+    if (carte.lastChild.lastChild.textContent == "Modifier") { // Première possibilité : on va créer des formulaires
         var title = ultimateHTMLGenerator("input", carte.firstChild.lastChild.textContent, ["form-control"], carte.firstChild.lastChild.id);
-        for (z = 0; z < 8; z++) {
+        for (z = 0; z < 8; z++) { // Première boucle = propriétés du parking (nombre fixe)
             var element = ultimateHTMLGenerator("input", carte.lastChild.firstChild.children[0].textContent, ["form-control"], carte.lastChild.firstChild.children[0].id);
             carte.lastChild.firstChild.children[0].remove();
             carte.lastChild.firstChild.appendChild(element);
         }
-        for (y = 1; y <= 6; y++) {
+        for (y = 1; y <= 6; y++) { // Dexuième boucle = caractéristiques du parking (nombre fixe)
             var element = ultimateHTMLGenerator("input", "", ["form-check-input"], carte.id + "check" + y);
             element.type = "checkbox";
             element.dataset.idCarac = carte.id + y;
@@ -171,20 +171,20 @@ function Modification(id) {
             carte.lastChild.firstChild.appendChild(element);
             carte.lastChild.firstChild.appendChild(element2);
         }
-        for (x = 1; x <= carte.lastChild.firstChild.children.length; x++) {
+        for (x = 1; x <= carte.lastChild.firstChild.children.length; x++) { // on récupère les caractéristiques existantes et on supprime au fur et à mesure
             if (carte.lastChild.firstChild.children[0].id.includes("caracteristiques") && carte.lastChild.firstChild.children[0].textContent == carte.lastChild.firstChild.children[x].textContent) {
                 carte.lastChild.firstChild.children[x - 1].checked = true;
                 carte.lastChild.firstChild.children[0].remove();
             }
         }
-
+        // on supprime les anciens éléments et on transforme le bouton
         carte.firstChild.lastChild.remove();
         carte.firstChild.appendChild(title);
         carte.lastChild.lastChild.classList.remove("btn-danger");
         carte.lastChild.lastChild.classList.add("btn-success");
         carte.lastChild.lastChild.textContent = "Enregistrer";
 
-    } else {
+    } else { // Opération inverse, on récupère le contenu des formulaires et on recrée la carte.
         var title2 = ultimateHTMLGenerator("h5", carte.firstChild.lastChild.value, [], carte.firstChild.lastChild.id)
         var tableaucarac = [];
         for (z = 0; z < carte.lastChild.firstChild.children.length;) {
@@ -206,6 +206,7 @@ function Modification(id) {
                 carte.lastChild.firstChild.children[0].remove();
             }
         }
+        // on supprime les anciens éléments et on transforme le bouton
         carte.firstChild.lastChild.remove();
         carte.firstChild.appendChild(title2);
         MajParking(carte.dataset.idDb, carte.id, tableaucarac);
@@ -213,9 +214,9 @@ function Modification(id) {
         carte.lastChild.lastChild.classList.add("btn-danger");
         carte.lastChild.lastChild.textContent = "Modifier";
     }
-
 }
 
+// Fonction qui permet de récupérer les données du formulaire de MAJ et les formate avant envoi
 function MajParking(idDb, id, tableaucarac) {
     var nom_quartier = document.getElementById(id + "nom_quartier").textContent;
     var nom_parking = document.getElementById(id + "nom_parking").textContent;
@@ -250,8 +251,7 @@ function MajParking(idDb, id, tableaucarac) {
     ParkingMisAJour.img = imgcard;
     ParkingMisAJour.caracteristiques = tableaucarac;
     ParkingMisAJour.id = idDb;
-    // on crée le nouveau parking dans la DB
-    console.log(ParkingMisAJour);
+    // on envoie au serveur pour mise à jour dans la BDD
     UpdateParking(ParkingMisAJour);
 }
 
@@ -287,10 +287,6 @@ function CreerParking() {
     nouveauParking.lien_maps = url_map;
     nouveauParking.img = img;
     nouveauParking.caracteristiques = caracteristiques;
-
-
-    
-
 
     // on crée le nouveau parking dans la DB
     console.log(nouveauParking);
@@ -354,7 +350,7 @@ function ultimateHTMLGenerator(typeElement, contenu, tableauClassCss, id, destin
     return ultimateElement;
 }
 //_________________________________________________________________________________________
-
+//Fonction qui récupère les parkings de la BDD
 function ReadDBParkings() {
     // Création de la variable qui stockera la base de données des héros
     let xhr = new XMLHttpRequest; // Création d'une nouvelle requête XMLHTTP pour aller récupérer la base de données
@@ -368,6 +364,7 @@ function ReadDBParkings() {
     xhr.send(); // On envoie !
 }
 
+//Fonction qui crée le parking dans la BDD
 function CreateParking(nouveauParking) {
     let xhrinsert = new XMLHttpRequest; // on crée une variable XMLHTTPRequest pour fabriquer notre requête
     xhrinsert.open("POST", "http://141.94.223.96/Luc/GogoParking/php/DB_CREATE.php", true); // On utilise la méthode POST pour envoyer des données, sur l'URL du fichier PHP qui permet d'écrire le fichier json
@@ -393,6 +390,7 @@ function DeleteParking(parking) {
     xhrdelete.send("delete=" + encodeURIComponent(JSON.stringify(parking))); // On envoie notre requête, dans une variable PHP mesHeros à laquelle on rajoute le fichier JSON entier
 }
 
+// Fonction de MAJ de parking dans la BDD
 function UpdateParking(update) {
     let xhrupdate = new XMLHttpRequest; // on crée une variable XMLHTTPRequest pour fabriquer notre requête
     xhrupdate.open("POST", "http://141.94.223.96/Luc/GogoParking/php/DB_UPDATE.php", true); // On utilise la méthode POST pour envoyer des données, sur l'URL du fichier PHP qui permet d'écrire le fichier json
