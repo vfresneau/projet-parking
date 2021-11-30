@@ -17,15 +17,15 @@ function processUser() {
 
 function pri() { 
     nom.classList.add("titre");
-    
-    for (let z = 1; z <= 1; z++) {
+    // creation des lignes pour tableau 
+    for (var z = 1; z <= 1; z++) {
         var ligne1 = document.createElement("div");
         ligne1.classList.add("row");
         ligne1.classList.add("a");
         ligne1.classList.add("styleligne");
         a.appendChild(ligne1);
-        
-        for (let i = 0; i < mesParkings.GogoParking[numeroparking]._PLACES.length; i++) {
+        // creation des colonnes pour tableau 
+        for (var i = 0; i < mesParkings.GogoParking[numeroparking]._PLACES.length; i++) {
             var colonne1 = document.createElement("div");
             colonne1.classList.add("col");
             colonne1.classList.add("a");
