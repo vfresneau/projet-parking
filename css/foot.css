@@ -14,6 +14,7 @@ body {
     font-weight: 700;
 }
 
+/* tuiles des lettres animation titre cree r avec des span*/
 .back span {
     font-size: 2em;
     color: white;
@@ -39,6 +40,7 @@ body {
         transform: translateY(0px)
     }
 }
+
 
 .back span:nth-child(1) {
     animation-delay: 0s;
@@ -88,6 +90,7 @@ body {
     max-width: 1200px;
 }
 
+/*block cards title */
 .tile {
     width: 380px;
     height: 380px;
@@ -104,6 +107,7 @@ body {
     font-family: 'Roboto';
 }
 
+/*Image cards title */
 .tile img {
     height: 100%;
     width: 100%;
@@ -114,31 +118,30 @@ body {
     transition: all 0.4s ease-out;
 }
 
+/*Texte cards title */
 .tile .text {
-    /*   z-index:99; */
     position: absolute;
     padding: 30px;
     height: calc(100% - 60px);
 }
-
+/*Titre h1 cards title */
 .tile h1 {
     font-weight: 300;
     margin: 0;
     text-shadow: 2px 2px 10px rgba(0, 0, 0, 0.3);
 }
-
+/*Titre h2 cards title */
 .tile h2 {
     font-weight: 100;
     margin: 20px 0 0 0;
     font-style: italic;
     transform: translateX(200px);
 }
-
+/*Titre h1 cards title */
 .tile p {
     font-weight: 300;
     margin: 20px 0 0 0;
     line-height: 25px;
-    /*   opacity:0; */
     transform: translateX(-200px);
     transition-delay: 0.2s;
 }
@@ -148,11 +151,12 @@ body {
     transition: all 0.6s ease-in-out;
 }
 
+/*titre au survol*/
 .tile:hover {
-    /*   background-color:#99aeff; */
     box-shadow: 0px 35px 77px -17px rgba(0, 0, 0, 0.64);
     transform: scale(1.05);
 }
+
 
 .tile:hover img {
     opacity: 0.2;
@@ -207,8 +211,8 @@ body {
 
 @media (max-width: 50px) {
     .wrap {
-        flex-direction: column;
-        width: 300px;
+    flex-direction: column;
+    width: 300px;
     }
 }
 
@@ -241,6 +245,7 @@ body {
     height: 30px;
 }
 
+/*pied de page*/
 .footer {
     width: 100%;
     margin-top: 50px;
@@ -258,9 +263,10 @@ body {
     margin-left: auto;
 }
 
+/*texte pied de page footer*/
 .text-footer {
-    font-family: optima;
-    font-weight: bold;
+    font-family: optima; /* changement la police */
+    font-weight: bold; /* changement l'épaisseur des caractères de la police */
 }
 
 @font-face {
@@ -285,6 +291,7 @@ a {
     color: #9ca0b1;
 }
 
+/*mise en forme du titre défilant */
 .wrapper {
     
     display: flex;
@@ -293,7 +300,9 @@ a {
     padding-top:0.5vh;
 }
 
-.wrapper h1 {
+
+/* mise en forme de l'animation du titre clignotant ringuard !! */
+.wrapper h1 { 
     color: #fff;
     font-size: 30px;
     text-transform: uppercase;
@@ -312,14 +321,15 @@ a {
     display: inline-list-item;
 }
 
+/*position du fond écran */
 @keyframes textclip {
     to {
-        background-position: 200% center;
+        background-position: 200% center; 
     }
 }
 
 .navblock {
-    padding-top:30px;
+    padding-top:30px; /*marge intérieur */
 }
 
 .page-link{

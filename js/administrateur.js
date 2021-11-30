@@ -1,4 +1,4 @@
-var mesParkings; // Variable qui contiendra la BDD des Parkings
+var mesParkings; // Variable qui contiendra la BDD des Parkings //
 
 // Tableau des caractéristiques (fixe)
 var refCaracteristiques = ["Restrictions de hauteur: 2.10m",
