@@ -94,8 +94,9 @@ function generateDisplay() {
         let lien_nombre_place = document.createElement("a");
         lien_nombre_place.classList.add("lien_nbr_place_cus")
         lien_nombre_place.textContent = "Nombre de place : "+ mesParkings.GogoParking[i]._NOMBRE_PLACE + " places";
-        lien_nombre_place.href ="LIEN DE LA PAGE A METTRE ICI";
+        lien_nombre_place.href ="placespark.html?placespark="+ i ;
         puce_nombre_place.appendChild(lien_nombre_place);
+       
         
 
         // Pour chaque caractéristiques du parking en cours
