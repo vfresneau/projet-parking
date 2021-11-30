@@ -184,7 +184,7 @@ function EffaceCartes(start,interval, sens){
     var ligne1 = document.createElement("div");
     ligne1.classList.add("row");
     ligne1.id = "ligne1";
-    document.getElementById("ligne0").after(ligne1);
+    document.getElementById("quartier").prepend(ligne1);
     switch (sens){
         case "previous":
             StartPagination = StartPagination - Intervalle;
