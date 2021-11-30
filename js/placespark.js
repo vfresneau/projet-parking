@@ -9,23 +9,23 @@ var numeroparking = processUser(); // récupère le parking envoyé depuis l'URL
 ReadDBParkings();// Lit la BDD pour charger les infos parkings
 
 function processUser() {
-var parameters = location.search.substring(1).split("&");
-var temp = parameters[0].split("=");
-l = unescape(temp[1]);
-return parseInt(l);
+    var parameters = location.search.substring(1).split("&");
+    var temp = parameters[0].split("=");
+    l = unescape(temp[1]);
+    return parseInt(l);
 }
 
 function pri() { 
     nom.classList.add("titre");
     
-    for (var z = 1; z <= 1; z++) {
+    for (let z = 1; z <= 1; z++) {
         var ligne1 = document.createElement("div");
         ligne1.classList.add("row");
         ligne1.classList.add("a");
         ligne1.classList.add("styleligne");
         a.appendChild(ligne1);
         
-        for (var i = 0; i < mesParkings.GogoParking[numeroparking]._PLACES.length; i++) {
+        for (let i = 0; i < mesParkings.GogoParking[numeroparking]._PLACES.length; i++) {
             var colonne1 = document.createElement("div");
             colonne1.classList.add("col");
             colonne1.classList.add("a");
@@ -34,18 +34,24 @@ function pri() {
             colonne1.id = compteur;
             colonne1.classList.add("stylecol");
 
+        //bouton on/off pour la dispo des parking //
 
-   //bouton on/off pour la dispo des parking //
+            var tempoff = ultimateHTMLGenerator("label", "", ["switch"],"",colonne1 ) //creation d'un element html label et d'une class "switch" dans la div //
 
-     var tempoff = ultimateHTMLGenerator("label", "", ["switch"],"",colonne1 ) //creation d'un element html label et d'une class "switch" dans la div //
+            var tempoff2 = ultimateHTMLGenerator("input", "", ["switch-input"],"toggle-one"+i,tempoff ) //creation d'un input et une class switch-input et un id pour chaque input dans la colonne //
+            tempoff2.type = "checkbox"; // ajout le type checkbox dans l'input var tempoff2// 
+            tempoff2.onclick = function (){
+                var idtemp = "toggle-one"+i;
+                var idparkingtemp = mesParkings.GogoParking[numeroparking]._ID;
+                var dispoplace = i+1;
+                maPlace(idtemp,idparkingtemp,dispoplace);
+            } ;
 
-     var tempoff2 = ultimateHTMLGenerator("input", "", ["switch-input"],"toggle-one"+i,tempoff ) //creation d'un input et une class switch-input et un id pour chaque input dans la colonne //
-     tempoff2.type = "checkbox"; // ajout le type checkbox dans l'input var tempoff2// 
-     tempoff2.onclick = function (){maPlace(tempoff2.id,parseInt(mesParkings.GogoParking[numeroparking]._ID),mesParkings.GogoParking[numeroparking]._PLACES[i])} ;
-     var tempoff3 = ultimateHTMLGenerator("span", "", ["switch-label"],"",tempoff ) // creation d'un element html span et une class switch-label  dans la colonne //
-     tempoff3.setAttribute("data-on","Libre") ; //dans la span, je met la valeur libre a l'attribut data-one //
-     tempoff3.setAttribute("data-off","Occupé") ; // dans la span, je met la valeur occupé  a l'attribut data-off //
-     var tempoff4 = ultimateHTMLGenerator("span", "", ["switch-handle"],"",tempoff ) //creation d'un element html span et une class switch-handle dans la colonne //
+
+            var tempoff3 = ultimateHTMLGenerator("span", "", ["switch-label"],"",tempoff ) // creation d'un element html span et une class switch-label  dans la colonne //
+            tempoff3.setAttribute("data-on","Libre") ; //dans la span, je met la valeur libre a l'attribut data-one //
+            tempoff3.setAttribute("data-off","Occupé") ; // dans la span, je met la valeur occupé  a l'attribut data-off //
+            var tempoff4 = ultimateHTMLGenerator("span", "", ["switch-handle"],"",tempoff ) //creation d'un element html span et une class switch-handle dans la colonne //
 
 
 
@@ -62,11 +68,11 @@ function pri() {
                 var tempoff4 = ultimateHTMLGenerator("span", "", ["switch-handle"],"",tempoff ) //creation d'un element html span et une class switch-handle dans la colonne //
                 tempoff2.checked = true ;
             }
-        }
+    }
     }
 }
 
-nom.textContent = mesParkings.GogoParking[numeroparking]._NOM_PARKING;
+// nom.textContent = mesParkings.GogoParking[numeroparking]._NOM_PARKING;
 
 function ReadDBParkings() {
     // Création de la variable qui stockera la base de données des héros
@@ -99,6 +105,7 @@ function ultimateHTMLGenerator(typeElement, contenu, tableauClassCss,id, destina
         // on ajoute la class css contenu dans le tableau de class css passé en paramètre 3
         ultimateElement.classList.add(tableauClassCss[i]);
     }
+    ultimateElement.id = id;
     // on fait apparaitre l'element dans celui passé en 4ème paramètre
     destinationElement.appendChild(ultimateElement);
     return ultimateElement;
@@ -112,19 +119,34 @@ function UpdateParking(update) {
     xhrupdate.setRequestHeader("Content-type", "application/x-www-form-urlencoded"); // On définit les en-têtes pour que l'envoi soit correctement interprété par le serveur
     xhrupdate.onreadystatechange = function() { // on modifie l'attribut onreadystatechange de notre requête qui permet d'exécuter du code en fonction du changement d'état de la requête
         if (xhrupdate.readyState == XMLHttpRequest.DONE && xhrupdate.status == 200) { // Si la requête se termine
-            ReadDBParkings(); // On exécute la fonction 
+            console.log(xhrupdate.responseText); // On exécute la fonction 
         }
     }
     xhrupdate.send("update_places=" + encodeURIComponent(JSON.stringify(update))); // On envoie notre requête, dans une variable PHP mesHeros à laquelle on rajoute le fichier JSON entier
 }
 
-function maPlace(idBouton,idParking,idPlace
-    ) {
-        var bouton = document.getElementById(idBouton);
-    if (idBouton.checked ==true){ //si ma case est coché //
-        UpdateParking(idParking,idPlace,1)
+function maPlace(idBouton,idParking,idPlace){
+        var boutonRef = document.getElementById(idBouton);
+        var NouveauParking = ParkingModel();
+        NouveauParking.id_quartier = idParking.toString();
+        NouveauParking.num_place = idPlace.toString();
+
+
+    if (boutonRef.checked ==true){ //si ma case est coché //
+        NouveauParking.dispo = 1;
         }
         else {
-            UpdateParking(idParking,idPlace,0)
+            NouveauParking.dispo = 0;
         }
+        console.log(NouveauParking);
+        UpdateParking(NouveauParking);
 }
+
+    function ParkingModel() {
+        return {
+            "id_quartier": "",
+            "num_place": "",
+            "dispo": "",
+        };
+        
+    }
