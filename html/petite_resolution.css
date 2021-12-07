@@ -1,4 +1,6 @@
 
+/*pour tous les medias inférieur à 1024px*/
+
 @media all and (max-width: 1024px)
 {
     #bloc_page
@@ -7,28 +9,21 @@
     }
 }
 
-
-/*pour tester   */
-.body {
-    background: #21d5f5f5 !important;
-    display: flex;
-    align-items: center;
-    height:auto;
-    
-   
-}
+/*chgt de la taille des vignettes*/
 .tile {
     width:150px;
     height:150px;
     margin:auto;
     
 }
+/*chgt des titres des vignettes*/
 .tile h1 {
     font-size: xx-small;
     margin: 0;
     text-shadow: 2px 2px 10px rgba(0, 0, 0, 0.3);
 }
 
+/*chgt du tu titre smart park*/
 .back span {
     font-size: 0.75em;
     color: rgba(255, 255, 255, 0.726);
@@ -42,6 +37,7 @@
     animation: jumb 2s infinite;
 }
 
+/*chgt du titres animés*/
 .wrapper h1 {
         font-size: 10px; 
 }

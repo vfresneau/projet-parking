@@ -1,0 +1,26 @@
+titre clignotant en js et css.
+
+Démarrage de la page d'accueuil html, css.
+Affichage des cards bootstraps en JS pour chaque parking.
+
+Mise en place d'un bouton acueuil
+
+Centrage de divers élements en css, aide de la console pour ce situé.
+Apprendre à utiliser GITUP en équipe .
+
+Essai de responsive avec une page css,en mode portable sur la console ou autre. alors que finalement il faut ajuster les div et colonnes avec bootstraps automatiquement.
+
+
+Difficulté utiliser et adapter une fonction ou une element trouver sur internet.
+exemple sur bootstraps.
+
+Difficulté : centrage bouton bootstraps,
+- relire et comprendre un code d'un collègue, commenter beaucoup plus !
+
+-Regret d'avoir polus chaercher le css au lieu de pratiquer le js.
+Par contre super projet , bonne expérience !
+
+
+
+
+
